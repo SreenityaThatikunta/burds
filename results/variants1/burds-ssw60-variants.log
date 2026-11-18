@@ -1,0 +1,65 @@
+[{"stream_name":"stdout","time":53.280627174,"data":"[  49.1s] budget 70: {'probe_top1': 0.8266666666666667, 'ci95': [0.805, 0.85], 'centroid_top1': 0.7833333333333333, 'items_per_s_per_gpu': 10.72, 'load_wait_s': 0.8, 'encode_s': 223.0, 'n_train': 1200, 'n_test': 1200, 'C': 100}\n"}
+,{"stream_name":"stdout","time":99.857532104,"data":"[  95.7s] budget 140: {'probe_top1': 0.8791666666666667, 'ci95': [0.8608333333333333, 0.8966666666666666], 'centroid_top1': 0.84, 'items_per_s_per_gpu': 5.0, 'load_wait_s': 0.5, 'encode_s': 479.4, 'n_train': 1200, 'n_test': 1200, 'C': 300}\n"}
+,{"stream_name":"stdout","time":143.993516382,"data":"[ 139.8s] budget 280: {'probe_top1': 0.91, 'ci95': [0.8933333333333333, 0.925], 'centroid_top1': 0.86, 'items_per_s_per_gpu': 2.13, 'load_wait_s': 0.4, 'encode_s': 1128.9, 'n_train': 1200, 'n_test': 1200, 'C': 100}\n"}
+,{"stream_name":"stdout","time":247.533579048,"data":"[ 243.4s] audio base: probe 0.279\n"}
+,{"stream_name":"stdout","time":351.138205582,"data":"[ 347.0s] audio trim3: probe 0.275\n"}
+,{"stream_name":"stdout","time":448.630597796,"data":"[ 444.5s] audio slow2: probe 0.374\n"}
+,{"stream_name":"stdout","time":549.245617234,"data":"[ 545.1s] audio slow2_trim3: probe 0.354\n"}
+,{"stream_name":"stdout","time":654.621567607,"data":"[ 650.5s] audio win3: probe 0.286\n"}
+,{"stream_name":"stdout","time":834.114709135,"data":"[ 829.9s] audio base+slow2: probe 0.407\n"}
+,{"stream_name":"stdout","time":1090.819428722,"data":"[1086.7s] audio base+slow2+trim3: probe 0.422\n"}
+,{"stream_name":"stdout","time":1517.396315683,"data":"[1513.2s] audio all: probe 0.443\n"}
+,{"stream_name":"stdout","time":1969.675858002,"data":"[1965.5s] audio win3_vote: 0.299\n"}
+,{"stream_name":"stdout","time":1969.67595156,"data":"[1965.5s] best audio variant: all\n"}
+,{"stream_name":"stdout","time":2106.252407168,"data":"[2102.1s] fusion with base: image_only=0.935  audio_only=0.285  weighted=0.945  confidence=0.947\n"}
+,{"stream_name":"stdout","time":2106.409075157,"data":"[2102.2s] fusion with all: image_only=0.935  audio_only=0.436  weighted=0.962  confidence=0.963\n"}
+,{"stream_name":"stdout","time":2106.410876245,"data":"# Step B + C: audio variants and photo token budgets\n"}
+,{"stream_name":"stdout","time":2106.410899197,"data":"\n"}
+,{"stream_name":"stdout","time":2106.410904982,"data":"Embedding wall time: **36.64 min** on 2 GPU(s).\n"}
+,{"stream_name":"stdout","time":2106.410910194,"data":"\n"}
+,{"stream_name":"stdout","time":2106.410915439,"data":"## Photo token budget (40 photos per species subset; linear probe)\n"}
+,{"stream_name":"stdout","time":2106.410920333,"data":"\n"}
+,{"stream_name":"stdout","time":2106.410924862,"data":"| tokens/photo | top-1 | 95% CI | centroid | photos/s per GPU | load wait | encode |\n"}
+,{"stream_name":"stdout","time":2106.41092986,"data":"|---|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":2106.410934923,"data":"| 70 | 82.7% | [80.5, 85.0] | 78.3% | 10.72 | 0.8s | 223.0s |\n"}
+,{"stream_name":"stdout","time":2106.410939995,"data":"| 140 | 87.9% | [86.1, 89.7] | 84.0% | 5.0 | 0.5s | 479.4s |\n"}
+,{"stream_name":"stdout","time":2106.410944845,"data":"| 280 | 91.0% | [89.3, 92.5] | 86.0% | 2.13 | 0.4s | 1128.9s |\n"}
+,{"stream_name":"stdout","time":2106.410950236,"data":"\n"}
+,{"stream_name":"stdout","time":2106.410954891,"data":"## Audio variants (full audio test set, n=1264; linear probe)\n"}
+,{"stream_name":"stdout","time":2106.410960111,"data":"\n"}
+,{"stream_name":"stdout","time":2106.410964728,"data":"| variant | top-1 | 95% CI | top-5 | centroid |\n"}
+,{"stream_name":"stdout","time":2106.410969546,"data":"|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":2106.410974255,"data":"| all five concatenated | 44.3% | [41.5, 46.9] | 71.9% | – |\n"}
+,{"stream_name":"stdout","time":2106.410993862,"data":"| full + half speed + loudest 3 s | 42.2% | [39.5, 44.8] | 70.3% | – |\n"}
+,{"stream_name":"stdout","time":2106.41099722,"data":"| full + half speed (concatenated) | 40.7% | [38.1, 43.4] | 69.0% | – |\n"}
+,{"stream_name":"stdout","time":2106.410999943,"data":"| half speed | 37.4% | [34.8, 40.1] | 69.1% | 24.0% |\n"}
+,{"stream_name":"stdout","time":2106.411002498,"data":"| loudest 3 s, half speed | 35.4% | [33.1, 38.1] | 65.7% | 21.1% |\n"}
+,{"stream_name":"stdout","time":2106.411004979,"data":"| 3 s windows, probe per window, vote | 29.9% | [27.4, 32.3] | 57.8% | – |\n"}
+,{"stream_name":"stdout","time":2106.411007571,"data":"| mean of 3 s windows | 28.6% | [26.2, 31.1] | 58.1% | 12.3% |\n"}
+,{"stream_name":"stdout","time":2106.411009988,"data":"| full clip (run 2 setup) | 27.9% | [25.6, 30.2] | 55.9% | 15.8% |\n"}
+,{"stream_name":"stdout","time":2106.411012694,"data":"| loudest 3 s | 27.5% | [25.0, 29.8] | 54.2% | 15.8% |\n"}
+,{"stream_name":"stdout","time":2106.411015163,"data":"\n"}
+,{"stream_name":"stdout","time":2106.411017439,"data":"## Audio throughput\n"}
+,{"stream_name":"stdout","time":2106.411020082,"data":"\n"}
+,{"stream_name":"stdout","time":2106.411022424,"data":"| job | clips/s per GPU | inputs | load wait | encode |\n"}
+,{"stream_name":"stdout","time":2106.411025897,"data":"|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":2106.411029597,"data":"| aud_base | 8.88 | 3861 | 0.4s | 434.2s |\n"}
+,{"stream_name":"stdout","time":2106.411033352,"data":"| aud_trim3 | 21.34 | 3861 | 0.6s | 180.3s |\n"}
+,{"stream_name":"stdout","time":2106.411037296,"data":"| aud_slow2 | 4.41 | 3861 | 0.4s | 875.7s |\n"}
+,{"stream_name":"stdout","time":2106.411041216,"data":"| aud_slow2_trim3 | 12.72 | 3861 | 0.6s | 302.9s |\n"}
+,{"stream_name":"stdout","time":2106.411044971,"data":"| aud_win3 | 6.88 | 15444 | 0.5s | 560.7s |\n"}
+,{"stream_name":"stdout","time":2106.411049995,"data":"\n"}
+,{"stream_name":"stdout","time":2106.411053702,"data":"## Photo + song fusion (paired test, n=1500)\n"}
+,{"stream_name":"stdout","time":2106.411057687,"data":"\n"}
+,{"stream_name":"stdout","time":2106.41106139,"data":"| audio features | image only | audio only | weighted | confidence | gain vs image (95% CI) |\n"}
+,{"stream_name":"stdout","time":2106.411065426,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":2106.411069216,"data":"| full clip (run 2 setup) | 93.5% | 28.5% | 94.5% | 94.7% | [+0.3, +2.2] pts |\n"}
+,{"stream_name":"stdout","time":2106.411073267,"data":"| all five concatenated | 93.5% | 43.6% | 96.2% | 96.3% | [+1.6, +4.0] pts |\n"}
+,{"stream_name":"stdout","time":2106.411077255,"data":"[2102.2s] done\n"}
+,{"stream_name":"stderr","time":2110.043757959,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2110.043792125,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2110.386713417,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2110.386740205,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2112.189207156,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2113.469609257,"data":"[NbConvertApp] Writing 342554 bytes to __results__.html\n"}
+]

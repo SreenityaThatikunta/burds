@@ -1,0 +1,288 @@
+{
+  "timing": {
+    "wall_min": 36.64,
+    "gpus": 2,
+    "per_job": {
+      "img_b70": {
+        "items": 2400,
+        "inputs": 2400,
+        "load_wait_s": 0.8,
+        "encode_s": 223.0,
+        "items_per_s_per_gpu": 10.72
+      },
+      "img_b140": {
+        "items": 2400,
+        "inputs": 2400,
+        "load_wait_s": 0.5,
+        "encode_s": 479.4,
+        "items_per_s_per_gpu": 5.0
+      },
+      "img_b280": {
+        "items": 2400,
+        "inputs": 2400,
+        "load_wait_s": 0.4,
+        "encode_s": 1128.9,
+        "items_per_s_per_gpu": 2.13
+      },
+      "aud_base": {
+        "items": 3861,
+        "inputs": 3861,
+        "load_wait_s": 0.4,
+        "encode_s": 434.2,
+        "items_per_s_per_gpu": 8.88
+      },
+      "aud_trim3": {
+        "items": 3861,
+        "inputs": 3861,
+        "load_wait_s": 0.6,
+        "encode_s": 180.3,
+        "items_per_s_per_gpu": 21.34
+      },
+      "aud_slow2": {
+        "items": 3861,
+        "inputs": 3861,
+        "load_wait_s": 0.4,
+        "encode_s": 875.7,
+        "items_per_s_per_gpu": 4.41
+      },
+      "aud_slow2_trim3": {
+        "items": 3861,
+        "inputs": 3861,
+        "load_wait_s": 0.6,
+        "encode_s": 302.9,
+        "items_per_s_per_gpu": 12.72
+      },
+      "aud_win3": {
+        "items": 3861,
+        "inputs": 15444,
+        "load_wait_s": 0.5,
+        "encode_s": 560.7,
+        "items_per_s_per_gpu": 6.88
+      }
+    }
+  },
+  "image_budget": {
+    "70": {
+      "probe_top1": 0.8266666666666667,
+      "ci95": [
+        0.805,
+        0.85
+      ],
+      "centroid_top1": 0.7833333333333333,
+      "items_per_s_per_gpu": 10.72,
+      "load_wait_s": 0.8,
+      "encode_s": 223.0,
+      "n_train": 1200,
+      "n_test": 1200,
+      "C": 100
+    },
+    "140": {
+      "probe_top1": 0.8791666666666667,
+      "ci95": [
+        0.8608333333333333,
+        0.8966666666666666
+      ],
+      "centroid_top1": 0.84,
+      "items_per_s_per_gpu": 5.0,
+      "load_wait_s": 0.5,
+      "encode_s": 479.4,
+      "n_train": 1200,
+      "n_test": 1200,
+      "C": 300
+    },
+    "280": {
+      "probe_top1": 0.91,
+      "ci95": [
+        0.8933333333333333,
+        0.925
+      ],
+      "centroid_top1": 0.86,
+      "items_per_s_per_gpu": 2.13,
+      "load_wait_s": 0.4,
+      "encode_s": 1128.9,
+      "n_train": 1200,
+      "n_test": 1200,
+      "C": 100
+    }
+  },
+  "audio": {
+    "base": {
+      "desc": "full clip (run 2 setup)",
+      "probe_top1": 0.27927215189873417,
+      "probe_top5": 0.5593354430379747,
+      "ci95": [
+        0.2563291139240506,
+        0.30223496835443037
+      ],
+      "C": 100,
+      "centroid_top1": 0.15822784810126583
+    },
+    "trim3": {
+      "desc": "loudest 3 s",
+      "probe_top1": 0.2745253164556962,
+      "probe_top5": 0.5419303797468354,
+      "ci95": [
+        0.25,
+        0.29825949367088606
+      ],
+      "C": 100,
+      "centroid_top1": 0.15822784810126583
+    },
+    "slow2": {
+      "desc": "half speed",
+      "probe_top1": 0.37420886075949367,
+      "probe_top5": 0.6906645569620253,
+      "ci95": [
+        0.34810126582278483,
+        0.40110759493670883
+      ],
+      "C": 100,
+      "centroid_top1": 0.23971518987341772
+    },
+    "slow2_trim3": {
+      "desc": "loudest 3 s, half speed",
+      "probe_top1": 0.35443037974683544,
+      "probe_top5": 0.6566455696202531,
+      "ci95": [
+        0.33069620253164556,
+        0.3805577531645569
+      ],
+      "C": 100,
+      "centroid_top1": 0.21123417721518986
+    },
+    "win3": {
+      "desc": "mean of 3 s windows",
+      "probe_top1": 0.28639240506329117,
+      "probe_top5": 0.5806962025316456,
+      "ci95": [
+        0.26186708860759494,
+        0.31091772151898733
+      ],
+      "C": 300,
+      "centroid_top1": 0.12262658227848101
+    },
+    "base+slow2": {
+      "desc": "full + half speed (concatenated)",
+      "probe_top1": 0.4074367088607595,
+      "probe_top5": 0.689873417721519,
+      "ci95": [
+        0.3805379746835443,
+        0.43354430379746833
+      ],
+      "C": 300,
+      "centroid_top1": null
+    },
+    "base+slow2+trim3": {
+      "desc": "full + half speed + loudest 3 s",
+      "probe_top1": 0.4224683544303797,
+      "probe_top5": 0.7025316455696202,
+      "ci95": [
+        0.3947784810126582,
+        0.4478045886075949
+      ],
+      "C": 100,
+      "centroid_top1": null
+    },
+    "all": {
+      "desc": "all five concatenated",
+      "probe_top1": 0.4430379746835443,
+      "probe_top5": 0.7191455696202531,
+      "ci95": [
+        0.4153481012658228,
+        0.46914556962025317
+      ],
+      "C": 100,
+      "centroid_top1": null
+    },
+    "win3_vote": {
+      "desc": "3 s windows, probe per window, vote",
+      "probe_top1": 0.2990506329113924,
+      "probe_top5": 0.5783227848101266,
+      "ci95": [
+        0.2737341772151899,
+        0.3228045886075949
+      ],
+      "C": 100
+    }
+  },
+  "fusion": {
+    "base": {
+      "image_only": {
+        "top1": 0.9346666666666666,
+        "ci95": [
+          0.9226666666666666,
+          0.9473333333333334
+        ]
+      },
+      "audio_only": {
+        "top1": 0.2853333333333333,
+        "ci95": [
+          0.264,
+          0.31
+        ]
+      },
+      "weighted": {
+        "top1": 0.9453333333333334,
+        "ci95": [
+          0.934,
+          0.956
+        ]
+      },
+      "confidence": {
+        "top1": 0.9473333333333334,
+        "ci95": [
+          0.9353166666666667,
+          0.958
+        ]
+      },
+      "params": {
+        "gamma": 0.5,
+        "image_weight": 0.7000000000000001,
+        "image_C": 100
+      },
+      "confidence_gain_vs_image_ci95": [
+        0.0033333333333333335,
+        0.02201666666666665
+      ]
+    },
+    "all": {
+      "image_only": {
+        "top1": 0.9346666666666666,
+        "ci95": [
+          0.9219833333333334,
+          0.946
+        ]
+      },
+      "audio_only": {
+        "top1": 0.436,
+        "ci95": [
+          0.412,
+          0.46
+        ]
+      },
+      "weighted": {
+        "top1": 0.962,
+        "ci95": [
+          0.952,
+          0.9706833333333333
+        ]
+      },
+      "confidence": {
+        "top1": 0.9626666666666667,
+        "ci95": [
+          0.9526666666666667,
+          0.9713333333333334
+        ]
+      },
+      "params": {
+        "gamma": 0.5,
+        "image_weight": 0.65,
+        "image_C": 100
+      },
+      "confidence_gain_vs_image_ci95": [
+        0.016,
+        0.04
+      ]
+    }
+  }
+}

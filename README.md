@@ -48,6 +48,35 @@ still pull a correct photo guess off (Downy Woodpecker drops from 84% to 76%).
 Confusion matrices: [photo](results/analysis1/confusion_image.png) ·
 [song](results/analysis1/confusion_audio.png) · [fused](results/analysis1/confusion_fused.png).
 
+## Making the model hear birds: the half-speed trick
+EmbeddingGemma 2 takes audio at 16 kHz, so it can't hear anything above 8 kHz, and many songbirds
+sing higher than that. Playing each clip at **half speed** moves 0–11 kHz content into the range
+the model can hear. Linear classifier, full audio test set (n=1,264). Full report:
+[`results/variants1/variants.md`](results/variants1/variants.md).
+
+| Audio input | top-1 | 95% CI |
+|---|---|---|
+| Full 10 s clip (previous setup) | 27.9% | [25.6, 30.2] |
+| Loudest 3 s only | 27.5% | [25.0, 29.8] |
+| **Half speed** | **37.4%** | [34.8, 40.1] |
+| Full + half speed + loudest 3 s + windows (concatenated) | **44.3%** | [41.5, 46.9] |
+
+With the improved audio, photo + song reaches **96.3%** on the paired test set, compared with
+93.5% for photo only. The gain is **+2.8 points, 95% CI [+1.6, +4.0]**, so it is clearly above zero.
+
+## Speed
+All seven embedding jobs (3 photo budgets on 2,400 photos, 5 audio versions of 3,861 clips) take
+**37 min** on Kaggle's 2× T4, compared with 4.5 h for a single set in run 2. The speedup comes
+from reusing the prepped data (no 33 GB download), one worker per GPU, and photo decoding that
+never makes the GPU wait. Photo token budget is a direct speed/accuracy trade-off (linear
+classifier, 20 training photos per species):
+
+| tokens per photo | top-1 | photos/s per GPU |
+|---|---|---|
+| 70 | 82.7% | 10.7 |
+| 140 | 87.9% | 5.0 |
+| 280 (default) | 91.0% | 2.1 |
+
 ## Run
 ```bash
 kaggle kernels push -p kaggle/ssw60_baseline

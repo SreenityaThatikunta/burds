@@ -1,0 +1,62 @@
+{
+  "wall_min": 36.64,
+  "gpus": 2,
+  "per_job": {
+    "img_b70": {
+      "items": 2400,
+      "inputs": 2400,
+      "load_wait_s": 0.8,
+      "encode_s": 223.0,
+      "items_per_s_per_gpu": 10.72
+    },
+    "img_b140": {
+      "items": 2400,
+      "inputs": 2400,
+      "load_wait_s": 0.5,
+      "encode_s": 479.4,
+      "items_per_s_per_gpu": 5.0
+    },
+    "img_b280": {
+      "items": 2400,
+      "inputs": 2400,
+      "load_wait_s": 0.4,
+      "encode_s": 1128.9,
+      "items_per_s_per_gpu": 2.13
+    },
+    "aud_base": {
+      "items": 3861,
+      "inputs": 3861,
+      "load_wait_s": 0.4,
+      "encode_s": 434.2,
+      "items_per_s_per_gpu": 8.88
+    },
+    "aud_trim3": {
+      "items": 3861,
+      "inputs": 3861,
+      "load_wait_s": 0.6,
+      "encode_s": 180.3,
+      "items_per_s_per_gpu": 21.34
+    },
+    "aud_slow2": {
+      "items": 3861,
+      "inputs": 3861,
+      "load_wait_s": 0.4,
+      "encode_s": 875.7,
+      "items_per_s_per_gpu": 4.41
+    },
+    "aud_slow2_trim3": {
+      "items": 3861,
+      "inputs": 3861,
+      "load_wait_s": 0.6,
+      "encode_s": 302.9,
+      "items_per_s_per_gpu": 12.72
+    },
+    "aud_win3": {
+      "items": 3861,
+      "inputs": 15444,
+      "load_wait_s": 0.5,
+      "encode_s": 560.7,
+      "items_per_s_per_gpu": 6.88
+    }
+  }
+}

@@ -1,0 +1,120 @@
+[{"stream_name":"stdout","time":1.185801499,"data":"[    0.0s main] $ pip install -q -U sentence-transformers transformers soundfile\n"}
+,{"stream_name":"stdout","time":26.432485886,"data":"[   25.2s main] GPUs: 2 x Tesla T4  CPUs: 4\n"}
+,{"stream_name":"stdout","time":26.585364134,"data":"[   25.4s main] $ cp /kaggle/input/notebooks/sreenityathatikunta/burds-ssw60-data/*.csv /tmp/ssw60/ \u0026\u0026 tar -xf /kaggle/input/notebooks/sreenityathatikunta/burds-ssw60-data/audio_ml.tar -C /tmp/ssw60 \u0026\u0026 tar -xf /kaggle/input/notebooks/sreenityathatikunta/burds-ssw60-data/images_nabirds.tar -C /tmp/ssw60\n"}
+,{"stream_name":"stdout","time":55.833922126,"data":"[   54.6s main] audio clips 3861  image subset 2400 {'test': 1200, 'train': 1200}\n"}
+,{"stream_name":"stdout","time":57.483608604,"data":"[   56.3s main] variant base: 1 segment(s), 10.0s each, 82 ms/clip to prepare\n"}
+,{"stream_name":"stdout","time":57.770963188,"data":"[   56.6s main] variant trim3: 1 segment(s), 3.0s each, 14 ms/clip to prepare\n"}
+,{"stream_name":"stdout","time":58.073640045,"data":"[   56.9s main] variant slow2: 1 segment(s), 20.0s each, 15 ms/clip to prepare\n"}
+,{"stream_name":"stdout","time":58.390113472,"data":"[   57.2s main] variant slow2_trim3: 1 segment(s), 6.0s each, 16 ms/clip to prepare\n"}
+,{"stream_name":"stdout","time":58.583672153,"data":"[   57.4s main] variant win3: 4 segment(s), 3.0s each, 10 ms/clip to prepare\n"}
+,{"stream_name":"stderr","time":89.832066003,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   2%|▏         | 34/1376 [00:00\u003c00:04, 313.70it/s]\rLoading weights:   4%|▍         | 60/1376 [00:00\u003c00:02, 595.01it/s]\rLoading weights:   5%|▍         | 66/1376 [00:00\u003c00:08, 153.90it/s]\rLoading weights:   9%|▊         | 120/1376 [00:00\u003c00:04, 292.55it/s]\rLoading weights:   9%|▉         | 127/1376 [00:00\u003c00:04, 258.18it/s]\rLoading weights:  13%|█▎        | 181/1376 [00:00\u003c00:03, 346.15it/s]\rLoading weights:  13%|█▎        | 184/1376 [00:00\u003c00:03, 340.94it/s]\rLoading weights:  16%|█▌        | 222/1376 [00:00\u003c00:03, 355.98it/s]\rLoading weights:  17%|█▋        | 229/1376 [00:00\u003c00:03, 367.73it/s]\rLoading weights:  19%|█▉        | 263/1376 [00:00\u003c00:03, 365.39it/s]\rLoading weights:  20%|██        | 282/1376 [00:00\u003c00:02, 378.86it/s]\rLoading weights:  23%|██▎       | 313/1376 [00:00\u003c00:02, 394.37it/s]\rLoading weights:  25%|██▌       | 344/1376 [00:00\u003c00:02, 406.94it/s]\rLoading weights:  27%|██▋       | 375/1376 [00:00\u003c00:02, 405.69it/s]\rLoading weights:  30%|██▉       | 406/1376 [00:01\u003c00:02, 453.75it/s]\rLoading weights:  32%|███▏      | 437/1376 [00:01\u003c00:02, 454.95it/s]\rLoading weights:  33%|███▎      | 454/1376 [00:01\u003c00:02, 440.70it/s]\rLoading weights:  36%|███▋      | 499/1376 [00:01\u003c00:01, 462.22it/s]\rLoading weights:  37%|███▋      | 504/1376 [00:01\u003c00:01, 455.37it/s]\rLoading weights:  41%|████      | 561/1376 [00:01\u003c00:01, 475.14it/s]\rLoading weights:  41%|████      | 561/1376 [00:01\u003c00:01, 466.01it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:01\u003c00:01, 505.66it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:01\u003c00:01, 500.72it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:01\u003c00:01, 496.27it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:01\u003c00:01, 492.27it/s]\rLoading weights:  55%|█████▍    | 750/1376 [00:01\u003c00:01, 534.43it/s]\rLoading weights:  55%|█████▍    | 754/1376 [00:03\u003c00:06, 96.56it/s] \rLoading weights:  59%|█████▊    | 805/1376 [00:03\u003c00:05, 98.83it/s] \rLoading weights:  92%|█████████▏| 1260/1376 [00:03\u003c00:00, 411.68it/s]\rLoading weights:  85%|████████▍ | 1165/1376 [00:03\u003c00:00, 331.57it/s]\rLoading weights:  95%|█████████▍| 1301/1376 [00:03\u003c00:00, 402.59it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:04\u003c00:00, 338.37it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:04\u003c00:00, 330.36it/s]\n"}
+,{"stream_name":"stderr","time":89.832140149,"data":"\n"}
+,{"stream_name":"stdout","time":94.643188486,"data":"[   35.7s gpu0] model loaded on Tesla T4\n"}
+,{"stream_name":"stdout","time":94.646348325,"data":"[   35.7s gpu1] model loaded on Tesla T4\n"}
+,{"stream_name":"stdout","time":102.477766227,"data":"[   43.6s gpu1] img_b70: 64/1200  wait-on-load 0s  encode 7s\n"}
+,{"stream_name":"stdout","time":102.527347729,"data":"[   43.6s gpu0] img_b70: 64/1200  wait-on-load 0s  encode 7s\n"}
+,{"stream_name":"stdout","time":157.34898142,"data":"[   98.5s gpu1] img_b70: 704/1200  wait-on-load 0s  encode 62s\n"}
+,{"stream_name":"stdout","time":162.541214263,"data":"[  103.6s gpu0] img_b70: 704/1200  wait-on-load 0s  encode 67s\n"}
+,{"stream_name":"stdout","time":200.286800686,"data":"[  141.4s gpu1] img_b70: 1200/1200  wait-on-load 0s  encode 105s\n"}
+,{"stream_name":"stdout","time":212.204183185,"data":"[  153.3s gpu1] img_b140: 64/1200  wait-on-load 0s  encode 12s\n"}
+,{"stream_name":"stdout","time":212.890297195,"data":"[  154.0s gpu0] img_b70: 1200/1200  wait-on-load 0s  encode 118s\n"}
+,{"stream_name":"stdout","time":227.258931142,"data":"[  168.3s gpu0] img_b140: 64/1200  wait-on-load 0s  encode 14s\n"}
+,{"stream_name":"stdout","time":331.778267471,"data":"[  272.9s gpu1] img_b140: 704/1200  wait-on-load 0s  encode 131s\n"}
+,{"stream_name":"stdout","time":362.063318381,"data":"[  303.1s gpu0] img_b140: 704/1200  wait-on-load 0s  encode 149s\n"}
+,{"stream_name":"stdout","time":426.823702304,"data":"[  367.9s gpu1] img_b140: 1200/1200  wait-on-load 0s  encode 226s\n"}
+,{"stream_name":"stdout","time":455.523428107,"data":"[  396.6s gpu1] img_b280: 64/1200  wait-on-load 0s  encode 29s\n"}
+,{"stream_name":"stdout","time":466.215385501,"data":"[  407.3s gpu0] img_b140: 1200/1200  wait-on-load 0s  encode 253s\n"}
+,{"stream_name":"stdout","time":497.466736539,"data":"[  438.5s gpu0] img_b280: 64/1200  wait-on-load 0s  encode 31s\n"}
+,{"stream_name":"stdout","time":743.52614966,"data":"[  684.6s gpu1] img_b280: 704/1200  wait-on-load 0s  encode 317s\n"}
+,{"stream_name":"stdout","time":810.044319159,"data":"[  751.1s gpu0] img_b280: 704/1200  wait-on-load 0s  encode 344s\n"}
+,{"stream_name":"stdout","time":969.213117529,"data":"[  910.3s gpu1] img_b280: 1200/1200  wait-on-load 0s  encode 542s\n"}
+,{"stream_name":"stdout","time":975.821026681,"data":"[  916.9s gpu1] aud_base: 32/1930  wait-on-load 0s  encode 6s\n"}
+,{"stream_name":"stdout","time":1009.806150087,"data":"[  950.9s gpu1] aud_base: 352/1930  wait-on-load 0s  encode 40s\n"}
+,{"stream_name":"stdout","time":1043.432388394,"data":"[  984.5s gpu1] aud_base: 672/1930  wait-on-load 0s  encode 74s\n"}
+,{"stream_name":"stdout","time":1053.060160041,"data":"[  994.1s gpu0] img_b280: 1200/1200  wait-on-load 0s  encode 587s\n"}
+,{"stream_name":"stdout","time":1057.380148681,"data":"[  998.4s gpu0] aud_base: 32/1931  wait-on-load 0s  encode 4s\n"}
+,{"stream_name":"stdout","time":1077.792207317,"data":"[ 1018.9s gpu1] aud_base: 992/1930  wait-on-load 0s  encode 108s\n"}
+,{"stream_name":"stdout","time":1094.07406685,"data":"[ 1035.1s gpu0] aud_base: 352/1931  wait-on-load 0s  encode 41s\n"}
+,{"stream_name":"stdout","time":1112.14416346,"data":"[ 1053.2s gpu1] aud_base: 1312/1930  wait-on-load 0s  encode 143s\n"}
+,{"stream_name":"stdout","time":1131.133407539,"data":"[ 1072.2s gpu0] aud_base: 672/1931  wait-on-load 0s  encode 78s\n"}
+,{"stream_name":"stdout","time":1146.750750527,"data":"[ 1087.9s gpu1] aud_base: 1632/1930  wait-on-load 0s  encode 177s\n"}
+,{"stream_name":"stdout","time":1167.548207501,"data":"[ 1108.6s gpu0] aud_base: 992/1931  wait-on-load 0s  encode 114s\n"}
+,{"stream_name":"stdout","time":1178.824337601,"data":"[ 1119.9s gpu1] aud_base: 1930/1930  wait-on-load 0s  encode 209s\n"}
+,{"stream_name":"stdout","time":1180.719406587,"data":"[ 1121.8s gpu1] aud_trim3: 32/1930  wait-on-load 0s  encode 1s\n"}
+,{"stream_name":"stdout","time":1196.099010984,"data":"[ 1137.2s gpu1] aud_trim3: 352/1930  wait-on-load 0s  encode 17s\n"}
+,{"stream_name":"stdout","time":1205.898402045,"data":"[ 1147.0s gpu0] aud_base: 1312/1931  wait-on-load 0s  encode 153s\n"}
+,{"stream_name":"stdout","time":1211.02495257,"data":"[ 1152.1s gpu1] aud_trim3: 672/1930  wait-on-load 0s  encode 32s\n"}
+,{"stream_name":"stdout","time":1225.750995263,"data":"[ 1166.9s gpu1] aud_trim3: 992/1930  wait-on-load 0s  encode 47s\n"}
+,{"stream_name":"stdout","time":1241.078281998,"data":"[ 1182.2s gpu1] aud_trim3: 1312/1930  wait-on-load 0s  encode 62s\n"}
+,{"stream_name":"stdout","time":1243.875646866,"data":"[ 1184.9s gpu0] aud_base: 1632/1931  wait-on-load 0s  encode 191s\n"}
+,{"stream_name":"stdout","time":1255.850541303,"data":"[ 1197.0s gpu1] aud_trim3: 1632/1930  wait-on-load 0s  encode 77s\n"}
+,{"stream_name":"stdout","time":1269.022775452,"data":"[ 1210.1s gpu1] aud_trim3: 1930/1930  wait-on-load 0s  encode 90s\n"}
+,{"stream_name":"stdout","time":1276.068915407,"data":"[ 1217.2s gpu1] aud_slow2: 32/1930  wait-on-load 0s  encode 7s\n"}
+,{"stream_name":"stdout","time":1278.06325933,"data":"[ 1219.1s gpu0] aud_base: 1931/1931  wait-on-load 0s  encode 225s\n"}
+,{"stream_name":"stdout","time":1279.688277563,"data":"[ 1220.8s gpu0] aud_trim3: 32/1931  wait-on-load 0s  encode 1s\n"}
+,{"stream_name":"stdout","time":1295.017702291,"data":"[ 1236.1s gpu0] aud_trim3: 352/1931  wait-on-load 0s  encode 17s\n"}
+,{"stream_name":"stdout","time":1309.829625756,"data":"[ 1250.9s gpu0] aud_trim3: 672/1931  wait-on-load 0s  encode 32s\n"}
+,{"stream_name":"stdout","time":1324.949476404,"data":"[ 1266.0s gpu0] aud_trim3: 992/1931  wait-on-load 0s  encode 47s\n"}
+,{"stream_name":"stdout","time":1339.863567016,"data":"[ 1280.9s gpu0] aud_trim3: 1312/1931  wait-on-load 0s  encode 62s\n"}
+,{"stream_name":"stdout","time":1348.140002363,"data":"[ 1289.2s gpu1] aud_slow2: 352/1930  wait-on-load 0s  encode 79s\n"}
+,{"stream_name":"stdout","time":1354.841103902,"data":"[ 1295.9s gpu0] aud_trim3: 1632/1931  wait-on-load 0s  encode 77s\n"}
+,{"stream_name":"stdout","time":1368.808583588,"data":"[ 1309.9s gpu0] aud_trim3: 1931/1931  wait-on-load 0s  encode 90s\n"}
+,{"stream_name":"stdout","time":1376.324982318,"data":"[ 1317.4s gpu0] aud_slow2: 32/1931  wait-on-load 0s  encode 7s\n"}
+,{"stream_name":"stdout","time":1418.83133827,"data":"[ 1359.9s gpu1] aud_slow2: 672/1930  wait-on-load 0s  encode 150s\n"}
+,{"stream_name":"stdout","time":1450.628952163,"data":"[ 1391.7s gpu0] aud_slow2: 352/1931  wait-on-load 0s  encode 82s\n"}
+,{"stream_name":"stdout","time":1489.544176359,"data":"[ 1430.6s gpu1] aud_slow2: 992/1930  wait-on-load 0s  encode 220s\n"}
+,{"stream_name":"stdout","time":1526.122672092,"data":"[ 1467.2s gpu0] aud_slow2: 672/1931  wait-on-load 0s  encode 157s\n"}
+,{"stream_name":"stdout","time":1559.585222365,"data":"[ 1500.7s gpu1] aud_slow2: 1312/1930  wait-on-load 0s  encode 290s\n"}
+,{"stream_name":"stdout","time":1600.752177032,"data":"[ 1541.8s gpu0] aud_slow2: 992/1931  wait-on-load 0s  encode 232s\n"}
+,{"stream_name":"stdout","time":1628.738246094,"data":"[ 1569.8s gpu1] aud_slow2: 1632/1930  wait-on-load 0s  encode 359s\n"}
+,{"stream_name":"stdout","time":1675.580070101,"data":"[ 1616.6s gpu0] aud_slow2: 1312/1931  wait-on-load 0s  encode 307s\n"}
+,{"stream_name":"stdout","time":1691.886891271,"data":"[ 1633.0s gpu1] aud_slow2: 1930/1930  wait-on-load 0s  encode 423s\n"}
+,{"stream_name":"stdout","time":1694.583041561,"data":"[ 1635.7s gpu1] aud_slow2_trim3: 32/1930  wait-on-load 0s  encode 2s\n"}
+,{"stream_name":"stdout","time":1718.418807308,"data":"[ 1659.5s gpu1] aud_slow2_trim3: 352/1930  wait-on-load 0s  encode 26s\n"}
+,{"stream_name":"stdout","time":1742.275794863,"data":"[ 1683.4s gpu1] aud_slow2_trim3: 672/1930  wait-on-load 0s  encode 50s\n"}
+,{"stream_name":"stdout","time":1751.326367218,"data":"[ 1692.4s gpu0] aud_slow2: 1632/1931  wait-on-load 0s  encode 382s\n"}
+,{"stream_name":"stdout","time":1765.557663901,"data":"[ 1706.7s gpu1] aud_slow2_trim3: 992/1930  wait-on-load 0s  encode 73s\n"}
+,{"stream_name":"stdout","time":1788.986055113,"data":"[ 1730.1s gpu1] aud_slow2_trim3: 1312/1930  wait-on-load 0s  encode 97s\n"}
+,{"stream_name":"stdout","time":1812.180172207,"data":"[ 1753.3s gpu1] aud_slow2_trim3: 1632/1930  wait-on-load 0s  encode 120s\n"}
+,{"stream_name":"stdout","time":1822.11268979,"data":"[ 1763.2s gpu0] aud_slow2: 1931/1931  wait-on-load 0s  encode 453s\n"}
+,{"stream_name":"stdout","time":1825.181224167,"data":"[ 1766.2s gpu0] aud_slow2_trim3: 32/1931  wait-on-load 0s  encode 3s\n"}
+,{"stream_name":"stdout","time":1834.269406578,"data":"[ 1775.4s gpu1] aud_slow2_trim3: 1930/1930  wait-on-load 0s  encode 142s\n"}
+,{"stream_name":"stdout","time":1839.513666889,"data":"[ 1780.6s gpu1] aud_win3: 32/1930  wait-on-load 0s  encode 5s\n"}
+,{"stream_name":"stdout","time":1851.484318341,"data":"[ 1792.5s gpu0] aud_slow2_trim3: 352/1931  wait-on-load 0s  encode 29s\n"}
+,{"stream_name":"stdout","time":1878.287699618,"data":"[ 1819.4s gpu0] aud_slow2_trim3: 672/1931  wait-on-load 0s  encode 56s\n"}
+,{"stream_name":"stdout","time":1887.142599096,"data":"[ 1828.2s gpu1] aud_win3: 352/1930  wait-on-load 0s  encode 53s\n"}
+,{"stream_name":"stdout","time":1905.029864478,"data":"[ 1846.1s gpu0] aud_slow2_trim3: 992/1931  wait-on-load 0s  encode 83s\n"}
+,{"stream_name":"stdout","time":1931.516138916,"data":"[ 1872.6s gpu0] aud_slow2_trim3: 1312/1931  wait-on-load 0s  encode 109s\n"}
+,{"stream_name":"stdout","time":1934.605688997,"data":"[ 1875.7s gpu1] aud_win3: 672/1930  wait-on-load 0s  encode 100s\n"}
+,{"stream_name":"stdout","time":1958.373640362,"data":"[ 1899.4s gpu0] aud_slow2_trim3: 1632/1931  wait-on-load 0s  encode 136s\n"}
+,{"stream_name":"stdout","time":1981.877070628,"data":"[ 1923.0s gpu1] aud_win3: 992/1930  wait-on-load 0s  encode 147s\n"}
+,{"stream_name":"stdout","time":1983.162609856,"data":"[ 1924.2s gpu0] aud_slow2_trim3: 1931/1931  wait-on-load 0s  encode 161s\n"}
+,{"stream_name":"stdout","time":1988.584239792,"data":"[ 1929.6s gpu0] aud_win3: 32/1931  wait-on-load 0s  encode 5s\n"}
+,{"stream_name":"stdout","time":2030.673000268,"data":"[ 1971.8s gpu1] aud_win3: 1312/1930  wait-on-load 0s  encode 196s\n"}
+,{"stream_name":"stdout","time":2040.097465088,"data":"[ 1981.2s gpu0] aud_win3: 352/1931  wait-on-load 0s  encode 57s\n"}
+,{"stream_name":"stdout","time":2078.537300306,"data":"[ 2019.6s gpu1] aud_win3: 1632/1930  wait-on-load 0s  encode 244s\n"}
+,{"stream_name":"stdout","time":2089.797560607,"data":"[ 2030.9s gpu0] aud_win3: 672/1931  wait-on-load 0s  encode 106s\n"}
+,{"stream_name":"stdout","time":2123.883104601,"data":"[ 2065.0s gpu1] aud_win3: 1930/1930  wait-on-load 0s  encode 289s\n"}
+,{"stream_name":"stdout","time":2123.96439271,"data":"[ 2065.1s gpu1] worker done\n"}
+,{"stream_name":"stdout","time":2138.069330289,"data":"[ 2079.1s gpu0] aud_win3: 992/1931  wait-on-load 0s  encode 155s\n"}
+,{"stream_name":"stdout","time":2177.821243232,"data":"[ 2118.9s gpu0] aud_win3: 1312/1931  wait-on-load 0s  encode 194s\n"}
+,{"stream_name":"stdout","time":2217.903593352,"data":"[ 2159.0s gpu0] aud_win3: 1632/1931  wait-on-load 0s  encode 234s\n"}
+,{"stream_name":"stdout","time":2254.688412216,"data":"[ 2195.8s gpu0] aud_win3: 1931/1931  wait-on-load 0s  encode 271s\n"}
+,{"stream_name":"stdout","time":2254.740890549,"data":"[ 2195.8s gpu0] worker done\n"}
+,{"stream_name":"stdout","time":2256.887176758,"data":"[ 2255.7s main] workers exited [0, 0] in 36.6 min\n"}
+,{"stream_name":"stdout","time":2257.16284361,"data":"[ 2256.0s main] img_b70: {'items': 2400, 'inputs': 2400, 'load_wait_s': 0.8, 'encode_s': 223.0, 'items_per_s_per_gpu': 10.72}\n"}
+,{"stream_name":"stdout","time":2257.16287483,"data":"[ 2256.0s main] img_b140: {'items': 2400, 'inputs': 2400, 'load_wait_s': 0.5, 'encode_s': 479.4, 'items_per_s_per_gpu': 5.0}\n"}
+,{"stream_name":"stdout","time":2257.162880912,"data":"[ 2256.0s main] img_b280: {'items': 2400, 'inputs': 2400, 'load_wait_s': 0.4, 'encode_s': 1128.9, 'items_per_s_per_gpu': 2.13}\n"}
+,{"stream_name":"stdout","time":2257.162885871,"data":"[ 2256.0s main] aud_base: {'items': 3861, 'inputs': 3861, 'load_wait_s': 0.4, 'encode_s': 434.2, 'items_per_s_per_gpu': 8.88}\n"}
+,{"stream_name":"stdout","time":2257.162890523,"data":"[ 2256.0s main] aud_trim3: {'items': 3861, 'inputs': 3861, 'load_wait_s': 0.6, 'encode_s': 180.3, 'items_per_s_per_gpu': 21.34}\n"}
+,{"stream_name":"stdout","time":2257.162895278,"data":"[ 2256.0s main] aud_slow2: {'items': 3861, 'inputs': 3861, 'load_wait_s': 0.4, 'encode_s': 875.7, 'items_per_s_per_gpu': 4.41}\n"}
+,{"stream_name":"stdout","time":2257.162900102,"data":"[ 2256.0s main] aud_slow2_trim3: {'items': 3861, 'inputs': 3861, 'load_wait_s': 0.6, 'encode_s': 302.9, 'items_per_s_per_gpu': 12.72}\n"}
+,{"stream_name":"stdout","time":2257.162904862,"data":"[ 2256.0s main] aud_win3: {'items': 3861, 'inputs': 15444, 'load_wait_s': 0.5, 'encode_s': 560.7, 'items_per_s_per_gpu': 6.88}\n"}
+,{"stream_name":"stdout","time":2259.726602523,"data":"[ 2258.5s main] done\n"}
+,{"stream_name":"stderr","time":2262.799701776,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2262.7997423,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2263.077247596,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2263.077275276,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2263.972161752,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2265.056856146,"data":"[NbConvertApp] Writing 344407 bytes to __results__.html\n"}
+]
