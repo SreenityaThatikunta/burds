@@ -118,8 +118,9 @@ os.makedirs(DATA, exist_ok=True)
 if not glob.glob(f"{DATA}/**/taxa.csv", recursive=True):
     dec = "pigz -dc" if subprocess.run("command -v pigz", shell=True).returncode == 0 else "gzip -dc"
     # Stream: nothing of the 31 GB archive is stored; only matching members are written.
+    # Only patterns known to exist: GNU tar exits non-zero if any pattern matches nothing.
     sh(f"curl -sSfL --retry 5 '{URL}' | {dec} | tar -x -C {DATA} --wildcards "
-       f"'*.csv' '*audio_ml/*' '*images_nabirds/*' '*erms*' '*README*' '*LICENSE*'")
+       f"'*.csv' '*audio_ml/*' '*images_nabirds/*'")
 sh(f"du -sh {DATA}; find {DATA} -maxdepth 2 | head -30")
 
 ROOT = os.path.dirname(glob.glob(f"{DATA}/**/taxa.csv", recursive=True)[0])
