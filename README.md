@@ -13,6 +13,21 @@ its nearest species.
 
 All data download and compute happens on Kaggle; nothing large runs locally.
 
+## Baseline results (run 2, no training)
+60 species from SSW60. Each test item is labeled by its nearest species centroid, built from the
+training embeddings. Full tables: [`results/run2/results.md`](results/run2/results.md).
+
+| | top-1 (768-d) | top-1 (256-d) |
+|---|---|---|
+| Photo only (NABirds test, n=5,171) | **88.6%** (top-5 99.2%) | 87.8% |
+| Song only (SSW60 audio test, n=1,264) | 15.8% (top-5 38.1%) | 16.0% |
+| Photo + song, equal-weight score sum (synthetic pairs) | 88.3% | 87.5% |
+| Photo → species *name*, zero-shot | 68.3% | 65.8% |
+
+Random guessing is 1.7%. The photos work very well out of the box. The audio embeddings are only
+weakly specific to species, so giving them equal weight doesn't help fusion yet. Next steps:
+weighted or confidence-based fusion, and a linear classifier on top of the frozen embeddings.
+
 ## Run
 ```bash
 kaggle kernels push -p kaggle/ssw60_baseline

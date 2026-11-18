@@ -1,0 +1,61 @@
+label,species_code,inat_taxon_id,inat2021_label,nabirds_labels,common_name,scientific_name,family,order
+0,cangoo,7089,3226,57 457,Canada Goose,Branta canadensis,"Anatidae (Ducks, Geese, and Waterfowl)",Anseriformes
+1,wooduc,7107,3188,81 314 613,Wood Duck,Aix sponsa,"Anatidae (Ducks, Geese, and Waterfowl)",Anseriformes
+2,mallar3,6930,3201,102 317 616,Mallard,Anas platyrhynchos,"Anatidae (Ducks, Geese, and Waterfowl)",Anseriformes
+3,hoomer,7109,3250,225 335 634,Hooded Merganser,Lophodytes cucullatus,"Anatidae (Ducks, Geese, and Waterfowl)",Anseriformes
+4,moudov,3454,3547,171 529,Mourning Dove,Zenaida macroura,Columbidae (Pigeons and Doves),Columbiformes
+5,rthhum,6432,3307,107 373 672,Ruby-throated Hummingbird,Archilochus colubris,Trochilidae (Hummingbirds),Caprimulgiformes
+6,killde,4793,3363,30 504,Killdeer,Charadrius vociferus,Charadriidae (Plovers and Lapwings),Charadriiformes
+7,grbher3,4956,4359,58 480,Great Blue Heron,Ardea herodias,"Ardeidae (Herons, Egrets, and Bitterns)",Pelecaniformes
+8,grnher,5020,4371,160 485,Green Heron,Butorides virescens,"Ardeidae (Herons, Egrets, and Bitterns)",Pelecaniformes
+9,shshaw,5097,3115,135 357 656,Sharp-shinned Hawk,Accipiter striatus,"Accipitridae (Hawks, Eagles, and Kites)",Accipitriformes
+10,coohaw,5112,3112,155 358 657,Cooper's Hawk,Accipiter cooperii,"Accipitridae (Hawks, Eagles, and Kites)",Accipitriformes
+11,rethaw,5212,3127,210 299 497 700,Red-tailed Hawk,Buteo jamaicensis,"Accipitridae (Hawks, Eagles, and Kites)",Accipitriformes
+12,grhowl,20044,4549,111 539,Great Horned Owl,Bubo virginianus,Strigidae (Owls),Strigiformes
+13,yebsap,18463,4466,112 554,Yellow-bellied Sapsucker,Sphyrapicus varius,Picidae (Woodpeckers),Piciformes
+14,rebwoo,18205,4450,95 553,Red-bellied Woodpecker,Melanerpes carolinus,Picidae (Woodpeckers),Piciformes
+15,dowwoo,792988,4442,188 559,Downy Woodpecker,Dryobates pubescens,Picidae (Woodpeckers),Piciformes
+16,haiwoo,792990,4444,206 560,Hairy Woodpecker,Dryobates villosus,Picidae (Woodpeckers),Piciformes
+17,pilwoo,17855,4447,230 561,Pileated Woodpecker,Dryocopus pileatus,Picidae (Woodpeckers),Piciformes
+18,norfli,18236,4427,216 382 681,Northern Flicker,Colaptes auratus,Picidae (Woodpeckers),Piciformes
+19,amekes,4665,3604,94 363 662,American Kestrel,Falco sparverius,Falconidae (Falcons and Caracaras),Falconiformes
+20,easpho,17008,4324,420 929,Eastern Phoebe,Sayornis phoebe,Tyrannidae (Tyrant Flycatchers),Passeriformes
+21,reevir1,891704,4346,733 947,Red-eyed Vireo,Vireo olivaceus,"Vireonidae (Vireos, Shrike-Babblers, and Erpornis)",Passeriformes
+22,blujay,8229,3761,286 950,Blue Jay,Cyanocitta cristata,"Corvidae (Crows, Jays, and Magpies)",Passeriformes
+23,amecro,8021,3749,683 957 695 799,American Crow,Corvus brachyrhynchos,"Corvidae (Crows, Jays, and Magpies)",Passeriformes
+24,comrav,8010,3751,739 802,Common Raven,Corvus corax,"Corvidae (Crows, Jays, and Magpies)",Passeriformes
+25,bkcchi,144815,4037,278 812,Black-capped Chickadee,Poecile atricapillus,"Paridae (Tits, Chickadees, and Titmice)",Passeriformes
+26,tuftit,13632,4027,717 819,Tufted Titmouse,Baeolophus bicolor,"Paridae (Tits, Chickadees, and Titmice)",Passeriformes
+27,treswa,11935,3864,287 804,Tree Swallow,Tachycineta bicolor,Hirundinidae (Swallows),Passeriformes
+28,barswa,11901,3849,730 810,Barn Swallow,Hirundo rustica,Hirundinidae (Swallows),Passeriformes
+29,whbnut,14801,4187,413 824,White-breasted Nuthatch,Sitta carolinensis,Sittidae (Nuthatches),Passeriformes
+30,houwre,7562,4262,572 832,House Wren,Troglodytes aedon,Troglodytidae (Wrens),Passeriformes
+31,eursta,14850,4202,439 748 856 1005,European Starling,Sturnus vulgaris,Sturnidae (Starlings),Passeriformes
+32,grycat,14995,3940,275 851,Gray Catbird,Dumetella carolinensis,Mimidae (Mockingbirds and Thrashers),Passeriformes
+33,amerob,12727,4285,718 753 960,American Robin,Turdus migratorius,Turdidae (Thrushes and Allies),Passeriformes
+34,cedwax,7428,3701,597 859,Cedar Waxwing,Bombycilla cedrorum,Bombycillidae (Waxwings),Passeriformes
+35,houfin,199840,3824,419 790 997,House Finch,Haemorhous mexicanus,"Fringillidae (Finches, Euphonias, and Allies)",Passeriformes
+36,purfin,199841,3825,311 788 995,Purple Finch,Haemorhous purpureus,"Fringillidae (Finches, Euphonias, and Allies)",Passeriformes
+37,comred,145300,3807,585 920,Common Redpoll,Acanthis flammea,"Fringillidae (Finches, Euphonias, and Allies)",Passeriformes
+38,amegfi,145310,3838,726 794 1001,American Goldfinch,Spinus tristis,"Fringillidae (Finches, Euphonias, and Allies)",Passeriformes
+39,chispa,9135,4124,403 769 976,Chipping Sparrow,Spizella passerina,Passerellidae (New World Sparrows),Passeriformes
+40,foxspa,9156,4113,591 749 901 1006,Fox Sparrow,Passerella iliaca,Passerellidae (New World Sparrows),Passeriformes
+41,daejun,10094,4103,744 746 768 905 975 1010,Dark-eyed Junco,Junco hyemalis,Passerellidae (New World Sparrows),Passeriformes
+42,whcspa,9176,4130,729 766 973,White-crowned Sparrow,Zonotrichia leucophrys,Passerellidae (New World Sparrows),Passeriformes
+43,whtspa,9184,4127,714 764 971,White-throated Sparrow,Zonotrichia albicollis,Passerellidae (New World Sparrows),Passeriformes
+44,sonspa,9100,4107,686 902,Song Sparrow,Melospiza melodia,Passerellidae (New World Sparrows),Passeriformes
+45,balori,9346,3880,742 786 993,Baltimore Oriole,Icterus galbula,Icteridae (Troupials and Allies),Passeriformes
+46,rewbla,9744,3867,268 780 987,Red-winged Blackbird,Agelaius phoeniceus,Icteridae (Troupials and Allies),Passeriformes
+47,rusbla,10322,3874,404 911,Rusty Blackbird,Euphagus carolinus,Icteridae (Troupials and Allies),Passeriformes
+48,comgra,9602,3901,429 912,Common Grackle,Quiscalus quiscula,Icteridae (Troupials and Allies),Passeriformes
+49,ovenbi1,62550,4064,251 860,Ovenbird,Seiurus aurocapilla,Parulidae (New World Warblers),Passeriformes
+50,amered,10247,4084,412 757 964,American Redstart,Setophaga ruticilla,Parulidae (New World Warblers),Passeriformes
+51,camwar,145231,4086,417 872,Cape May Warbler,Setophaga tigrina,Parulidae (New World Warblers),Passeriformes
+52,norpar,145233,4065,423 873,Northern Parula,Setophaga americana,Parulidae (New World Warblers),Passeriformes
+53,yelwar,145238,4081,573 875,Yellow Warbler,Setophaga petechia,Parulidae (New World Warblers),Passeriformes
+54,chswar,145239,4080,577 760 967,Chestnut-sided Warbler,Setophaga pensylvanica,Parulidae (New World Warblers),Passeriformes
+55,btbwar,199916,4066,589 762 969,Black-throated Blue Warbler,Setophaga caerulescens,Parulidae (New World Warblers),Passeriformes
+56,yerwar,145245,4071,691 747 798 958 1009,Yellow-rumped Warbler,Setophaga coronata,Parulidae (New World Warblers),Passeriformes
+57,scatan,9921,3725,274 770 977,Scarlet Tanager,Piranga olivacea,Cardinalidae (Cardinals and Allies),Passeriformes
+58,norcar,9083,3709,310 772 979,Northern Cardinal,Cardinalis cardinalis,Cardinalidae (Cardinals and Allies),Passeriformes
+59,robgro,10271,3720,427 773 980,Rose-breasted Grosbeak,Pheucticus ludovicianus,Cardinalidae (Cardinals and Allies),Passeriformes

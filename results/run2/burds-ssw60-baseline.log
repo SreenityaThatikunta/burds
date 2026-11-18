@@ -1,0 +1,322 @@
+[{"stream_name":"stdout","time":0.765307143,"data":"[    0.0s] $ pip install -q -U sentence-transformers transformers soundfile\n"}
+,{"stream_name":"stdout","time":43.089134,"data":"[   42.3s] python 3.13.16 torch 2.11.0+cu130 transformers 5.23.0 sentence-transformers 6.3.0\n"}
+,{"stream_name":"stdout","time":43.515946575,"data":"[   42.8s] cuda: True Tesla T4\n"}
+,{"stream_name":"stdout","time":43.529573357,"data":"[   42.8s] model path: /kaggle/input/models/google/embeddinggemma-2/transformers/embeddinggemma-2/1\n"}
+,{"stream_name":"stderr","time":48.210942222,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   5%|▍         | 65/1376 [00:00\u003c00:02, 547.34it/s]\rLoading weights:   9%|▉         | 127/1376 [00:00\u003c00:02, 562.14it/s]\rLoading weights:  14%|█▎        | 189/1376 [00:00\u003c00:02, 513.41it/s]\rLoading weights:  19%|█▉        | 263/1376 [00:00\u003c00:02, 537.79it/s]\rLoading weights:  24%|██▍       | 330/1376 [00:00\u003c00:01, 526.31it/s]\rLoading weights:  28%|██▊       | 383/1376 [00:00\u003c00:01, 519.14it/s]\rLoading weights:  32%|███▏      | 437/1376 [00:00\u003c00:01, 502.09it/s]\rLoading weights:  36%|███▋      | 499/1376 [00:00\u003c00:01, 500.41it/s]\rLoading weights:  41%|████      | 561/1376 [00:01\u003c00:01, 529.64it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:01\u003c00:01, 532.14it/s]\rLoading weights:  52%|█████▏    | 711/1376 [00:01\u003c00:01, 626.02it/s]\rLoading weights:  56%|█████▋    | 775/1376 [00:02\u003c00:04, 121.05it/s]\rLoading weights:  92%|█████████▏| 1264/1376 [00:02\u003c00:00, 464.57it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:03\u003c00:00, 402.23it/s]\n"}
+,{"stream_name":"stdout","time":52.466092359,"data":"[   51.7s] loaded model, dtype=torch.float32, modalities=['text', 'image', 'audio', 'video', 'message']\n"}
+,{"stream_name":"stdout","time":58.01606948,"data":"[   57.3s] smoke test ok: (4, 768)\n"}
+,{"stream_name":"stdout","time":58.017766417,"data":"/usr/bin/pigz\n"}
+,{"stream_name":"stdout","time":58.018024979,"data":"[   57.3s] $ curl -sSfL --retry 5 'https://ml-inat-competition-datasets.s3.amazonaws.com/ssw60/ssw60.tar.gz' | pigz -dc | tar -x -C /tmp/ssw60 --wildcards '*.csv' '*audio_ml/*' '*images_nabirds/*'\n"}
+,{"stream_name":"stdout","time":8884.406331692,"data":"[ 8883.6s] $ du -sh /tmp/ssw60; find /tmp/ssw60 -maxdepth 2 | head -30\n"}
+,{"stream_name":"stdout","time":8884.461586251,"data":"3.7G\t/tmp/ssw60\n"}
+,{"stream_name":"stdout","time":8884.468033276,"data":"/tmp/ssw60\n"}
+,{"stream_name":"stdout","time":8884.468060768,"data":"/tmp/ssw60/ssw60\n"}
+,{"stream_name":"stdout","time":8884.468066456,"data":"/tmp/ssw60/ssw60/audio_ml.csv\n"}
+,{"stream_name":"stdout","time":8884.468071516,"data":"/tmp/ssw60/ssw60/images_inat.csv\n"}
+,{"stream_name":"stdout","time":8884.468076538,"data":"/tmp/ssw60/ssw60/audio_ml\n"}
+,{"stream_name":"stdout","time":8884.468081508,"data":"/tmp/ssw60/ssw60/images_nabirds.csv\n"}
+,{"stream_name":"stdout","time":8884.46808649,"data":"/tmp/ssw60/ssw60/inat_licenses.csv\n"}
+,{"stream_name":"stdout","time":8884.468091362,"data":"/tmp/ssw60/ssw60/taxa.csv\n"}
+,{"stream_name":"stdout","time":8884.468096417,"data":"/tmp/ssw60/ssw60/images_nabirds\n"}
+,{"stream_name":"stdout","time":8884.468101254,"data":"/tmp/ssw60/ssw60/video_ml.csv\n"}
+,{"stream_name":"stdout","time":8884.606105344,"data":"[ 8883.8s] species=60  audio=3861 {'train': 2597, 'test': 1264}  images=10220 {'test': 5171, 'train': 5049}\n"}
+,{"stream_name":"stdout","time":8884.607463633,"data":"[ 8883.8s] embedding images\n"}
+,{"stream_name":"stdout","time":8940.545169123,"data":"[ 8939.8s]   images 128/10220\n"}
+,{"stream_name":"stdout","time":8999.884384693,"data":"[ 8999.1s]   images 256/10220\n"}
+,{"stream_name":"stdout","time":9062.147892139,"data":"[ 9061.4s]   images 384/10220\n"}
+,{"stream_name":"stdout","time":9125.942840288,"data":"[ 9125.2s]   images 512/10220\n"}
+,{"stream_name":"stdout","time":9190.475802005,"data":"[ 9189.7s]   images 640/10220\n"}
+,{"stream_name":"stdout","time":9255.540837577,"data":"[ 9254.8s]   images 768/10220\n"}
+,{"stream_name":"stdout","time":9321.113109446,"data":"[ 9320.3s]   images 896/10220\n"}
+,{"stream_name":"stdout","time":9386.965297688,"data":"[ 9386.2s]   images 1024/10220\n"}
+,{"stream_name":"stdout","time":9452.925627639,"data":"[ 9452.2s]   images 1152/10220\n"}
+,{"stream_name":"stdout","time":9518.961296171,"data":"[ 9518.2s]   images 1280/10220\n"}
+,{"stream_name":"stdout","time":9588.028614222,"data":"[ 9587.3s]   images 1408/10220\n"}
+,{"stream_name":"stdout","time":9655.1082987,"data":"[ 9654.3s]   images 1536/10220\n"}
+,{"stream_name":"stdout","time":9722.088084399,"data":"[ 9721.3s]   images 1664/10220\n"}
+,{"stream_name":"stdout","time":9788.593966877,"data":"[ 9787.8s]   images 1792/10220\n"}
+,{"stream_name":"stdout","time":9854.842658859,"data":"[ 9854.1s]   images 1920/10220\n"}
+,{"stream_name":"stdout","time":9920.997083544,"data":"[ 9920.2s]   images 2048/10220\n"}
+,{"stream_name":"stdout","time":9987.104793297,"data":"[ 9986.3s]   images 2176/10220\n"}
+,{"stream_name":"stdout","time":10053.257662002,"data":"[10052.5s]   images 2304/10220\n"}
+,{"stream_name":"stdout","time":10119.631918094,"data":"[10118.9s]   images 2432/10220\n"}
+,{"stream_name":"stdout","time":10186.410388501,"data":"[10185.6s]   images 2560/10220\n"}
+,{"stream_name":"stdout","time":10253.214116804,"data":"[10252.4s]   images 2688/10220\n"}
+,{"stream_name":"stdout","time":10319.732947698,"data":"[10319.0s]   images 2816/10220\n"}
+,{"stream_name":"stdout","time":10385.957702472,"data":"[10385.2s]   images 2944/10220\n"}
+,{"stream_name":"stdout","time":10451.91651734,"data":"[10451.2s]   images 3072/10220\n"}
+,{"stream_name":"stdout","time":10517.721687161,"data":"[10517.0s]   images 3200/10220\n"}
+,{"stream_name":"stdout","time":10584.218797484,"data":"[10583.5s]   images 3328/10220\n"}
+,{"stream_name":"stdout","time":10650.135814918,"data":"[10649.4s]   images 3456/10220\n"}
+,{"stream_name":"stdout","time":10716.330754985,"data":"[10715.6s]   images 3584/10220\n"}
+,{"stream_name":"stdout","time":10782.845151765,"data":"[10782.1s]   images 3712/10220\n"}
+,{"stream_name":"stdout","time":10849.461096804,"data":"[10848.7s]   images 3840/10220\n"}
+,{"stream_name":"stdout","time":10916.012041473,"data":"[10915.2s]   images 3968/10220\n"}
+,{"stream_name":"stdout","time":10982.716708402,"data":"[10982.0s]   images 4096/10220\n"}
+,{"stream_name":"stdout","time":11049.322343543,"data":"[11048.6s]   images 4224/10220\n"}
+,{"stream_name":"stdout","time":11115.866078659,"data":"[11115.1s]   images 4352/10220\n"}
+,{"stream_name":"stdout","time":11182.473324991,"data":"[11181.7s]   images 4480/10220\n"}
+,{"stream_name":"stdout","time":11249.557684112,"data":"[11248.8s]   images 4608/10220\n"}
+,{"stream_name":"stdout","time":11317.018077154,"data":"[11316.3s]   images 4736/10220\n"}
+,{"stream_name":"stdout","time":11385.703022394,"data":"[11384.9s]   images 4864/10220\n"}
+,{"stream_name":"stdout","time":11452.571740635,"data":"[11451.8s]   images 4992/10220\n"}
+,{"stream_name":"stdout","time":11519.845612897,"data":"[11519.1s]   images 5120/10220\n"}
+,{"stream_name":"stdout","time":11587.180066902,"data":"[11586.4s]   images 5248/10220\n"}
+,{"stream_name":"stdout","time":11654.080592639,"data":"[11653.3s]   images 5376/10220\n"}
+,{"stream_name":"stdout","time":11720.708294442,"data":"[11719.9s]   images 5504/10220\n"}
+,{"stream_name":"stdout","time":11787.388548079,"data":"[11786.6s]   images 5632/10220\n"}
+,{"stream_name":"stdout","time":11854.231066723,"data":"[11853.5s]   images 5760/10220\n"}
+,{"stream_name":"stdout","time":11920.342099077,"data":"[11919.6s]   images 5888/10220\n"}
+,{"stream_name":"stdout","time":11987.16209536,"data":"[11986.4s]   images 6016/10220\n"}
+,{"stream_name":"stdout","time":12054.087576565,"data":"[12053.3s]   images 6144/10220\n"}
+,{"stream_name":"stdout","time":12120.299639053,"data":"[12119.5s]   images 6272/10220\n"}
+,{"stream_name":"stdout","time":12186.376664056,"data":"[12185.6s]   images 6400/10220\n"}
+,{"stream_name":"stdout","time":12252.391611162,"data":"[12251.6s]   images 6528/10220\n"}
+,{"stream_name":"stdout","time":12319.038009049,"data":"[12318.3s]   images 6656/10220\n"}
+,{"stream_name":"stdout","time":12385.947330398,"data":"[12385.2s]   images 6784/10220\n"}
+,{"stream_name":"stdout","time":12452.166871951,"data":"[12451.4s]   images 6912/10220\n"}
+,{"stream_name":"stdout","time":12518.764362512,"data":"[12518.0s]   images 7040/10220\n"}
+,{"stream_name":"stdout","time":12585.151254853,"data":"[12584.4s]   images 7168/10220\n"}
+,{"stream_name":"stdout","time":12651.512884862,"data":"[12650.7s]   images 7296/10220\n"}
+,{"stream_name":"stdout","time":12717.655759622,"data":"[12716.9s]   images 7424/10220\n"}
+,{"stream_name":"stdout","time":12783.745241557,"data":"[12783.0s]   images 7552/10220\n"}
+,{"stream_name":"stdout","time":12849.9288119,"data":"[12849.2s]   images 7680/10220\n"}
+,{"stream_name":"stdout","time":12916.001787025,"data":"[12915.2s]   images 7808/10220\n"}
+,{"stream_name":"stdout","time":12983.028605773,"data":"[12982.3s]   images 7936/10220\n"}
+,{"stream_name":"stdout","time":13050.283305418,"data":"[13049.5s]   images 8064/10220\n"}
+,{"stream_name":"stdout","time":13117.449669989,"data":"[13116.7s]   images 8192/10220\n"}
+,{"stream_name":"stdout","time":13185.141309172,"data":"[13184.4s]   images 8320/10220\n"}
+,{"stream_name":"stdout","time":13251.486016217,"data":"[13250.7s]   images 8448/10220\n"}
+,{"stream_name":"stdout","time":13317.716673928,"data":"[13317.0s]   images 8576/10220\n"}
+,{"stream_name":"stdout","time":13383.927588842,"data":"[13383.2s]   images 8704/10220\n"}
+,{"stream_name":"stdout","time":13450.257705476,"data":"[13449.5s]   images 8832/10220\n"}
+,{"stream_name":"stdout","time":13516.434802369,"data":"[13515.7s]   images 8960/10220\n"}
+,{"stream_name":"stdout","time":13583.109086324,"data":"[13582.3s]   images 9088/10220\n"}
+,{"stream_name":"stdout","time":13649.02371515,"data":"[13648.3s]   images 9216/10220\n"}
+,{"stream_name":"stdout","time":13715.87606331,"data":"[13715.1s]   images 9344/10220\n"}
+,{"stream_name":"stdout","time":13782.652068944,"data":"[13781.9s]   images 9472/10220\n"}
+,{"stream_name":"stdout","time":13849.428448528,"data":"[13848.7s]   images 9600/10220\n"}
+,{"stream_name":"stdout","time":13916.026881199,"data":"[13915.3s]   images 9728/10220\n"}
+,{"stream_name":"stdout","time":13982.507178043,"data":"[13981.7s]   images 9856/10220\n"}
+,{"stream_name":"stdout","time":14049.429966322,"data":"[14048.7s]   images 9984/10220\n"}
+,{"stream_name":"stdout","time":14115.735935746,"data":"[14115.0s]   images 10112/10220\n"}
+,{"stream_name":"stdout","time":14171.801482443,"data":"[14171.0s]   images 10220/10220\n"}
+,{"stream_name":"stdout","time":14171.813358283,"data":"[14171.0s] embedding audio\n"}
+,{"stream_name":"stdout","time":14179.629684968,"data":"[14178.9s]   audio 64/3861\n"}
+,{"stream_name":"stdout","time":14187.317447354,"data":"[14186.6s]   audio 128/3861\n"}
+,{"stream_name":"stdout","time":14194.974874975,"data":"[14194.2s]   audio 192/3861\n"}
+,{"stream_name":"stdout","time":14202.658359263,"data":"[14201.9s]   audio 256/3861\n"}
+,{"stream_name":"stdout","time":14210.382545672,"data":"[14209.6s]   audio 320/3861\n"}
+,{"stream_name":"stdout","time":14218.172076038,"data":"[14217.4s]   audio 384/3861\n"}
+,{"stream_name":"stdout","time":14225.79567264,"data":"[14225.0s]   audio 448/3861\n"}
+,{"stream_name":"stdout","time":14233.385738633,"data":"[14232.6s]   audio 512/3861\n"}
+,{"stream_name":"stdout","time":14240.919983803,"data":"[14240.2s]   audio 576/3861\n"}
+,{"stream_name":"stdout","time":14248.493900337,"data":"[14247.7s]   audio 640/3861\n"}
+,{"stream_name":"stdout","time":14256.005628034,"data":"[14255.2s]   audio 704/3861\n"}
+,{"stream_name":"stdout","time":14263.507910892,"data":"[14262.7s]   audio 768/3861\n"}
+,{"stream_name":"stdout","time":14270.998129465,"data":"[14270.2s]   audio 832/3861\n"}
+,{"stream_name":"stdout","time":14278.518227368,"data":"[14277.8s]   audio 896/3861\n"}
+,{"stream_name":"stdout","time":14285.985395623,"data":"[14285.2s]   audio 960/3861\n"}
+,{"stream_name":"stdout","time":14293.368392075,"data":"[14292.6s]   audio 1024/3861\n"}
+,{"stream_name":"stdout","time":14300.764942279,"data":"[14300.0s]   audio 1088/3861\n"}
+,{"stream_name":"stdout","time":14308.232759422,"data":"[14307.5s]   audio 1152/3861\n"}
+,{"stream_name":"stdout","time":14315.715704205,"data":"[14315.0s]   audio 1216/3861\n"}
+,{"stream_name":"stdout","time":14323.239239284,"data":"[14322.5s]   audio 1280/3861\n"}
+,{"stream_name":"stdout","time":14330.884249909,"data":"[14330.1s]   audio 1344/3861\n"}
+,{"stream_name":"stdout","time":14338.467238724,"data":"[14337.7s]   audio 1408/3861\n"}
+,{"stream_name":"stdout","time":14346.016602498,"data":"[14345.3s]   audio 1472/3861\n"}
+,{"stream_name":"stdout","time":14353.495033529,"data":"[14352.7s]   audio 1536/3861\n"}
+,{"stream_name":"stdout","time":14360.909678175,"data":"[14360.1s]   audio 1600/3861\n"}
+,{"stream_name":"stdout","time":14368.3114971,"data":"[14367.5s]   audio 1664/3861\n"}
+,{"stream_name":"stdout","time":14375.683940426,"data":"[14374.9s]   audio 1728/3861\n"}
+,{"stream_name":"stdout","time":14383.053075159,"data":"[14382.3s]   audio 1792/3861\n"}
+,{"stream_name":"stdout","time":14390.478831475,"data":"[14389.7s]   audio 1856/3861\n"}
+,{"stream_name":"stdout","time":14397.917250032,"data":"[14397.2s]   audio 1920/3861\n"}
+,{"stream_name":"stdout","time":14405.381998922,"data":"[14404.6s]   audio 1984/3861\n"}
+,{"stream_name":"stdout","time":14412.875326683,"data":"[14412.1s]   audio 2048/3861\n"}
+,{"stream_name":"stdout","time":14420.38076338,"data":"[14419.6s]   audio 2112/3861\n"}
+,{"stream_name":"stdout","time":14427.874230968,"data":"[14427.1s]   audio 2176/3861\n"}
+,{"stream_name":"stdout","time":14435.379882742,"data":"[14434.6s]   audio 2240/3861\n"}
+,{"stream_name":"stdout","time":14442.853235485,"data":"[14442.1s]   audio 2304/3861\n"}
+,{"stream_name":"stdout","time":14450.317916154,"data":"[14449.6s]   audio 2368/3861\n"}
+,{"stream_name":"stdout","time":14457.761734941,"data":"[14457.0s]   audio 2432/3861\n"}
+,{"stream_name":"stdout","time":14465.231528938,"data":"[14464.5s]   audio 2496/3861\n"}
+,{"stream_name":"stdout","time":14472.679789635,"data":"[14471.9s]   audio 2560/3861\n"}
+,{"stream_name":"stdout","time":14480.122742053,"data":"[14479.4s]   audio 2624/3861\n"}
+,{"stream_name":"stdout","time":14487.540514713,"data":"[14486.8s]   audio 2688/3861\n"}
+,{"stream_name":"stdout","time":14494.990533965,"data":"[14494.2s]   audio 2752/3861\n"}
+,{"stream_name":"stdout","time":14502.401140847,"data":"[14501.6s]   audio 2816/3861\n"}
+,{"stream_name":"stdout","time":14509.794907281,"data":"[14509.0s]   audio 2880/3861\n"}
+,{"stream_name":"stdout","time":14517.257248978,"data":"[14516.5s]   audio 2944/3861\n"}
+,{"stream_name":"stdout","time":14524.648131245,"data":"[14523.9s]   audio 3008/3861\n"}
+,{"stream_name":"stdout","time":14532.06478496,"data":"[14531.3s]   audio 3072/3861\n"}
+,{"stream_name":"stdout","time":14539.475589715,"data":"[14538.7s]   audio 3136/3861\n"}
+,{"stream_name":"stdout","time":14546.864375615,"data":"[14546.1s]   audio 3200/3861\n"}
+,{"stream_name":"stdout","time":14554.310543724,"data":"[14553.5s]   audio 3264/3861\n"}
+,{"stream_name":"stdout","time":14561.718825303,"data":"[14561.0s]   audio 3328/3861\n"}
+,{"stream_name":"stdout","time":14569.101610144,"data":"[14568.3s]   audio 3392/3861\n"}
+,{"stream_name":"stdout","time":14576.518956331,"data":"[14575.8s]   audio 3456/3861\n"}
+,{"stream_name":"stdout","time":14583.94547576,"data":"[14583.2s]   audio 3520/3861\n"}
+,{"stream_name":"stdout","time":14591.32503469,"data":"[14590.6s]   audio 3584/3861\n"}
+,{"stream_name":"stdout","time":14598.742904857,"data":"[14598.0s]   audio 3648/3861\n"}
+,{"stream_name":"stdout","time":14606.188410247,"data":"[14605.4s]   audio 3712/3861\n"}
+,{"stream_name":"stdout","time":14613.598206654,"data":"[14612.8s]   audio 3776/3861\n"}
+,{"stream_name":"stdout","time":14620.987752114,"data":"[14620.2s]   audio 3840/3861\n"}
+,{"stream_name":"stdout","time":14623.373526772,"data":"[14622.6s]   audio 3861/3861\n"}
+,{"stream_name":"stdout","time":14623.37670918,"data":"[14622.6s] embedding species names\n"}
+,{"stream_name":"stdout","time":14623.803062363,"data":"[14623.0s] embedding fused pairs train=1500 test=1500\n"}
+,{"stream_name":"stdout","time":14644.055903071,"data":"[14643.3s]   pairs 32/1500\n"}
+,{"stream_name":"stdout","time":14664.314410223,"data":"[14663.5s]   pairs 64/1500\n"}
+,{"stream_name":"stdout","time":14684.691709575,"data":"[14683.9s]   pairs 96/1500\n"}
+,{"stream_name":"stdout","time":14705.082243556,"data":"[14704.3s]   pairs 128/1500\n"}
+,{"stream_name":"stdout","time":14725.61032292,"data":"[14724.8s]   pairs 160/1500\n"}
+,{"stream_name":"stdout","time":14746.197149468,"data":"[14745.4s]   pairs 192/1500\n"}
+,{"stream_name":"stdout","time":14766.758578011,"data":"[14766.0s]   pairs 224/1500\n"}
+,{"stream_name":"stdout","time":14787.401165152,"data":"[14786.6s]   pairs 256/1500\n"}
+,{"stream_name":"stdout","time":14807.99680522,"data":"[14807.2s]   pairs 288/1500\n"}
+,{"stream_name":"stdout","time":14828.584600023,"data":"[14827.8s]   pairs 320/1500\n"}
+,{"stream_name":"stdout","time":14849.312678163,"data":"[14848.5s]   pairs 352/1500\n"}
+,{"stream_name":"stdout","time":14869.936116051,"data":"[14869.2s]   pairs 384/1500\n"}
+,{"stream_name":"stdout","time":14890.585524917,"data":"[14889.8s]   pairs 416/1500\n"}
+,{"stream_name":"stdout","time":14911.241519515,"data":"[14910.5s]   pairs 448/1500\n"}
+,{"stream_name":"stdout","time":14931.992622329,"data":"[14931.2s]   pairs 480/1500\n"}
+,{"stream_name":"stdout","time":14953.113379306,"data":"[14952.3s]   pairs 512/1500\n"}
+,{"stream_name":"stdout","time":14974.063317064,"data":"[14973.3s]   pairs 544/1500\n"}
+,{"stream_name":"stdout","time":14994.749958714,"data":"[14994.0s]   pairs 576/1500\n"}
+,{"stream_name":"stdout","time":15015.2747575,"data":"[15014.5s]   pairs 608/1500\n"}
+,{"stream_name":"stdout","time":15035.765369381,"data":"[15035.0s]   pairs 640/1500\n"}
+,{"stream_name":"stdout","time":15056.433183717,"data":"[15055.7s]   pairs 672/1500\n"}
+,{"stream_name":"stdout","time":15076.983686485,"data":"[15076.2s]   pairs 704/1500\n"}
+,{"stream_name":"stdout","time":15097.651966113,"data":"[15096.9s]   pairs 736/1500\n"}
+,{"stream_name":"stdout","time":15118.359852697,"data":"[15117.6s]   pairs 768/1500\n"}
+,{"stream_name":"stdout","time":15138.930893431,"data":"[15138.2s]   pairs 800/1500\n"}
+,{"stream_name":"stdout","time":15159.68228422,"data":"[15158.9s]   pairs 832/1500\n"}
+,{"stream_name":"stdout","time":15180.482417389,"data":"[15179.7s]   pairs 864/1500\n"}
+,{"stream_name":"stdout","time":15201.324204963,"data":"[15200.6s]   pairs 896/1500\n"}
+,{"stream_name":"stdout","time":15222.103423279,"data":"[15221.3s]   pairs 928/1500\n"}
+,{"stream_name":"stdout","time":15242.694952647,"data":"[15241.9s]   pairs 960/1500\n"}
+,{"stream_name":"stdout","time":15263.290956847,"data":"[15262.5s]   pairs 992/1500\n"}
+,{"stream_name":"stdout","time":15284.299334028,"data":"[15283.5s]   pairs 1024/1500\n"}
+,{"stream_name":"stdout","time":15305.176759225,"data":"[15304.4s]   pairs 1056/1500\n"}
+,{"stream_name":"stdout","time":15325.832651369,"data":"[15325.1s]   pairs 1088/1500\n"}
+,{"stream_name":"stdout","time":15346.227660256,"data":"[15345.5s]   pairs 1120/1500\n"}
+,{"stream_name":"stdout","time":15367.018078412,"data":"[15366.3s]   pairs 1152/1500\n"}
+,{"stream_name":"stdout","time":15387.915910603,"data":"[15387.2s]   pairs 1184/1500\n"}
+,{"stream_name":"stdout","time":15408.579236051,"data":"[15407.8s]   pairs 1216/1500\n"}
+,{"stream_name":"stdout","time":15429.053938873,"data":"[15428.3s]   pairs 1248/1500\n"}
+,{"stream_name":"stdout","time":15449.449874868,"data":"[15448.7s]   pairs 1280/1500\n"}
+,{"stream_name":"stdout","time":15469.96556826,"data":"[15469.2s]   pairs 1312/1500\n"}
+,{"stream_name":"stdout","time":15490.651818498,"data":"[15489.9s]   pairs 1344/1500\n"}
+,{"stream_name":"stdout","time":15511.306515014,"data":"[15510.5s]   pairs 1376/1500\n"}
+,{"stream_name":"stdout","time":15532.039493872,"data":"[15531.3s]   pairs 1408/1500\n"}
+,{"stream_name":"stdout","time":15552.694384324,"data":"[15551.9s]   pairs 1440/1500\n"}
+,{"stream_name":"stdout","time":15573.20368192,"data":"[15572.4s]   pairs 1472/1500\n"}
+,{"stream_name":"stdout","time":15591.213427381,"data":"[15590.4s]   pairs 1500/1500\n"}
+,{"stream_name":"stdout","time":15611.838342496,"data":"[15611.1s]   pairs 32/1500\n"}
+,{"stream_name":"stdout","time":15632.361356159,"data":"[15631.6s]   pairs 64/1500\n"}
+,{"stream_name":"stdout","time":15652.832293511,"data":"[15652.1s]   pairs 96/1500\n"}
+,{"stream_name":"stdout","time":15673.266875573,"data":"[15672.5s]   pairs 128/1500\n"}
+,{"stream_name":"stdout","time":15693.740011188,"data":"[15693.0s]   pairs 160/1500\n"}
+,{"stream_name":"stdout","time":15714.22164937,"data":"[15713.5s]   pairs 192/1500\n"}
+,{"stream_name":"stdout","time":15734.717492376,"data":"[15734.0s]   pairs 224/1500\n"}
+,{"stream_name":"stdout","time":15755.173269562,"data":"[15754.4s]   pairs 256/1500\n"}
+,{"stream_name":"stdout","time":15775.644373278,"data":"[15774.9s]   pairs 288/1500\n"}
+,{"stream_name":"stdout","time":15796.06554123,"data":"[15795.3s]   pairs 320/1500\n"}
+,{"stream_name":"stdout","time":15816.551749438,"data":"[15815.8s]   pairs 352/1500\n"}
+,{"stream_name":"stdout","time":15837.052096212,"data":"[15836.3s]   pairs 384/1500\n"}
+,{"stream_name":"stdout","time":15857.59743612,"data":"[15856.8s]   pairs 416/1500\n"}
+,{"stream_name":"stdout","time":15878.033551593,"data":"[15877.3s]   pairs 448/1500\n"}
+,{"stream_name":"stdout","time":15898.585778992,"data":"[15897.8s]   pairs 480/1500\n"}
+,{"stream_name":"stdout","time":15919.039646767,"data":"[15918.3s]   pairs 512/1500\n"}
+,{"stream_name":"stdout","time":15939.576061721,"data":"[15938.8s]   pairs 544/1500\n"}
+,{"stream_name":"stdout","time":15960.247341721,"data":"[15959.5s]   pairs 576/1500\n"}
+,{"stream_name":"stdout","time":15980.890563236,"data":"[15980.1s]   pairs 608/1500\n"}
+,{"stream_name":"stdout","time":16001.61783553,"data":"[16000.9s]   pairs 640/1500\n"}
+,{"stream_name":"stdout","time":16022.244001143,"data":"[16021.5s]   pairs 672/1500\n"}
+,{"stream_name":"stdout","time":16042.864956712,"data":"[16042.1s]   pairs 704/1500\n"}
+,{"stream_name":"stdout","time":16063.432944576,"data":"[16062.7s]   pairs 736/1500\n"}
+,{"stream_name":"stdout","time":16084.018813635,"data":"[16083.3s]   pairs 768/1500\n"}
+,{"stream_name":"stdout","time":16104.607541174,"data":"[16103.8s]   pairs 800/1500\n"}
+,{"stream_name":"stdout","time":16125.204755916,"data":"[16124.4s]   pairs 832/1500\n"}
+,{"stream_name":"stdout","time":16145.807728276,"data":"[16145.0s]   pairs 864/1500\n"}
+,{"stream_name":"stdout","time":16166.350859001,"data":"[16165.6s]   pairs 896/1500\n"}
+,{"stream_name":"stdout","time":16186.98521038,"data":"[16186.2s]   pairs 928/1500\n"}
+,{"stream_name":"stdout","time":16207.554908082,"data":"[16206.8s]   pairs 960/1500\n"}
+,{"stream_name":"stdout","time":16228.100911573,"data":"[16227.3s]   pairs 992/1500\n"}
+,{"stream_name":"stdout","time":16248.742085987,"data":"[16248.0s]   pairs 1024/1500\n"}
+,{"stream_name":"stdout","time":16269.298390384,"data":"[16268.5s]   pairs 1056/1500\n"}
+,{"stream_name":"stdout","time":16289.812692321,"data":"[16289.0s]   pairs 1088/1500\n"}
+,{"stream_name":"stdout","time":16310.264769285,"data":"[16309.5s]   pairs 1120/1500\n"}
+,{"stream_name":"stdout","time":16330.778790044,"data":"[16330.0s]   pairs 1152/1500\n"}
+,{"stream_name":"stdout","time":16351.340101816,"data":"[16350.6s]   pairs 1184/1500\n"}
+,{"stream_name":"stdout","time":16371.970549782,"data":"[16371.2s]   pairs 1216/1500\n"}
+,{"stream_name":"stdout","time":16392.451849481,"data":"[16391.7s]   pairs 1248/1500\n"}
+,{"stream_name":"stdout","time":16413.03028618,"data":"[16412.3s]   pairs 1280/1500\n"}
+,{"stream_name":"stdout","time":16433.588158673,"data":"[16432.8s]   pairs 1312/1500\n"}
+,{"stream_name":"stdout","time":16454.119693282,"data":"[16453.4s]   pairs 1344/1500\n"}
+,{"stream_name":"stdout","time":16474.710554268,"data":"[16473.9s]   pairs 1376/1500\n"}
+,{"stream_name":"stdout","time":16495.213060701,"data":"[16494.4s]   pairs 1408/1500\n"}
+,{"stream_name":"stdout","time":16515.8090503,"data":"[16515.0s]   pairs 1440/1500\n"}
+,{"stream_name":"stdout","time":16536.358083314,"data":"[16535.6s]   pairs 1472/1500\n"}
+,{"stream_name":"stdout","time":16554.498878895,"data":"[16553.7s]   pairs 1500/1500\n"}
+,{"stream_name":"stdout","time":16555.347430233,"data":"[16554.6s] d=768: full={'image': {'centroid_top1': 0.8857087603945079, 'centroid_top5': 0.9920711661187391, 'nn1_top1': 0.8988590214658674, 'n_test': 5171}, 'audio': {'centroid_top1': 0.15822784810126583, 'centroid_top5': 0.3805379746835443, 'nn1_top1': 0.1518987341772152, 'n_test': 1264}}  paired={'image_only': 0.8866666666666667, 'audio_only': 0.172, 'late_fusion': 0.8833333333333333, 'joint_embedding': 0.87, 'joint_plus_late': 0.8913333333333333, 'n_test_pairs': 1500}  zs={'image_to_name_top1': 0.6828466447495649, 'audio_to_name_top1': 0.043512658227848104, 'pair_to_name_top1': 0.644}\n"}
+,{"stream_name":"stdout","time":16556.125311594,"data":"[16555.4s] d=512: full={'image': {'centroid_top1': 0.8814542641655386, 'centroid_top5': 0.9911042351576097, 'nn1_top1': 0.900986269580352, 'n_test': 5171}, 'audio': {'centroid_top1': 0.15981012658227847, 'centroid_top5': 0.3805379746835443, 'nn1_top1': 0.1550632911392405, 'n_test': 1264}}  paired={'image_only': 0.8833333333333333, 'audio_only': 0.17133333333333334, 'late_fusion': 0.8833333333333333, 'joint_embedding': 0.8666666666666667, 'joint_plus_late': 0.8926666666666667, 'n_test_pairs': 1500}  zs={'image_to_name_top1': 0.6735641075227229, 'audio_to_name_top1': 0.051424050632911396, 'pair_to_name_top1': 0.642}\n"}
+,{"stream_name":"stdout","time":16556.802565634,"data":"[16556.0s] d=256: full={'image': {'centroid_top1': 0.877779926513247, 'centroid_top5': 0.9918777799265133, 'nn1_top1': 0.8973119319280604, 'n_test': 5171}, 'audio': {'centroid_top1': 0.15981012658227847, 'centroid_top5': 0.37658227848101267, 'nn1_top1': 0.1629746835443038, 'n_test': 1264}}  paired={'image_only': 0.8786666666666667, 'audio_only': 0.168, 'late_fusion': 0.8753333333333333, 'joint_embedding': 0.8593333333333333, 'joint_plus_late': 0.8853333333333333, 'n_test_pairs': 1500}  zs={'image_to_name_top1': 0.6584799845291046, 'audio_to_name_top1': 0.04272151898734177, 'pair_to_name_top1': 0.6126666666666667}\n"}
+,{"stream_name":"stdout","time":16557.430983195,"data":"[16556.7s] d=128: full={'image': {'centroid_top1': 0.8729452717076001, 'centroid_top5': 0.9912976213498356, 'nn1_top1': 0.8851286018178302, 'n_test': 5171}, 'audio': {'centroid_top1': 0.1550632911392405, 'centroid_top5': 0.375, 'nn1_top1': 0.1463607594936709, 'n_test': 1264}}  paired={'image_only': 0.8673333333333333, 'audio_only': 0.16266666666666665, 'late_fusion': 0.8673333333333333, 'joint_embedding': 0.8453333333333334, 'joint_plus_late': 0.8766666666666667, 'n_test_pairs': 1500}  zs={'image_to_name_top1': 0.5389673177335138, 'audio_to_name_top1': 0.029272151898734177, 'pair_to_name_top1': 0.5366666666666666}\n"}
+,{"stream_name":"stdout","time":16558.804078023,"data":"# SSW60 baseline — EmbeddingGemma 2, no training\n"}
+,{"stream_name":"stdout","time":16558.804120809,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804126646,"data":"60 species · images: NABirds split · audio: SSW60 audio_ml split · Tesla T4 · embedding time 127.8 min\n"}
+,{"stream_name":"stdout","time":16558.804133281,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804142201,"data":"## Paired test set (top-1, nearest class centroid)\n"}
+,{"stream_name":"stdout","time":16558.804145527,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804148429,"data":"| dims | image only | audio only | late fusion | joint embedding | joint + late |\n"}
+,{"stream_name":"stdout","time":16558.804151346,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":16558.804154041,"data":"| 768 | 88.7% | 17.2% | 88.3% | 87.0% | 89.1% |\n"}
+,{"stream_name":"stdout","time":16558.804157674,"data":"| 512 | 88.3% | 17.1% | 88.3% | 86.7% | 89.3% |\n"}
+,{"stream_name":"stdout","time":16558.804177415,"data":"| 256 | 87.9% | 16.8% | 87.5% | 85.9% | 88.5% |\n"}
+,{"stream_name":"stdout","time":16558.804181719,"data":"| 128 | 86.7% | 16.3% | 86.7% | 84.5% | 87.7% |\n"}
+,{"stream_name":"stdout","time":16558.804186358,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804190748,"data":"## Full single-modality test sets\n"}
+,{"stream_name":"stdout","time":16558.804195122,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804221102,"data":"| dims | modality | centroid top-1 | centroid top-5 | 1-NN top-1 | n |\n"}
+,{"stream_name":"stdout","time":16558.804226984,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":16558.804231672,"data":"| 768 | image | 88.6% | 99.2% | 89.9% | 5171 |\n"}
+,{"stream_name":"stdout","time":16558.804235721,"data":"| 768 | audio | 15.8% | 38.1% | 15.2% | 1264 |\n"}
+,{"stream_name":"stdout","time":16558.804239607,"data":"| 512 | image | 88.1% | 99.1% | 90.1% | 5171 |\n"}
+,{"stream_name":"stdout","time":16558.804243418,"data":"| 512 | audio | 16.0% | 38.1% | 15.5% | 1264 |\n"}
+,{"stream_name":"stdout","time":16558.804247261,"data":"| 256 | image | 87.8% | 99.2% | 89.7% | 5171 |\n"}
+,{"stream_name":"stdout","time":16558.804277455,"data":"| 256 | audio | 16.0% | 37.7% | 16.3% | 1264 |\n"}
+,{"stream_name":"stdout","time":16558.804283139,"data":"| 128 | image | 87.3% | 99.1% | 88.5% | 5171 |\n"}
+,{"stream_name":"stdout","time":16558.804287727,"data":"| 128 | audio | 15.5% | 37.5% | 14.6% | 1264 |\n"}
+,{"stream_name":"stdout","time":16558.804291687,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804295908,"data":"## Zero-shot (match against species names, no examples)\n"}
+,{"stream_name":"stdout","time":16558.804300363,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804304706,"data":"| dims | image→name | audio→name | pair→name |\n"}
+,{"stream_name":"stdout","time":16558.804309361,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":16558.804314086,"data":"| 768 | 68.3% | 4.4% | 64.4% |\n"}
+,{"stream_name":"stdout","time":16558.804318126,"data":"| 512 | 67.4% | 5.1% | 64.2% |\n"}
+,{"stream_name":"stdout","time":16558.804322713,"data":"| 256 | 65.8% | 4.3% | 61.3% |\n"}
+,{"stream_name":"stdout","time":16558.804326339,"data":"| 128 | 53.9% | 2.9% | 53.7% |\n"}
+,{"stream_name":"stdout","time":16558.804330187,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804333731,"data":"## Hardest species (768-d, paired)\n"}
+,{"stream_name":"stdout","time":16558.804337472,"data":"\n"}
+,{"stream_name":"stdout","time":16558.804341294,"data":"| species | image | audio | fused |\n"}
+,{"stream_name":"stdout","time":16558.80434488,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":16558.804348491,"data":"| Cape May Warbler | 80.0% | 4.0% | 24.0% |\n"}
+,{"stream_name":"stdout","time":16558.804352033,"data":"| Common Raven | 40.0% | 16.0% | 56.0% |\n"}
+,{"stream_name":"stdout","time":16558.804355528,"data":"| Downy Woodpecker | 76.0% | 16.0% | 64.0% |\n"}
+,{"stream_name":"stdout","time":16558.804359041,"data":"| Rusty Blackbird | 84.0% | 8.0% | 68.0% |\n"}
+,{"stream_name":"stdout","time":16558.804363339,"data":"| Cooper's Hawk | 64.0% | 0.0% | 72.0% |\n"}
+,{"stream_name":"stdout","time":16558.804367159,"data":"| Purple Finch | 76.0% | 0.0% | 72.0% |\n"}
+,{"stream_name":"stdout","time":16558.804371369,"data":"| Red-winged Blackbird | 76.0% | 12.0% | 72.0% |\n"}
+,{"stream_name":"stdout","time":16558.804375402,"data":"| Sharp-shinned Hawk | 68.0% | 36.0% | 76.0% |\n"}
+,{"stream_name":"stdout","time":16558.804379772,"data":"| Hairy Woodpecker | 56.0% | 68.0% | 76.0% |\n"}
+,{"stream_name":"stdout","time":16558.804384355,"data":"| Chipping Sparrow | 80.0% | 24.0% | 76.0% |\n"}
+,{"stream_name":"stdout","time":16558.804389011,"data":"[16558.0s] done\n"}
+,{"stream_name":"stderr","time":16567.310829461,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":16567.310869927,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":16567.589183452,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":16567.589244021,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":16568.422595783,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":16569.515484045,"data":"[NbConvertApp] Writing 363832 bytes to __results__.html\n"}
+]
