@@ -1,0 +1,116 @@
+[{"stream_name":"stdout","time":7.675076849,"data":"[   0.2s] loading /kaggle/input/notebooks/sreenityathatikunta/burds-ssw60-baseline/embeddings.npz\n"}
+,{"stream_name":"stdout","time":8.429670973,"data":"[   1.0s] img train/test 5049/5171  aud 2597/1264  pairs 1500/1500\n"}
+,{"stream_name":"stdout","time":8.429731072,"data":"[   1.0s] A3/A4: single-modality probes\n"}
+,{"stream_name":"stdout","time":149.176061167,"data":"[ 141.7s] image: centroid=0.886  knn=0.919  linear_probe=0.944  hp={'centroid_temp': 0.01, 'knn_k': 10, 'lr_C': 30}\n"}
+,{"stream_name":"stdout","time":230.392349712,"data":"[ 222.9s] audio: centroid=0.158  knn=0.184  linear_probe=0.263  hp={'centroid_temp': 0.01, 'knn_k': 40, 'lr_C': 30}\n"}
+,{"stream_name":"stdout","time":230.395157984,"data":"[ 222.9s] A1/A2: fusion\n"}
+,{"stream_name":"stdout","time":230.594655352,"data":"[ 223.1s] centroid: image_only=0.887  audio_only=0.172  equal_weight=0.883  weighted=0.897  confidence=0.900  w=0.9 g=1.0\n"}
+,{"stream_name":"stdout","time":230.765365289,"data":"[ 223.3s] knn: image_only=0.908  audio_only=0.191  equal_weight=0.873  weighted=0.909  confidence=0.911  w=0.9500000000000001 g=2.0\n"}
+,{"stream_name":"stdout","time":230.940056976,"data":"[ 223.5s] linear_probe: image_only=0.939  audio_only=0.267  equal_weight=0.940  weighted=0.948  confidence=0.953  w=0.6000000000000001 g=1.0\n"}
+,{"stream_name":"stdout","time":267.077084159,"data":"[ 259.6s] joint embedding probe: 0.913\n"}
+,{"stream_name":"stdout","time":276.824907212,"data":"[ 269.4s] early fusion probe: 0.924\n"}
+,{"stream_name":"stdout","time":288.101933644,"data":"[ 280.6s] d=768: {'image_probe': 0.9386666666666666, 'audio_probe': 0.2673333333333333, 'weighted_fusion': 0.948}\n"}
+,{"stream_name":"stdout","time":293.673984441,"data":"[ 286.2s] d=256: {'image_probe': 0.9333333333333333, 'audio_probe': 0.26066666666666666, 'weighted_fusion': 0.94}\n"}
+,{"stream_name":"stdout","time":298.690972589,"data":"[ 291.2s] d=128: {'image_probe': 0.9186666666666666, 'audio_probe': 0.23333333333333334, 'weighted_fusion': 0.9273333333333333}\n"}
+,{"stream_name":"stdout","time":298.691028025,"data":"[ 291.2s] A5: error analysis\n"}
+,{"stream_name":"stdout","time":301.377602808,"data":"# SSW60 analysis on frozen EmbeddingGemma 2 embeddings\n"}
+,{"stream_name":"stdout","time":301.377638007,"data":"\n"}
+,{"stream_name":"stdout","time":301.377645364,"data":"All hyperparameters chosen by 5-fold CV on the train split; 95% bootstrap CIs on test.\n"}
+,{"stream_name":"stdout","time":301.377651277,"data":"\n"}
+,{"stream_name":"stdout","time":301.377656571,"data":"## Single modality (full test sets)\n"}
+,{"stream_name":"stdout","time":301.377666937,"data":"\n"}
+,{"stream_name":"stdout","time":301.377670491,"data":"| modality | method | top-1 | 95% CI | top-5 | n |\n"}
+,{"stream_name":"stdout","time":301.377673976,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.377677405,"data":"| image | centroid | 88.6% | [87.6, 89.4] | 99.2% | 5171 |\n"}
+,{"stream_name":"stdout","time":301.377681012,"data":"| image | knn | 91.9% | [91.2, 92.7] | 99.2% | 5171 |\n"}
+,{"stream_name":"stdout","time":301.37768448,"data":"| image | linear_probe | 94.4% | [93.7, 95.0] | 99.7% | 5171 |\n"}
+,{"stream_name":"stdout","time":301.377688146,"data":"| audio | centroid | 15.8% | [13.9, 17.8] | 38.1% | 1264 |\n"}
+,{"stream_name":"stdout","time":301.377691551,"data":"| audio | knn | 18.4% | [16.3, 20.6] | 42.4% | 1264 |\n"}
+,{"stream_name":"stdout","time":301.377695127,"data":"| audio | linear_probe | 26.3% | [23.7, 28.7] | 53.7% | 1264 |\n"}
+,{"stream_name":"stdout","time":301.377712864,"data":"\n"}
+,{"stream_name":"stdout","time":301.377719231,"data":"## Photo + song (paired test set, n=1500)\n"}
+,{"stream_name":"stdout","time":301.377740463,"data":"\n"}
+,{"stream_name":"stdout","time":301.377744757,"data":"| per-modality scorer | image only | audio only | equal weight | weighted | confidence |\n"}
+,{"stream_name":"stdout","time":301.377749109,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.377752948,"data":"| centroid | 88.7% | 17.2% | 88.3% | 89.7% | 90.0% |\n"}
+,{"stream_name":"stdout","time":301.37775692,"data":"| knn | 90.8% | 19.1% | 87.3% | 90.9% | 91.1% |\n"}
+,{"stream_name":"stdout","time":301.377760779,"data":"| linear_probe | 93.9% | 26.7% | 94.0% | 94.8% | 95.3% |\n"}
+,{"stream_name":"stdout","time":301.377764752,"data":"\n"}
+,{"stream_name":"stdout","time":301.377768465,"data":"- Best fused (linear probe + weighted, image weight 0.60): **94.8%** [93.6, 95.9]\n"}
+,{"stream_name":"stdout","time":301.377772478,"data":"- Image-only on same pairs: 93.9% [92.7, 95.1]\n"}
+,{"stream_name":"stdout","time":301.377776265,"data":"- Joint single-embedding probe: 91.3%\n"}
+,{"stream_name":"stdout","time":301.377784902,"data":"- Early fusion probe on [image, audio]: 92.4%\n"}
+,{"stream_name":"stdout","time":301.377848229,"data":"\n"}
+,{"stream_name":"stdout","time":301.37785324,"data":"## Embedding size (linear probe + weighted fusion, paired test)\n"}
+,{"stream_name":"stdout","time":301.377857482,"data":"\n"}
+,{"stream_name":"stdout","time":301.377861205,"data":"| dims | image | audio | fused |\n"}
+,{"stream_name":"stdout","time":301.377865072,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.377868945,"data":"| 768 | 93.9% | 26.7% | 94.8% |\n"}
+,{"stream_name":"stdout","time":301.377872763,"data":"| 256 | 93.3% | 26.1% | 94.0% |\n"}
+,{"stream_name":"stdout","time":301.377876712,"data":"| 128 | 91.9% | 23.3% | 92.7% |\n"}
+,{"stream_name":"stdout","time":301.377880526,"data":"\n"}
+,{"stream_name":"stdout","time":301.377884212,"data":"## Most confused (image)\n"}
+,{"stream_name":"stdout","time":301.377888204,"data":"\n"}
+,{"stream_name":"stdout","time":301.377891949,"data":"| true | predicted as | rate |\n"}
+,{"stream_name":"stdout","time":301.377895737,"data":"|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.377899603,"data":"| Hairy Woodpecker | Downy Woodpecker | 36.7% (22) |\n"}
+,{"stream_name":"stdout","time":301.37790355,"data":"| Sharp-shinned Hawk | Cooper's Hawk | 25.9% (30) |\n"}
+,{"stream_name":"stdout","time":301.377907628,"data":"| Cooper's Hawk | Sharp-shinned Hawk | 22.2% (26) |\n"}
+,{"stream_name":"stdout","time":301.377911629,"data":"| American Crow | Common Raven | 19.7% (15) |\n"}
+,{"stream_name":"stdout","time":301.377931303,"data":"| Common Raven | American Crow | 19.3% (11) |\n"}
+,{"stream_name":"stdout","time":301.377936007,"data":"| Downy Woodpecker | Hairy Woodpecker | 13.3% (8) |\n"}
+,{"stream_name":"stdout","time":301.377940688,"data":"| Cape May Warbler | Yellow-rumped Warbler | 11.7% (7) |\n"}
+,{"stream_name":"stdout","time":301.377944807,"data":"| Purple Finch | House Finch | 7.2% (7) |\n"}
+,{"stream_name":"stdout","time":301.377948665,"data":"\n"}
+,{"stream_name":"stdout","time":301.377952885,"data":"## Most confused (audio)\n"}
+,{"stream_name":"stdout","time":301.37795741,"data":"\n"}
+,{"stream_name":"stdout","time":301.377962083,"data":"| true | predicted as | rate |\n"}
+,{"stream_name":"stdout","time":301.377966026,"data":"|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.377969861,"data":"| Scarlet Tanager | Red-eyed Vireo | 36.8% (7) |\n"}
+,{"stream_name":"stdout","time":301.377973786,"data":"| Common Raven | American Crow | 25.0% (5) |\n"}
+,{"stream_name":"stdout","time":301.377984074,"data":"| Barn Swallow | House Wren | 23.5% (4) |\n"}
+,{"stream_name":"stdout","time":301.377989975,"data":"| Red-bellied Woodpecker | Northern Flicker | 23.5% (4) |\n"}
+,{"stream_name":"stdout","time":301.377993958,"data":"| Cape May Warbler | Red-eyed Vireo | 22.2% (4) |\n"}
+,{"stream_name":"stdout","time":301.377997935,"data":"| Cooper's Hawk | Gray Catbird | 22.2% (4) |\n"}
+,{"stream_name":"stdout","time":301.378001779,"data":"| Wood Duck | Canada Goose | 21.1% (4) |\n"}
+,{"stream_name":"stdout","time":301.378005583,"data":"| Cedar Waxwing | Chipping Sparrow | 19.2% (5) |\n"}
+,{"stream_name":"stdout","time":301.378009569,"data":"\n"}
+,{"stream_name":"stdout","time":301.378013303,"data":"## Most confused (fused)\n"}
+,{"stream_name":"stdout","time":301.378022797,"data":"\n"}
+,{"stream_name":"stdout","time":301.378026604,"data":"| true | predicted as | rate |\n"}
+,{"stream_name":"stdout","time":301.378041332,"data":"|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.378046192,"data":"| Common Raven | American Crow | 28.0% (7) |\n"}
+,{"stream_name":"stdout","time":301.378050472,"data":"| Downy Woodpecker | Hairy Woodpecker | 24.0% (6) |\n"}
+,{"stream_name":"stdout","time":301.378054716,"data":"| Hairy Woodpecker | Downy Woodpecker | 16.0% (4) |\n"}
+,{"stream_name":"stdout","time":301.378059275,"data":"| Sharp-shinned Hawk | Cooper's Hawk | 16.0% (4) |\n"}
+,{"stream_name":"stdout","time":301.378064016,"data":"| Northern Parula | Yellow-rumped Warbler | 12.0% (3) |\n"}
+,{"stream_name":"stdout","time":301.37806797,"data":"| Rusty Blackbird | Common Grackle | 12.0% (3) |\n"}
+,{"stream_name":"stdout","time":301.378071853,"data":"| Purple Finch | House Finch | 12.0% (3) |\n"}
+,{"stream_name":"stdout","time":301.3780757,"data":"| American Crow | Common Raven | 12.0% (3) |\n"}
+,{"stream_name":"stdout","time":301.378079641,"data":"\n"}
+,{"stream_name":"stdout","time":301.378083241,"data":"## Where song helps / hurts most (paired, linear probe)\n"}
+,{"stream_name":"stdout","time":301.37808735,"data":"\n"}
+,{"stream_name":"stdout","time":301.378090999,"data":"| species | image | audio | fused |\n"}
+,{"stream_name":"stdout","time":301.378094835,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":301.37809861,"data":"| Downy Woodpecker | 84.0% | 8.0% | 76.0% |\n"}
+,{"stream_name":"stdout","time":301.378102447,"data":"| Rusty Blackbird | 88.0% | 8.0% | 80.0% |\n"}
+,{"stream_name":"stdout","time":301.378106249,"data":"| Hooded Merganser | 100.0% | 40.0% | 96.0% |\n"}
+,{"stream_name":"stdout","time":301.378110175,"data":"| American Kestrel | 100.0% | 20.0% | 96.0% |\n"}
+,{"stream_name":"stdout","time":301.378114021,"data":"| Common Raven | 76.0% | 40.0% | 72.0% |\n"}
+,{"stream_name":"stdout","time":301.378117795,"data":"| Purple Finch | 88.0% | 0.0% | 84.0% |\n"}
+,{"stream_name":"stdout","time":301.378126879,"data":"| Eastern Phoebe | 80.0% | 20.0% | 88.0% |\n"}
+,{"stream_name":"stdout","time":301.378141761,"data":"| American Crow | 80.0% | 76.0% | 88.0% |\n"}
+,{"stream_name":"stdout","time":301.37814641,"data":"| Yellow-rumped Warbler | 92.0% | 4.0% | 100.0% |\n"}
+,{"stream_name":"stdout","time":301.378151225,"data":"| Sharp-shinned Hawk | 72.0% | 32.0% | 80.0% |\n"}
+,{"stream_name":"stdout","time":301.378155507,"data":"| Cooper's Hawk | 68.0% | 4.0% | 80.0% |\n"}
+,{"stream_name":"stdout","time":301.378160195,"data":"| Hairy Woodpecker | 64.0% | 76.0% | 84.0% |\n"}
+,{"stream_name":"stdout","time":301.378164827,"data":"\n"}
+,{"stream_name":"stdout","time":301.378169572,"data":"Hyperparameters: `{\"image\": {\"centroid_temp\": 0.01, \"knn_k\": 10, \"lr_C\": 30}, \"audio\": {\"centroid_temp\": 0.01, \"knn_k\": 40, \"lr_C\": 30}, \"fusion_centroid\": {\"image_weight\": 0.9, \"conf_gamma\": 1.0}, \"fusion_knn\": {\"image_weight\": 0.9500000000000001, \"conf_gamma\": 2.0}, \"fusion_linear_probe\": {\"image_weight\": 0.6000000000000001, \"conf_gamma\": 1.0}}`\n"}
+,{"stream_name":"stdout","time":301.378182406,"data":"[ 293.9s] done\n"}
+,{"stream_name":"stderr","time":305.267216963,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":305.267255722,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":305.693554452,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":305.693583734,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":307.932937446,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":309.491184286,"data":"[NbConvertApp] Writing 372956 bytes to __results__.html\n"}
+]

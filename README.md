@@ -25,8 +25,28 @@ training embeddings. Full tables: [`results/run2/results.md`](results/run2/resul
 | Photo → species *name*, zero-shot | 68.3% | 65.8% |
 
 Random guessing is 1.7%. The photos work very well out of the box. The audio embeddings are only
-weakly specific to species, so giving them equal weight doesn't help fusion yet. Next steps:
-weighted or confidence-based fusion, and a linear classifier on top of the frozen embeddings.
+weakly specific to species, so giving them equal weight doesn't help fusion.
+
+## Linear classifiers and smarter fusion (frozen embeddings, CPU only)
+Logistic regression on top of the frozen embeddings; the model itself is not fine-tuned. Every
+setting is chosen by 5-fold cross-validation on the train split. 95% bootstrap CIs. Full report:
+[`results/analysis1/analysis.md`](results/analysis1/analysis.md).
+
+| | nearest centroid | k-NN | linear classifier |
+|---|---|---|---|
+| Photo only | 88.6% | 91.9% | **94.4%** [93.7, 95.0] (top-5 99.7%) |
+| Song only | 15.8% | 18.4% | **26.3%** [23.7, 28.7] |
+
+On the paired test set (n=1,500), photo only gets 93.9%. Confidence-weighted photo + song fusion
+gets **95.3%**, and a fixed 0.6/0.4 weighting gets 94.8%. At 256 dimensions the fused result is
+still 94.0%.
+
+**Where it fails:** most photo errors are between look-alike species: Hairy vs. Downy Woodpecker,
+Sharp-shinned vs. Cooper's Hawk, and American Crow vs. Common Raven. The song fixes some of these
+(Hairy Woodpecker goes from 64% to 84%, Cooper's Hawk from 68% to 80%), but a weak song guess can
+still pull a correct photo guess off (Downy Woodpecker drops from 84% to 76%).
+Confusion matrices: [photo](results/analysis1/confusion_image.png) ·
+[song](results/analysis1/confusion_audio.png) · [fused](results/analysis1/confusion_fused.png).
 
 ## Run
 ```bash

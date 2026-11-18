@@ -1,0 +1,879 @@
+{
+  "single": {
+    "image": {
+      "centroid": {
+        "top1": 0.8857087603945079,
+        "top5": 0.9920711661187391,
+        "ci95": [
+          0.8764262231676658,
+          0.8940243666602204
+        ],
+        "n": 5171
+      },
+      "knn": {
+        "top1": 0.9193579578418101,
+        "top5": 0.9918777799265133,
+        "ci95": [
+          0.9122026687294528,
+          0.9270982401856507
+        ],
+        "n": 5171
+      },
+      "linear_probe": {
+        "top1": 0.9435312318700445,
+        "top5": 0.9974859795010637,
+        "ci95": [
+          0.9367482111777219,
+          0.9497195900212725
+        ],
+        "n": 5171
+      }
+    },
+    "audio": {
+      "centroid": {
+        "top1": 0.15822784810126583,
+        "top5": 0.3805379746835443,
+        "ci95": [
+          0.13924050632911392,
+          0.17800632911392406
+        ],
+        "n": 1264
+      },
+      "knn": {
+        "top1": 0.1843354430379747,
+        "top5": 0.4240506329113924,
+        "ci95": [
+          0.1629746835443038,
+          0.2064873417721519
+        ],
+        "n": 1264
+      },
+      "linear_probe": {
+        "top1": 0.2626582278481013,
+        "top5": 0.5371835443037974,
+        "ci95": [
+          0.23734177215189872,
+          0.28718354430379744
+        ],
+        "n": 1264
+      }
+    }
+  },
+  "paired": {
+    "centroid": {
+      "image_only": {
+        "top1": 0.8866666666666667,
+        "ci95": [
+          0.87065,
+          0.9026833333333333
+        ]
+      },
+      "audio_only": {
+        "top1": 0.172,
+        "ci95": [
+          0.15266666666666667,
+          0.19
+        ]
+      },
+      "equal_weight": {
+        "top1": 0.8833333333333333,
+        "ci95": [
+          0.8659833333333333,
+          0.9000166666666667
+        ]
+      },
+      "weighted": {
+        "top1": 0.8966666666666666,
+        "ci95": [
+          0.88,
+          0.9113333333333333
+        ]
+      },
+      "confidence": {
+        "top1": 0.9,
+        "ci95": [
+          0.8846666666666667,
+          0.914
+        ]
+      }
+    },
+    "knn": {
+      "image_only": {
+        "top1": 0.908,
+        "ci95": [
+          0.8933333333333333,
+          0.922
+        ]
+      },
+      "audio_only": {
+        "top1": 0.19066666666666668,
+        "ci95": [
+          0.17198333333333332,
+          0.21
+        ]
+      },
+      "equal_weight": {
+        "top1": 0.8726666666666667,
+        "ci95": [
+          0.856,
+          0.8886666666666667
+        ]
+      },
+      "weighted": {
+        "top1": 0.9086666666666666,
+        "ci95": [
+          0.894,
+          0.924
+        ]
+      },
+      "confidence": {
+        "top1": 0.9113333333333333,
+        "ci95": [
+          0.8973333333333333,
+          0.9246833333333333
+        ]
+      }
+    },
+    "linear_probe": {
+      "image_only": {
+        "top1": 0.9386666666666666,
+        "ci95": [
+          0.9266666666666666,
+          0.9506666666666667
+        ]
+      },
+      "audio_only": {
+        "top1": 0.2673333333333333,
+        "ci95": [
+          0.24533333333333332,
+          0.28933333333333333
+        ]
+      },
+      "equal_weight": {
+        "top1": 0.94,
+        "ci95": [
+          0.9273333333333333,
+          0.952
+        ]
+      },
+      "weighted": {
+        "top1": 0.948,
+        "ci95": [
+          0.936,
+          0.9593333333333334
+        ]
+      },
+      "confidence": {
+        "top1": 0.9526666666666667,
+        "ci95": [
+          0.9406666666666667,
+          0.9626666666666667
+        ]
+      }
+    },
+    "joint_embedding_probe": {
+      "top1": 0.9133333333333333,
+      "ci95": [
+        0.8993333333333333,
+        0.9266833333333333
+      ],
+      "C": 30
+    },
+    "early_fusion_probe": {
+      "top1": 0.924,
+      "ci95": [
+        0.91,
+        0.9366666666666666
+      ],
+      "train_pairs": 12000,
+      "C": 1.0
+    }
+  },
+  "hparams": {
+    "image": {
+      "centroid_temp": 0.01,
+      "knn_k": 10,
+      "lr_C": 30
+    },
+    "audio": {
+      "centroid_temp": 0.01,
+      "knn_k": 40,
+      "lr_C": 30
+    },
+    "fusion_centroid": {
+      "image_weight": 0.9,
+      "conf_gamma": 1.0
+    },
+    "fusion_knn": {
+      "image_weight": 0.9500000000000001,
+      "conf_gamma": 2.0
+    },
+    "fusion_linear_probe": {
+      "image_weight": 0.6000000000000001,
+      "conf_gamma": 1.0
+    }
+  },
+  "dims": {
+    "768": {
+      "image_probe": 0.9386666666666666,
+      "audio_probe": 0.2673333333333333,
+      "weighted_fusion": 0.948
+    },
+    "256": {
+      "image_probe": 0.9333333333333333,
+      "audio_probe": 0.26066666666666666,
+      "weighted_fusion": 0.94
+    },
+    "128": {
+      "image_probe": 0.9186666666666666,
+      "audio_probe": 0.23333333333333334,
+      "weighted_fusion": 0.9273333333333333
+    }
+  },
+  "confusions": {
+    "image": [
+      {
+        "true": "Hairy Woodpecker",
+        "predicted": "Downy Woodpecker",
+        "rate": 0.36666666666666664,
+        "count": 22
+      },
+      {
+        "true": "Sharp-shinned Hawk",
+        "predicted": "Cooper's Hawk",
+        "rate": 0.25862068965517243,
+        "count": 30
+      },
+      {
+        "true": "Cooper's Hawk",
+        "predicted": "Sharp-shinned Hawk",
+        "rate": 0.2222222222222222,
+        "count": 26
+      },
+      {
+        "true": "American Crow",
+        "predicted": "Common Raven",
+        "rate": 0.19736842105263158,
+        "count": 15
+      },
+      {
+        "true": "Common Raven",
+        "predicted": "American Crow",
+        "rate": 0.19298245614035087,
+        "count": 11
+      },
+      {
+        "true": "Downy Woodpecker",
+        "predicted": "Hairy Woodpecker",
+        "rate": 0.13333333333333333,
+        "count": 8
+      },
+      {
+        "true": "Cape May Warbler",
+        "predicted": "Yellow-rumped Warbler",
+        "rate": 0.11666666666666667,
+        "count": 7
+      },
+      {
+        "true": "Purple Finch",
+        "predicted": "House Finch",
+        "rate": 0.07216494845360824,
+        "count": 7
+      },
+      {
+        "true": "Red-tailed Hawk",
+        "predicted": "Cooper's Hawk",
+        "rate": 0.06666666666666667,
+        "count": 10
+      },
+      {
+        "true": "Canada Goose",
+        "predicted": "Hooded Merganser",
+        "rate": 0.06451612903225806,
+        "count": 2
+      },
+      {
+        "true": "Cooper's Hawk",
+        "predicted": "Red-tailed Hawk",
+        "rate": 0.05982905982905983,
+        "count": 7
+      },
+      {
+        "true": "House Finch",
+        "predicted": "Purple Finch",
+        "rate": 0.05357142857142857,
+        "count": 6
+      }
+    ],
+    "audio": [
+      {
+        "true": "Scarlet Tanager",
+        "predicted": "Red-eyed Vireo",
+        "rate": 0.3684210526315789,
+        "count": 7
+      },
+      {
+        "true": "Common Raven",
+        "predicted": "American Crow",
+        "rate": 0.25,
+        "count": 5
+      },
+      {
+        "true": "Barn Swallow",
+        "predicted": "House Wren",
+        "rate": 0.23529411764705882,
+        "count": 4
+      },
+      {
+        "true": "Red-bellied Woodpecker",
+        "predicted": "Northern Flicker",
+        "rate": 0.23529411764705882,
+        "count": 4
+      },
+      {
+        "true": "Cape May Warbler",
+        "predicted": "Red-eyed Vireo",
+        "rate": 0.2222222222222222,
+        "count": 4
+      },
+      {
+        "true": "Cooper's Hawk",
+        "predicted": "Gray Catbird",
+        "rate": 0.2222222222222222,
+        "count": 4
+      },
+      {
+        "true": "Wood Duck",
+        "predicted": "Canada Goose",
+        "rate": 0.21052631578947367,
+        "count": 4
+      },
+      {
+        "true": "Cedar Waxwing",
+        "predicted": "Chipping Sparrow",
+        "rate": 0.19230769230769232,
+        "count": 5
+      },
+      {
+        "true": "Black-throated Blue Warbler",
+        "predicted": "American Redstart",
+        "rate": 0.1875,
+        "count": 3
+      },
+      {
+        "true": "Black-throated Blue Warbler",
+        "predicted": "Hairy Woodpecker",
+        "rate": 0.1875,
+        "count": 3
+      },
+      {
+        "true": "European Starling",
+        "predicted": "Gray Catbird",
+        "rate": 0.1875,
+        "count": 3
+      },
+      {
+        "true": "European Starling",
+        "predicted": "Red-eyed Vireo",
+        "rate": 0.1875,
+        "count": 3
+      }
+    ],
+    "fused": [
+      {
+        "true": "Common Raven",
+        "predicted": "American Crow",
+        "rate": 0.28,
+        "count": 7
+      },
+      {
+        "true": "Downy Woodpecker",
+        "predicted": "Hairy Woodpecker",
+        "rate": 0.24,
+        "count": 6
+      },
+      {
+        "true": "Hairy Woodpecker",
+        "predicted": "Downy Woodpecker",
+        "rate": 0.16,
+        "count": 4
+      },
+      {
+        "true": "Sharp-shinned Hawk",
+        "predicted": "Cooper's Hawk",
+        "rate": 0.16,
+        "count": 4
+      },
+      {
+        "true": "Northern Parula",
+        "predicted": "Yellow-rumped Warbler",
+        "rate": 0.12,
+        "count": 3
+      },
+      {
+        "true": "Rusty Blackbird",
+        "predicted": "Common Grackle",
+        "rate": 0.12,
+        "count": 3
+      },
+      {
+        "true": "Purple Finch",
+        "predicted": "House Finch",
+        "rate": 0.12,
+        "count": 3
+      },
+      {
+        "true": "American Crow",
+        "predicted": "Common Raven",
+        "rate": 0.12,
+        "count": 3
+      },
+      {
+        "true": "Cooper's Hawk",
+        "predicted": "Sharp-shinned Hawk",
+        "rate": 0.12,
+        "count": 3
+      },
+      {
+        "true": "Cape May Warbler",
+        "predicted": "Yellow-rumped Warbler",
+        "rate": 0.08,
+        "count": 2
+      },
+      {
+        "true": "Cape May Warbler",
+        "predicted": "Black-throated Blue Warbler",
+        "rate": 0.08,
+        "count": 2
+      },
+      {
+        "true": "Cape May Warbler",
+        "predicted": "Northern Parula",
+        "rate": 0.08,
+        "count": 2
+      }
+    ]
+  },
+  "per_species": [
+    {
+      "species": "Downy Woodpecker",
+      "n": 25,
+      "image": 0.84,
+      "audio": 0.08,
+      "fused": 0.76
+    },
+    {
+      "species": "Rusty Blackbird",
+      "n": 25,
+      "image": 0.88,
+      "audio": 0.08,
+      "fused": 0.8
+    },
+    {
+      "species": "Hooded Merganser",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.4,
+      "fused": 0.96
+    },
+    {
+      "species": "American Kestrel",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.2,
+      "fused": 0.96
+    },
+    {
+      "species": "Common Raven",
+      "n": 25,
+      "image": 0.76,
+      "audio": 0.4,
+      "fused": 0.72
+    },
+    {
+      "species": "Purple Finch",
+      "n": 25,
+      "image": 0.88,
+      "audio": 0.0,
+      "fused": 0.84
+    },
+    {
+      "species": "Common Redpoll",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.16,
+      "fused": 0.96
+    },
+    {
+      "species": "Red-winged Blackbird",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.24,
+      "fused": 0.96
+    },
+    {
+      "species": "Northern Parula",
+      "n": 25,
+      "image": 0.88,
+      "audio": 0.12,
+      "fused": 0.84
+    },
+    {
+      "species": "White-breasted Nuthatch",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.2,
+      "fused": 0.92
+    },
+    {
+      "species": "Cape May Warbler",
+      "n": 25,
+      "image": 0.72,
+      "audio": 0.04,
+      "fused": 0.68
+    },
+    {
+      "species": "Mallard",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.56,
+      "fused": 1.0
+    },
+    {
+      "species": "Mourning Dove",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.72,
+      "fused": 1.0
+    },
+    {
+      "species": "Ruby-throated Hummingbird",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.32,
+      "fused": 1.0
+    },
+    {
+      "species": "Killdeer",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.52,
+      "fused": 0.96
+    },
+    {
+      "species": "Great Blue Heron",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.44,
+      "fused": 1.0
+    },
+    {
+      "species": "Green Heron",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.44,
+      "fused": 1.0
+    },
+    {
+      "species": "Red-tailed Hawk",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.12,
+      "fused": 0.96
+    },
+    {
+      "species": "Yellow-bellied Sapsucker",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.32,
+      "fused": 0.96
+    },
+    {
+      "species": "Red-bellied Woodpecker",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.32,
+      "fused": 1.0
+    },
+    {
+      "species": "Pileated Woodpecker",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.76,
+      "fused": 1.0
+    },
+    {
+      "species": "Northern Flicker",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.12,
+      "fused": 1.0
+    },
+    {
+      "species": "Red-eyed Vireo",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.68,
+      "fused": 1.0
+    },
+    {
+      "species": "Black-capped Chickadee",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.36,
+      "fused": 0.92
+    },
+    {
+      "species": "Tufted Titmouse",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.04,
+      "fused": 0.96
+    },
+    {
+      "species": "Tree Swallow",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.44,
+      "fused": 1.0
+    },
+    {
+      "species": "Barn Swallow",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.2,
+      "fused": 1.0
+    },
+    {
+      "species": "House Wren",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.24,
+      "fused": 1.0
+    },
+    {
+      "species": "European Starling",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.08,
+      "fused": 1.0
+    },
+    {
+      "species": "Gray Catbird",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.12,
+      "fused": 1.0
+    },
+    {
+      "species": "American Robin",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.08,
+      "fused": 1.0
+    },
+    {
+      "species": "House Finch",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.12,
+      "fused": 0.96
+    },
+    {
+      "species": "American Goldfinch",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.08,
+      "fused": 1.0
+    },
+    {
+      "species": "Fox Sparrow",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.2,
+      "fused": 0.96
+    },
+    {
+      "species": "Dark-eyed Junco",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.08,
+      "fused": 1.0
+    },
+    {
+      "species": "White-crowned Sparrow",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.2,
+      "fused": 0.96
+    },
+    {
+      "species": "White-throated Sparrow",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.0,
+      "fused": 1.0
+    },
+    {
+      "species": "Baltimore Oriole",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.0,
+      "fused": 0.96
+    },
+    {
+      "species": "Common Grackle",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.28,
+      "fused": 0.92
+    },
+    {
+      "species": "American Redstart",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.2,
+      "fused": 0.96
+    },
+    {
+      "species": "Yellow Warbler",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.0,
+      "fused": 1.0
+    },
+    {
+      "species": "Black-throated Blue Warbler",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.12,
+      "fused": 1.0
+    },
+    {
+      "species": "Scarlet Tanager",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.04,
+      "fused": 1.0
+    },
+    {
+      "species": "Rose-breasted Grosbeak",
+      "n": 25,
+      "image": 1.0,
+      "audio": 0.2,
+      "fused": 1.0
+    },
+    {
+      "species": "Blue Jay",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.48,
+      "fused": 0.96
+    },
+    {
+      "species": "Song Sparrow",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.2,
+      "fused": 0.96
+    },
+    {
+      "species": "Canada Goose",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.68,
+      "fused": 1.0
+    },
+    {
+      "species": "Great Horned Owl",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.72,
+      "fused": 1.0
+    },
+    {
+      "species": "Cedar Waxwing",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.12,
+      "fused": 1.0
+    },
+    {
+      "species": "Chipping Sparrow",
+      "n": 25,
+      "image": 0.84,
+      "audio": 0.52,
+      "fused": 0.88
+    },
+    {
+      "species": "Ovenbird",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.36,
+      "fused": 1.0
+    },
+    {
+      "species": "Chestnut-sided Warbler",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.28,
+      "fused": 1.0
+    },
+    {
+      "species": "Northern Cardinal",
+      "n": 25,
+      "image": 0.96,
+      "audio": 0.0,
+      "fused": 1.0
+    },
+    {
+      "species": "Wood Duck",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.24,
+      "fused": 1.0
+    },
+    {
+      "species": "Eastern Phoebe",
+      "n": 25,
+      "image": 0.8,
+      "audio": 0.2,
+      "fused": 0.88
+    },
+    {
+      "species": "American Crow",
+      "n": 25,
+      "image": 0.8,
+      "audio": 0.76,
+      "fused": 0.88
+    },
+    {
+      "species": "Yellow-rumped Warbler",
+      "n": 25,
+      "image": 0.92,
+      "audio": 0.04,
+      "fused": 1.0
+    },
+    {
+      "species": "Sharp-shinned Hawk",
+      "n": 25,
+      "image": 0.72,
+      "audio": 0.32,
+      "fused": 0.8
+    },
+    {
+      "species": "Cooper's Hawk",
+      "n": 25,
+      "image": 0.68,
+      "audio": 0.04,
+      "fused": 0.8
+    },
+    {
+      "species": "Hairy Woodpecker",
+      "n": 25,
+      "image": 0.64,
+      "audio": 0.76,
+      "fused": 0.84
+    }
+  ]
+}
