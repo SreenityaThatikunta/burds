@@ -1,0 +1,17 @@
+{
+  "id": "sreenityathatikunta/burds-ssw60-audiolen",
+  "title": "burds-ssw60-audiolen",
+  "code_file": "ssw60_audiolen.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": ["sreenityathatikunta/burds-ssw60-data"],
+  "competition_sources": [],
+  "model_sources": ["google/embeddinggemma-2/transformers/embeddinggemma-2/1"],
+  "machine_shape": "NvidiaTeslaT4"
+}

@@ -13,7 +13,7 @@ B (audio):
   - slow2       : played at half speed, so 0-11 kHz content lands in the model's 0-5.5 kHz range
   - slow2_trim3 : loudest 3 s, then half speed (6 s)
   - win3        : every 3 s window (hop 2.5 s), aggregated later (mean / best window)
-Output: /kaggle/working/embed_v3.npz (+ timing.json). Evaluation runs separately on CPU.
+Output: /kaggle/working/<CFG["out"]> (+ timing.json). Evaluation runs separately on CPU.
 SSW60 media is research-only: kernel stays private; only embeddings and metrics leave it.
 """
 import glob
@@ -32,8 +32,21 @@ WORK = "/tmp/emb"
 OUT = "/kaggle/working"
 SR = 16000
 IMG_PER_CLASS = 20  # per split, for the token-budget sweep
-BUDGETS = [70, 140, 280]
 WORKER = "--worker" in sys.argv
+
+# Which experiment this copy of the script runs. scripts/sync_kernels.sh copies this file into
+# other kernel folders with a different EXPERIMENT, so every kernel shares one implementation.
+EXPERIMENT = "variants"
+EXPERIMENTS = {
+    # step B + C: photo token budgets + five audio versions
+    "variants": {"budgets": [70, 140, 280], "out": "embed_v3.npz",
+                 "audio": ["base", "trim3", "slow2", "slow2_trim3", "win3"]},
+    # clip-length sweep: loudest N seconds, at normal and half speed (3 s and full 10 s exist already)
+    "audiolen": {"budgets": [], "out": "embed_audiolen.npz",
+                 "audio": [f"{p}trim{n}" for p in ("", "slow2_") for n in (1, 2, 5, 7)]},
+}
+CFG = EXPERIMENTS[EXPERIMENT]
+BUDGETS = CFG["budgets"]
 
 
 def log(m):
@@ -72,17 +85,16 @@ def loudest(x, sr, secs=3.0):
 
 
 def audio_variant(path, kind):
+    """kind: base | slow2 | trim<N> | slow2_trim<N> | win3   (N = seconds of the loudest part)."""
     x, sr = load_wav(path)
-    if kind == "base":
-        return [resample(x, sr, SR)]
-    if kind == "trim3":
-        s = loudest(x, sr)
-        return [resample(x[s:s + 3 * sr], sr, SR)]
-    if kind == "slow2":
-        return [resample(x, sr / 2, SR)]  # same samples read at half rate = half speed
-    if kind == "slow2_trim3":
-        s = loudest(x, sr)
-        return [resample(x[s:s + 3 * sr], sr / 2, SR)]
+    # Half speed: read the same samples at half the rate, so 0-11 kHz lands in 0-5.5 kHz.
+    rate = sr / 2 if kind.startswith("slow2") else sr
+    if kind in ("base", "slow2"):
+        return [resample(x, rate, SR)]
+    if "trim" in kind:
+        n = float(kind.split("trim")[1])
+        s = loudest(x, sr, n)
+        return [resample(x[s:s + int(n * sr)], rate, SR)]
     if kind == "win3":
         y = resample(x, sr, SR)
         n, hop = 3 * SR, int(2.5 * SR)
@@ -205,7 +217,7 @@ img_sub = img.loc[np.sort(sub)].reset_index(drop=True)
 log(f"audio clips {len(aud)}  image subset {len(img_sub)} {img_sub.split.value_counts().to_dict()}")
 
 # Quick check that each audio variant produces sane input, and is fast, before spending GPU time.
-for v in ("base", "trim3", "slow2", "slow2_trim3", "win3"):
+for v in CFG["audio"]:
     t = time.time()
     segs = [audio_variant(p, v) for p in aud.path[:20]][0]
     per = (time.time() - t) / 20
@@ -214,7 +226,7 @@ for v in ("base", "trim3", "slow2", "slow2_trim3", "win3"):
 
 jobs = [{"name": f"img_b{b}", "kind": "image", "budget": b, "items": list(img_sub.path)} for b in BUDGETS]
 jobs += [{"name": f"aud_{v}", "kind": "audio", "variant": v, "items": list(aud.path)}
-         for v in ("base", "trim3", "slow2", "slow2_trim3", "win3")]
+         for v in CFG["audio"]]
 json.dump(jobs, open(f"{WORK}/jobs.json", "w"))
 
 nw = max(ngpu, 1)
@@ -247,7 +259,7 @@ for k, v in timing["per_job"].items():
     log(f"{k}: {v}")
 
 np.savez_compressed(
-    f"{OUT}/embed_v3.npz", **out,
+    f"{OUT}/{CFG['out']}", **out,
     aud_id=aud.asset_id.astype(str).to_numpy(), aud_y=aud.label.to_numpy(), aud_split=aud.split.astype(str).to_numpy(),
     imgsub_id=img_sub.asset_id.astype(str).to_numpy(), imgsub_y=img_sub.label.to_numpy(),
     imgsub_split=img_sub.split.astype(str).to_numpy())
