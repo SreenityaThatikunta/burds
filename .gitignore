@@ -1,0 +1,5 @@
+# Derived from research-only SSW60 media; keep out of git
+*.npz
+data/
+__pycache__/
+.DS_Store

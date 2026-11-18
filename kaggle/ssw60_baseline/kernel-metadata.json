@@ -1,0 +1,17 @@
+{
+  "id": "sreenityathatikunta/burds-ssw60-baseline",
+  "title": "burds-ssw60-baseline",
+  "code_file": "ssw60_baseline.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [],
+  "competition_sources": [],
+  "model_sources": ["google/embeddinggemma-2/transformers/embeddinggemma-2/1"],
+  "machine_shape": "NvidiaTeslaT4"
+}
