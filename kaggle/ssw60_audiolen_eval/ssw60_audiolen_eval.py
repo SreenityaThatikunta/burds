@@ -86,7 +86,15 @@ for key in sorted(feats):
     log(f"{key}: {acc(Pte, ya[ate]):.3f}")
 
 # Combinations: previous best ("all five" from step B) vs. adding the best lengths.
-prev_all = np.hstack([norm(V[f"aud_{v}"]) for v in ("base", "trim3", "slow2", "slow2_trim3", "win3")])
+def clip_level(name):
+    """win3 has one row per 3 s window (owner = clip row); average windows back to one row per clip."""
+    E, own = np.asarray(V[name], np.float32), V[name + "__own"]
+    M = np.zeros((len(ya), E.shape[1]), np.float32)
+    np.add.at(M, own, E)
+    return norm(M)
+
+
+prev_all = np.hstack([clip_level(f"aud_{v}") for v in ("base", "trim3", "slow2", "slow2_trim3", "win3")])
 best_half = max((k for k in feats if k[1] == "half"), key=lambda k: R["length_sweep"][f"{k[0]}s_half"]["top1"])
 best_norm = max((k for k in feats if k[1] == "normal"), key=lambda k: R["length_sweep"][f"{k[0]}s_normal"]["top1"])
 combos = {
