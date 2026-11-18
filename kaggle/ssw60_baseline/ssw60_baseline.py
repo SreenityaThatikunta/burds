@@ -115,6 +115,13 @@ log(f"smoke test ok: {_smoke.shape}")
 # --------------------------------------------------------------------------- 1. data
 URL = "https://ml-inat-competition-datasets.s3.amazonaws.com/ssw60/ssw60.tar.gz"
 os.makedirs(DATA, exist_ok=True)
+# Fast path: output of the burds-ssw60-data kernel attached via kernel_sources.
+prepped = glob.glob("/kaggle/input/**/images_nabirds.tar", recursive=True)
+if prepped and not glob.glob(f"{DATA}/**/taxa.csv", recursive=True):
+    src = os.path.dirname(prepped[0])
+    log(f"using prepped data from {src}")
+    sh(f"cp {src}/*.csv {DATA}/ && tar -xf {src}/audio_ml.tar -C {DATA} && "
+       f"tar -xf {src}/images_nabirds.tar -C {DATA}")
 if not glob.glob(f"{DATA}/**/taxa.csv", recursive=True):
     dec = "pigz -dc" if subprocess.run("command -v pigz", shell=True).returncode == 0 else "gzip -dc"
     # Stream: nothing of the 31 GB archive is stored; only matching members are written.
