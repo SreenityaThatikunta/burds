@@ -64,6 +64,27 @@ the model can hear. Linear classifier, full audio test set (n=1,264). Full repor
 With the improved audio, photo + song reaches **96.3%** on the paired test set, compared with
 93.5% for photo only. The gain is **+2.8 points, 95% CI [+1.6, +4.0]**, so it is clearly above zero.
 
+### How many seconds of audio?
+The 3 s window came from BirdNET's chunk size, so we swept the loudest 1–10 s (energy above
+1 kHz) at both speeds. Linear classifier, audio test set (n=1,264). Full report:
+[`results/audiolen1/audiolen.md`](results/audiolen1/audiolen.md).
+
+| seconds | normal speed | half speed |
+|---|---|---|
+| 1 | 24.1% | 31.1% |
+| 2 | 27.8% | 35.3% |
+| 3 | 27.5% | 35.4% |
+| **5** | 27.8% | **38.6%** |
+| 7 | 27.0% | 37.3% |
+| 10 (full clip) | 27.9% | 37.4% |
+
+- At normal speed, length barely matters from 2 s on: the model can't hear the high notes anyway.
+- At half speed, 1 s is too short and accuracy peaks around **5 s**. The 5 s clip is within the CI
+  of the full clip, so it is the cheaper choice for a live demo rather than a clear win.
+- Concatenating every length at both speeds (9,216 dims) gives the best audio-only result,
+  **46.9%** [44.2, 49.4] (vs 44.3%), but no extra gain once fused with photos (95.7% vs 96.3%,
+  overlapping CIs). Photo + song is saturated by the photo side, so the five-version setup stays.
+
 ## Speed
 All seven embedding jobs (3 photo budgets on 2,400 photos, 5 audio versions of 3,861 clips) take
 **37 min** on Kaggle's 2× T4, compared with 4.5 h for a single set in run 2. The speedup comes

@@ -1,0 +1,54 @@
+[{"stream_name":"stdout","time":124.364720069,"data":"[ 118.2s] (1, 'half'): 0.311\n"}
+,{"stream_name":"stdout","time":234.88766124,"data":"[ 228.7s] (1, 'normal'): 0.241\n"}
+,{"stream_name":"stdout","time":344.063686447,"data":"[ 337.9s] (2, 'half'): 0.353\n"}
+,{"stream_name":"stdout","time":452.007688162,"data":"[ 445.8s] (2, 'normal'): 0.278\n"}
+,{"stream_name":"stdout","time":561.196652416,"data":"[ 555.0s] (3, 'half'): 0.354\n"}
+,{"stream_name":"stdout","time":672.660652038,"data":"[ 666.5s] (3, 'normal'): 0.275\n"}
+,{"stream_name":"stdout","time":782.026784396,"data":"[ 775.8s] (5, 'half'): 0.386\n"}
+,{"stream_name":"stdout","time":891.218683173,"data":"[ 885.0s] (5, 'normal'): 0.278\n"}
+,{"stream_name":"stdout","time":999.659700576,"data":"[ 993.5s] (7, 'half'): 0.373\n"}
+,{"stream_name":"stdout","time":1112.287671405,"data":"[1106.1s] (7, 'normal'): 0.270\n"}
+,{"stream_name":"stdout","time":1218.728696704,"data":"[1212.5s] (10, 'half'): 0.374\n"}
+,{"stream_name":"stdout","time":1329.115657097,"data":"[1322.9s] (10, 'normal'): 0.279\n"}
+,{"stream_name":"stdout","time":1796.883405795,"data":"[1790.7s] combo step B: all five (previous best): 0.443\n"}
+,{"stream_name":"stdout","time":2347.565688537,"data":"[2341.4s] combo half speed, all lengths: 0.446\n"}
+,{"stream_name":"stdout","time":2950.866687258,"data":"[2944.7s] combo normal speed, all lengths: 0.339\n"}
+,{"stream_name":"stdout","time":4043.5925199,"data":"[4037.4s] combo both speeds, all lengths: 0.469\n"}
+,{"stream_name":"stdout","time":4437.945701702,"data":"[4431.7s] combo best normal (10s) + best half (5s) + full both speeds: 0.415\n"}
+,{"stream_name":"stdout","time":4585.852681899,"data":"[4579.6s] fusion step B: all five (previous best): {'image_only': 0.9346666666666666, 'audio_only': 0.436, 'fused': 0.9626666666666667, 'fused_ci95': [0.9533166666666667, 0.9713333333333334], 'gamma': 0.5, 'gain_ci95': [0.015333333333333332, 0.04066666666666666]}\n"}
+,{"stream_name":"stdout","time":4585.908836272,"data":"[4579.7s] fusion both speeds, all lengths: {'image_only': 0.9346666666666666, 'audio_only': 0.45666666666666667, 'fused': 0.9573333333333334, 'fused_ci95': [0.9466666666666667, 0.9673333333333334], 'gamma': 0.5, 'gain_ci95': [0.011316666666666668, 0.036]}\n"}
+,{"stream_name":"stdout","time":4585.910358245,"data":"# How many seconds of audio? (loudest N seconds, linear probe, audio test n=1264)\n"}
+,{"stream_name":"stdout","time":4585.91038053,"data":"\n"}
+,{"stream_name":"stdout","time":4585.910384753,"data":"| seconds | normal speed | 95% CI | half speed | 95% CI |\n"}
+,{"stream_name":"stdout","time":4585.910388668,"data":"|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":4585.910408256,"data":"| 1 | 24.1% | [21.8, 26.5] | 31.1% | [28.6, 33.5] |\n"}
+,{"stream_name":"stdout","time":4585.910412456,"data":"| 2 | 27.8% | [25.4, 30.5] | 35.3% | [32.5, 37.8] |\n"}
+,{"stream_name":"stdout","time":4585.910423712,"data":"| 3 | 27.5% | [25.0, 29.8] | 35.4% | [32.9, 38.0] |\n"}
+,{"stream_name":"stdout","time":4585.910428282,"data":"| 5 | 27.8% | [25.3, 30.4] | 38.6% | [35.7, 41.3] |\n"}
+,{"stream_name":"stdout","time":4585.910431747,"data":"| 7 | 27.0% | [24.5, 29.4] | 37.3% | [34.3, 40.0] |\n"}
+,{"stream_name":"stdout","time":4585.910435261,"data":"| 10 (full clip) | 27.9% | [25.6, 30.4] | 37.4% | [34.9, 40.0] |\n"}
+,{"stream_name":"stdout","time":4585.910442871,"data":"\n"}
+,{"stream_name":"stdout","time":4585.910446194,"data":"## Combining lengths\n"}
+,{"stream_name":"stdout","time":4585.910449823,"data":"\n"}
+,{"stream_name":"stdout","time":4585.910453337,"data":"| features | dims | top-1 | 95% CI | top-5 |\n"}
+,{"stream_name":"stdout","time":4585.910456899,"data":"|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":4585.910475508,"data":"| both speeds, all lengths | 9216 | 46.9% | [44.2, 49.4] | 74.1% |\n"}
+,{"stream_name":"stdout","time":4585.910478581,"data":"| half speed, all lengths | 4608 | 44.6% | [42.1, 47.4] | 72.1% |\n"}
+,{"stream_name":"stdout","time":4585.91048165,"data":"| step B: all five (previous best) | 3840 | 44.3% | [41.6, 47.2] | 71.9% |\n"}
+,{"stream_name":"stdout","time":4585.910484502,"data":"| best normal (10s) + best half (5s) + full both speeds | 3072 | 41.5% | [38.8, 44.5] | 69.9% |\n"}
+,{"stream_name":"stdout","time":4585.910487355,"data":"| normal speed, all lengths | 4608 | 33.9% | [31.2, 36.6] | 62.1% |\n"}
+,{"stream_name":"stdout","time":4585.910490134,"data":"\n"}
+,{"stream_name":"stdout","time":4585.910492711,"data":"## Photo + song (paired test, n=1500, confidence fusion)\n"}
+,{"stream_name":"stdout","time":4585.910495564,"data":"\n"}
+,{"stream_name":"stdout","time":4585.910498279,"data":"| audio features | image only | audio only | fused | gain vs image (95% CI) |\n"}
+,{"stream_name":"stdout","time":4585.910501293,"data":"|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":4585.910503927,"data":"| step B: all five (previous best) | 93.5% | 43.6% | **96.3%** | [+1.5, +4.1] pts |\n"}
+,{"stream_name":"stdout","time":4585.910506793,"data":"| both speeds, all lengths | 93.5% | 45.7% | **95.7%** | [+1.1, +3.6] pts |\n"}
+,{"stream_name":"stdout","time":4585.910509584,"data":"[4579.7s] done\n"}
+,{"stream_name":"stderr","time":4589.811510764,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":4589.811563847,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":4590.251230436,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":4590.251264711,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":4592.734176048,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":4594.150707886,"data":"[NbConvertApp] Writing 331649 bytes to __results__.html\n"}
+]
