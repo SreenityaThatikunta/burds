@@ -1,0 +1,16 @@
+{
+  "id": "sreenityathatikunta/burds-demo-data-topup",
+  "title": "burds-demo-data-topup",
+  "code_file": "demo_data_topup.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": ["sreenityathatikunta/burds-demo-data"],
+  "competition_sources": [],
+  "model_sources": []
+}

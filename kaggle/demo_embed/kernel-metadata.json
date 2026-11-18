@@ -1,0 +1,23 @@
+{
+  "id": "sreenityathatikunta/burds-demo-embed",
+  "title": "burds-demo-embed",
+  "code_file": "demo_embed.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "sreenityathatikunta/burds-demo-data",
+    "sreenityathatikunta/burds-demo-data-topup",
+    "sreenityathatikunta/burds-ssw60-baseline",
+    "sreenityathatikunta/burds-ssw60-audiolen",
+    "sreenityathatikunta/burds-ssw60-embed"
+  ],
+  "competition_sources": [],
+  "model_sources": ["google/embeddinggemma-2/transformers/embeddinggemma-2/1"],
+  "machine_shape": "NvidiaTeslaT4"
+}

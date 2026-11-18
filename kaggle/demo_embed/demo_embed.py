@@ -1,0 +1,297 @@
+"""
+Build the demo's reference index from openly licensed media (GPU, runs on Kaggle).
+
+1. Embed every iNaturalist photo (280 image tokens) and every xeno-canto recording with the
+   audio recipe that won the SSW60 experiments:
+     half speed, loudest 5 s | half speed, loudest 10 s | normal speed, loudest 10 s  (3 x 768)
+2. Train one linear classifier per modality on this CC data only (C chosen by 5-fold CV) and pick
+   the confidence-fusion gamma on synthetic photo+song pairs built from out-of-fold predictions.
+3. Honest check: score that web-trained model on the SSW60 *test* sets it has never seen
+   (embeddings from earlier runs, same recipe), photo, song and photo + song.
+
+Outputs (/kaggle/working): demo_index.npz (weights + embeddings, a few MB), credits.csv,
+demo_eval.json, demo_eval.md
+"""
+import csv
+import glob
+import io
+import json
+import os
+import subprocess
+import sys
+import tarfile
+import time
+from concurrent.futures import ThreadPoolExecutor
+
+import numpy as np
+
+T0 = time.time()
+OUT, WORK = "/kaggle/working", "/kaggle/temp"
+SR = 16000
+BUDGET = 280
+AUDIO_KINDS = ("slow2_trim5", "slow2_trim10", "trim10")
+WORKER = os.environ.get("BURDS_WORKER")
+
+
+def log(m):
+    tag = f"gpu{os.environ.get('CUDA_VISIBLE_DEVICES', '-')}" if WORKER else "main"
+    print(f"[{time.time() - T0:7.1f}s {tag}] {m}", flush=True)
+
+
+# ============================================================================ audio (same as app)
+def load_audio(path):
+    import soundfile as sf
+    try:
+        x, sr = sf.read(path, dtype="float32", always_2d=False)
+    except Exception:  # noqa: BLE001  (older libsndfile without mp3)
+        import librosa
+        x, sr = librosa.load(path, sr=None, mono=True)
+    if x.ndim > 1:
+        x = x.mean(1)
+    return np.asarray(x, np.float32), sr
+
+
+def resample(x, sr_in, sr_out):
+    from math import gcd
+    from scipy.signal import resample_poly
+    sr_in, sr_out = int(round(sr_in)), int(round(sr_out))
+    g = gcd(sr_in, sr_out)
+    return resample_poly(x, sr_out // g, sr_in // g).astype(np.float32)
+
+
+def loudest(x, sr, secs):
+    from scipy.signal import butter, sosfilt
+    n = int(secs * sr)
+    if len(x) <= n:
+        return 0
+    hp = sosfilt(butter(4, 1000, "highpass", fs=sr, output="sos"), x)
+    c = np.concatenate([[0.0], np.cumsum(hp.astype(np.float64) ** 2)])
+    return int(np.argmax(c[n:] - c[:-n]))
+
+
+def audio_variant(x, sr, kind):
+    """kind: [slow2_]trim<N>. Half speed reads the samples at sr/2, so frequency f lands at f/2."""
+    rate = sr / 2 if kind.startswith("slow2") else sr
+    n = float(kind.split("trim")[1])
+    s = loudest(x, sr, n)
+    return resample(x[s:s + int(n * sr)], rate, SR)
+
+
+# ============================================================================ GPU worker
+def worker(shard, nshards):
+    import torch
+    from PIL import Image
+    from sentence_transformers import SentenceTransformer
+
+    items = json.load(open(f"{WORK}/items.json"))
+    mine = [i for i in range(len(items)) if i % nshards == shard]
+    cfgs = glob.glob("/kaggle/input/**/embeddinggemma*/**/config.json", recursive=True)
+    path = os.path.dirname(sorted(cfgs, key=len)[0]) if cfgs else "google/embeddinggemma-2"
+    model = SentenceTransformer(path, device="cuda", model_kwargs={"torch_dtype": torch.float32})
+    log(f"model loaded on {torch.cuda.get_device_name(0)}; {len(mine)} items")
+
+    def prep(i):
+        it = items[i]
+        p = f"{WORK}/{it['file']}"
+        try:
+            if it["kind"] == "image":
+                im = Image.open(p); im.draft("RGB", (1024, 1024))  # noqa: E702
+                im = im.convert("RGB"); im.thumbnail((1024, 1024))  # noqa: E702
+                return [{"image": im}]
+            x, sr = load_audio(p)
+            if len(x) < sr:  # < 1 s: useless
+                return None
+            return [{"audio": audio_variant(x, sr, k)} for k in AUDIO_KINDS]
+        except Exception as e:  # noqa: BLE001
+            log(f"skip {it['file']}: {e}")
+            return None
+
+    pool = ThreadPoolExecutor(8)
+    res = {}
+    for kind in ("image", "audio"):
+        ids = [i for i in mine if items[i]["kind"] == kind]
+        kw = {"processing_kwargs": {"image": {"max_soft_tokens": BUDGET}}} if kind == "image" else {}
+        for c0 in range(0, len(ids), 32):
+            chunk = ids[c0:c0 + 32]
+            ins = list(pool.map(prep, chunk))
+            ok = [(i, x) for i, x in zip(chunk, ins) if x]
+            flat = [d for _, x in ok for d in x]
+            if not flat:
+                continue
+            e = model.encode(flat, batch_size=16, normalize_embeddings=True, convert_to_numpy=True, **kw)
+            per = len(AUDIO_KINDS) if kind == "audio" else 1
+            for j, (i, _) in enumerate(ok):
+                res[i] = e[j * per:(j + 1) * per].reshape(-1).astype(np.float32)
+            if c0 % 320 == 0:
+                log(f"{kind}: {c0 + len(chunk)}/{len(ids)}")
+    np.savez(f"{WORK}/part{shard}.npz", idx=np.array(list(res)), emb=np.array(list(res.values()), dtype=object))
+    sys.exit(0)
+
+
+if WORKER:
+    worker(*map(int, WORKER.split("/")))
+
+
+# ============================================================================ main
+def sh(cmd):
+    log(f"$ {cmd}")
+    subprocess.run(["bash", "-c", "set -euo pipefail; " + cmd], check=True)
+
+
+sh("pip install -q -U sentence-transformers transformers soundfile")
+import torch  # noqa: E402
+
+os.makedirs(WORK, exist_ok=True)
+for t in glob.glob("/kaggle/input/**/images*.tar", recursive=True) + glob.glob("/kaggle/input/**/audio.tar", recursive=True):
+    if "ssw60" in t:
+        continue
+    log(f"untar {t}")
+    tarfile.open(t).extractall(WORK)
+man = []
+for m in sorted(glob.glob("/kaggle/input/**/manifest*.csv", recursive=True)):
+    man += list(csv.DictReader(open(m)))
+man = list({r["file"]: r for r in man if os.path.exists(f"{WORK}/{r['file']}")}.values())  # dedupe
+taxa = list(csv.DictReader(open(glob.glob("/kaggle/input/**/burds-demo-data/taxa.csv", recursive=True)[0])))
+log(f"{len(man)} files: {sum(r['kind'] == 'image' for r in man)} photos, {sum(r['kind'] == 'audio' for r in man)} songs")
+json.dump(man, open(f"{WORK}/items.json", "w"))
+
+ngpu = max(1, torch.cuda.device_count())
+procs = [subprocess.Popen([sys.executable, os.path.abspath(__file__)],
+                          env={**os.environ, "BURDS_WORKER": f"{s}/{ngpu}", "CUDA_VISIBLE_DEVICES": str(s)})
+         for s in range(ngpu)]
+assert all(p.wait() == 0 for p in procs), "a GPU worker failed"
+emb = {}
+for s in range(ngpu):
+    z = np.load(f"{WORK}/part{s}.npz", allow_pickle=True)
+    emb.update(dict(zip(z["idx"].tolist(), z["emb"])))
+log(f"embedded {len(emb)}/{len(man)}")
+
+# ---------------------------------------------------------------- train on CC data only
+from sklearn.linear_model import LogisticRegression  # noqa: E402
+from sklearn.model_selection import StratifiedKFold, cross_val_predict  # noqa: E402
+
+labels = np.array([int(t["label"]) for t in taxa])
+lab2idx = {int(l): i for i, l in enumerate(labels)}
+K = len(labels)
+GRID = (3, 10, 30, 100, 300)
+CV = StratifiedKFold(5, shuffle=True, random_state=0)
+rng = np.random.default_rng(0)
+
+
+def acc(P, y, k=1):
+    return float(np.mean((np.argsort(-P, 1)[:, :k] == y[:, None]).any(1)))
+
+
+def norm_blocks(X, d=768):
+    X = X.reshape(len(X), -1, d)
+    return (X / np.linalg.norm(X, axis=2, keepdims=True).clip(1e-12)).reshape(len(X), -1)
+
+
+def fit(X, y):
+    lr = lambda C: LogisticRegression(C=C, max_iter=4000, n_jobs=-1)  # noqa: E731
+    oof = {C: cross_val_predict(lr(C), X, y, cv=CV, method="predict_proba") for C in GRID}
+    C = max(GRID, key=lambda c: acc(oof[c], y))
+    return lr(C).fit(X, y), oof[C], C
+
+
+def fuse_conf(Pi, Pa, g):
+    a, b = Pi.max(1, keepdims=True) ** g, Pa.max(1, keepdims=True) ** g
+    return (a * np.log(Pi + 1e-9) + b * np.log(Pa + 1e-9)) / (a + b)
+
+
+def pairs(yi, ya, n=25):
+    out = []
+    for c in range(K):
+        ii, aa = np.where(yi == c)[0], np.where(ya == c)[0]
+        if len(ii) and len(aa):
+            out += [(rng.choice(ii), rng.choice(aa), c) for _ in range(n)]
+    return np.array(out)
+
+
+data = {}
+for kind in ("image", "audio"):
+    ix = [i for i in sorted(emb) if man[i]["kind"] == kind]
+    X = norm_blocks(np.stack([emb[i] for i in ix]))
+    y = np.array([lab2idx[int(man[i]["label"])] for i in ix])
+    clf, oof, C = fit(X, y)
+    data[kind] = {"ix": ix, "X": X, "y": y, "clf": clf, "oof": oof, "C": C}
+    log(f"{kind}: n={len(y)}  5-fold CV top-1 {acc(oof, y):.3f}  (C={C})")
+
+pr = pairs(data["image"]["y"], data["audio"]["y"])
+gamma = max([0.5, 1, 2, 4, 8], key=lambda g: acc(fuse_conf(data["image"]["oof"][pr[:, 0]],
+                                                           data["audio"]["oof"][pr[:, 1]], g), pr[:, 2]))
+cv_fused = acc(fuse_conf(data["image"]["oof"][pr[:, 0]], data["audio"]["oof"][pr[:, 1]], gamma), pr[:, 2])
+log(f"gamma={gamma}  CV fused top-1 {cv_fused:.3f}")
+
+# ---------------------------------------------------------------- honest test on SSW60 (never seen)
+R = {"cc_train": {k: {"n": int(len(v["y"])), "cv_top1": acc(v["oof"], v["y"]), "C": v["C"]} for k, v in data.items()},
+     "gamma": gamma, "cv_fused_top1": cv_fused}
+try:
+    B = np.load(glob.glob("/kaggle/input/**/embeddings.npz", recursive=True)[0], allow_pickle=True)
+    A = np.load(glob.glob("/kaggle/input/**/embed_audiolen.npz", recursive=True)[0], allow_pickle=True)
+    V = np.load(glob.glob("/kaggle/input/**/embed_v3.npz", recursive=True)[0], allow_pickle=True)
+    yidx = lambda yy: np.array([lab2idx[int(v)] for v in yy])  # noqa: E731
+    ite = B["img_split"] == "test"
+    Pi_all = data["image"]["clf"].predict_proba(norm_blocks(np.asarray(B["img"], np.float32)))
+    # SSW60 clips are 10 s, so "loudest 10 s" is the whole clip (aud_slow2 / aud_base).
+    Xa = norm_blocks(np.hstack([A["aud_slow2_trim5"], V["aud_slow2"], V["aud_base"]]).astype(np.float32))
+    ate = A["aud_split"] == "test"
+    Pa_all = data["audio"]["clf"].predict_proba(Xa)
+    yi_all, ya_all = yidx(B["img_y"]), yidx(A["aud_y"])
+    row_of = {a: i for i, a in enumerate(A["aud_id"].astype(str))}
+    b2a = np.array([row_of[a] for a in B["aud_id"].astype(str)])
+    PTE = B["pairs_test"]
+    Pi_p, Pa_p, y_p = Pi_all[PTE[:, 0]], Pa_all[b2a[PTE[:, 1]]], yidx(PTE[:, 2])
+    Pf = fuse_conf(Pi_p, Pa_p, gamma)
+    hi, hf = (Pi_p.argmax(1) == y_p).astype(float), (Pf.argmax(1) == y_p).astype(float)
+    bidx = rng.integers(0, len(y_p), (1000, len(y_p)))
+    d = (hf[bidx] - hi[bidx]).mean(1)
+    R["ssw60_test"] = {
+        "photo": {"n": int(ite.sum()), "top1": acc(Pi_all[ite], yi_all[ite]), "top5": acc(Pi_all[ite], yi_all[ite], 5)},
+        "song": {"n": int(ate.sum()), "top1": acc(Pa_all[ate], ya_all[ate]), "top5": acc(Pa_all[ate], ya_all[ate], 5)},
+        "paired": {"n": int(len(y_p)), "photo": acc(Pi_p, y_p), "song": acc(Pa_p, y_p), "fused": acc(Pf, y_p),
+                   "gain_ci95": [float(np.percentile(d, 2.5)), float(np.percentile(d, 97.5))]}}
+    log(f"SSW60 test: {R['ssw60_test']}")
+except Exception as e:  # noqa: BLE001
+    log(f"SSW60 check skipped: {e}")
+
+# ---------------------------------------------------------------- export
+img_ix = data["image"]["ix"]
+np.savez_compressed(
+    f"{OUT}/demo_index.npz",
+    labels=labels, common=np.array([t["common_name"] for t in taxa]), sci=np.array([t["scientific_name"] for t in taxa]),
+    W_img=data["image"]["clf"].coef_.astype(np.float32), b_img=data["image"]["clf"].intercept_.astype(np.float32),
+    W_aud=data["audio"]["clf"].coef_.astype(np.float32), b_aud=data["audio"]["clf"].intercept_.astype(np.float32),
+    gamma=np.float32(gamma), audio_kinds=np.array(AUDIO_KINDS), budget=np.int32(BUDGET),
+    img_emb=data["image"]["X"].astype(np.float16), img_y=data["image"]["y"],
+    img_file=np.array([man[i]["file"] for i in img_ix]))
+with open(f"{OUT}/credits.csv", "w", newline="") as f:
+    w = csv.DictWriter(f, fieldnames=list(man[0]))
+    w.writeheader(); w.writerows([man[i] for i in sorted(emb)])  # noqa: E702
+# one display photo per species (the first, i.e. most-faved, observation) for the app
+os.makedirs(f"{OUT}/thumbs", exist_ok=True)
+from PIL import Image  # noqa: E402
+for c in range(K):
+    i = next(i for i in img_ix if lab2idx[int(man[i]["label"])] == c)
+    im = Image.open(f"{WORK}/{man[i]['file']}").convert("RGB"); im.thumbnail((320, 320))  # noqa: E702
+    im.save(f"{OUT}/thumbs/{taxa[c]['species_code']}.jpg", quality=85)
+json.dump(R, open(f"{OUT}/demo_eval.json", "w"), indent=2)
+
+pct = lambda x: f"{100 * x:.1f}%"  # noqa: E731
+md = ["# Demo model: trained only on openly licensed web data", "",
+      f"Training data: {R['cc_train']['image']['n']} iNaturalist photos, {R['cc_train']['audio']['n']} xeno-canto "
+      f"recordings (60 species). 5-fold CV top-1: photo {pct(R['cc_train']['image']['cv_top1'])}, "
+      f"song {pct(R['cc_train']['audio']['cv_top1'])}, photo + song {pct(cv_fused)} (gamma={gamma}).", ""]
+if "ssw60_test" in R:
+    s = R["ssw60_test"]
+    g = s["paired"]["gain_ci95"]
+    md += ["## Tested on SSW60 (different photographers, recordists and sites; never seen)", "",
+           "| input | n | top-1 | top-5 |", "|---|---|---|---|",
+           f"| photo | {s['photo']['n']} | {pct(s['photo']['top1'])} | {pct(s['photo']['top5'])} |",
+           f"| song | {s['song']['n']} | {pct(s['song']['top1'])} | {pct(s['song']['top5'])} |",
+           f"| photo + song (paired) | {s['paired']['n']} | **{pct(s['paired']['fused'])}** | |", "",
+           f"Paired set: photo only {pct(s['paired']['photo'])}, gain from adding song "
+           f"[{100 * g[0]:+.1f}, {100 * g[1]:+.1f}] pts (95% CI)."]
+open(f"{OUT}/demo_eval.md", "w").write("\n".join(md) + "\n")
+print("\n".join(md))
+log("done")

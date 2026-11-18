@@ -1,0 +1,8 @@
+gradio>=5
+sentence-transformers>=5.1
+transformers>=4.57
+torch
+librosa
+scipy
+numpy
+pillow
