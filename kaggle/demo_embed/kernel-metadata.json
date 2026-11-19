@@ -15,9 +15,12 @@
     "sreenityathatikunta/burds-demo-data-topup",
     "sreenityathatikunta/burds-ssw60-baseline",
     "sreenityathatikunta/burds-ssw60-audiolen",
-    "sreenityathatikunta/burds-ssw60-embed"
+    "sreenityathatikunta/burds-ssw60-embed",
+    "sreenityathatikunta/burds-demo-sounds"
   ],
   "competition_sources": [],
-  "model_sources": ["google/embeddinggemma-2/transformers/embeddinggemma-2/1"],
+  "model_sources": [
+    "google/embeddinggemma-2/transformers/embeddinggemma-2/1"
+  ],
   "machine_shape": "NvidiaTeslaT4"
 }

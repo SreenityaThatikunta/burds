@@ -1,0 +1,20 @@
+{
+  "id": "sreenityathatikunta/burds-demo-sounds",
+  "title": "burds-demo-sounds",
+  "code_file": "demo_sounds.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": false,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "sreenityathatikunta/burds-demo-data",
+    "sreenityathatikunta/burds-demo-data-topup",
+    "sreenityathatikunta/burds-demo-video"
+  ],
+  "competition_sources": [],
+  "model_sources": []
+}

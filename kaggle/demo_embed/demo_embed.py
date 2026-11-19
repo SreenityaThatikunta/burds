@@ -17,6 +17,7 @@ import glob
 import io
 import json
 import os
+import pickle
 import subprocess
 import sys
 import tarfile
@@ -30,6 +31,7 @@ OUT, WORK = "/kaggle/working", "/kaggle/temp"
 SR = 16000
 BUDGET = 280
 AUDIO_KINDS = ("slow2_trim5", "slow2_trim10", "trim10")
+N_AUG = 2  # extra noisy copies of every recording (training only): field background from another clip
 WORKER = os.environ.get("BURDS_WORKER")
 
 
@@ -69,6 +71,21 @@ def loudest(x, sr, secs):
     return int(np.argmax(c[n:] - c[:-n]))
 
 
+def rms(x):
+    return float(np.sqrt(np.mean(x.astype(np.float64) ** 2)) + 1e-9)
+
+
+def add_background(x, sr, noise, sr_n, snr_db):
+    """Mix in the quietest stretch of another recording (wind, traffic, other birds, hiss) at snr_db."""
+    if sr_n != sr:
+        noise = resample(noise, sr_n, sr)
+    n = min(len(x), len(noise))
+    c = np.concatenate([[0.0], np.cumsum(noise.astype(np.float64) ** 2)])
+    s0 = int(np.argmin(c[n:] - c[:-n])) if len(noise) > n else 0
+    seg = np.resize(noise[s0:s0 + n], len(x))  # tile if the background is shorter than the clip
+    return (x + seg * (rms(x) / rms(seg)) * 10 ** (-snr_db / 20)).astype(np.float32)
+
+
 def audio_variant(x, sr, kind):
     """kind: [slow2_]trim<N>. Half speed reads the samples at sr/2, so frequency f lands at f/2."""
     rate = sr / 2 if kind.startswith("slow2") else sr
@@ -85,6 +102,7 @@ def worker(shard, nshards):
 
     items = json.load(open(f"{WORK}/items.json"))
     mine = [i for i in range(len(items)) if i % nshards == shard]
+    audio_ids = [i for i, it in enumerate(items) if it["kind"] == "audio"]
     cfgs = glob.glob("/kaggle/input/**/embeddinggemma*/**/config.json", recursive=True)
     path = os.path.dirname(sorted(cfgs, key=len)[0]) if cfgs else "google/embeddinggemma-2"
     model = SentenceTransformer(path, device="cuda", model_kwargs={"torch_dtype": torch.float32})
@@ -101,7 +119,14 @@ def worker(shard, nshards):
             x, sr = load_audio(p)
             if len(x) < sr:  # < 1 s: useless
                 return None
-            return [{"audio": audio_variant(x, sr, k)} for k in AUDIO_KINDS]
+            out = [{"audio": audio_variant(x, sr, k)} for k in AUDIO_KINDS]
+            rng_i = np.random.default_rng(i)
+            for _ in range(N_AUG):
+                j = int(rng_i.choice(audio_ids))
+                xn, srn = load_audio(f"{WORK}/{items[j]['file']}") if j != i else (x[::-1].copy(), sr)
+                xa = add_background(x, sr, xn, srn, rng_i.uniform(0, 12))
+                out += [{"audio": audio_variant(xa, sr, k)} for k in AUDIO_KINDS]
+            return out
         except Exception as e:  # noqa: BLE001
             log(f"skip {it['file']}: {e}")
             return None
@@ -119,12 +144,13 @@ def worker(shard, nshards):
             if not flat:
                 continue
             e = model.encode(flat, batch_size=16, normalize_embeddings=True, convert_to_numpy=True, **kw)
-            per = len(AUDIO_KINDS) if kind == "audio" else 1
+            per = len(AUDIO_KINDS) * (1 + N_AUG) if kind == "audio" else 1
             for j, (i, _) in enumerate(ok):
-                res[i] = e[j * per:(j + 1) * per].reshape(-1).astype(np.float32)
-            if c0 % 320 == 0:
+                # row 0 = clean recording, rows 1.. = noisy copies (audio only)
+                res[i] = e[j * per:(j + 1) * per].reshape(1 if kind == "image" else 1 + N_AUG, -1).astype(np.float32)
+            if c0 % (320 if kind == "image" else 96) == 0:
                 log(f"{kind}: {c0 + len(chunk)}/{len(ids)}")
-    np.savez(f"{WORK}/part{shard}.npz", idx=np.array(list(res)), emb=np.array(list(res.values()), dtype=object))
+    pickle.dump(res, open(f"{WORK}/part{shard}.pkl", "wb"))
     sys.exit(0)
 
 
@@ -142,6 +168,15 @@ sh("pip install -q -U sentence-transformers transformers soundfile")
 import torch  # noqa: E402
 
 os.makedirs(WORK, exist_ok=True)
+# self-test of the augmentation before any GPU time is spent
+_x = np.sin(np.arange(44100 * 4) / 7).astype(np.float32)
+_n = np.random.default_rng(0).normal(size=22050 * 9).astype(np.float32)
+for _snr in (0, 6, 12):
+    _m = add_background(_x, 44100, _n, 22050, _snr)
+    assert _m.shape == _x.shape and np.isfinite(_m).all()
+    assert abs(20 * np.log10(rms(_x) / rms(_m - _x)) - _snr) < 0.5, "SNR off"
+assert all(audio_variant(_x, 44100, k).ndim == 1 for k in AUDIO_KINDS)
+log("augmentation self-test ok")
 for t in glob.glob("/kaggle/input/**/images*.tar", recursive=True) + glob.glob("/kaggle/input/**/audio*.tar", recursive=True):
     if "ssw60" in t or "audio_ml" in t:
         continue
@@ -162,9 +197,9 @@ procs = [subprocess.Popen([sys.executable, os.path.abspath(__file__)],
 assert all(p.wait() == 0 for p in procs), "a GPU worker failed"
 emb = {}
 for s in range(ngpu):
-    z = np.load(f"{WORK}/part{s}.npz", allow_pickle=True)
-    emb.update(dict(zip(z["idx"].tolist(), z["emb"])))
+    emb.update(pickle.load(open(f"{WORK}/part{s}.pkl", "rb")))
 log(f"embedded {len(emb)}/{len(man)}")
+pickle.dump({"emb": emb, "man": man}, open(f"{OUT}/emb_all.pkl", "wb"))  # lets training be re-run on CPU
 
 # ---------------------------------------------------------------- train on CC data only
 from sklearn.linear_model import LogisticRegression  # noqa: E402
@@ -209,13 +244,61 @@ def pairs(yi, ya, n=25):
 
 
 data = {}
-for kind in ("image", "audio"):
-    ix = [i for i in sorted(emb) if man[i]["kind"] == kind]
-    X = norm_blocks(np.stack([emb[i] for i in ix]))
-    y = np.array([lab2idx[int(man[i]["label"])] for i in ix])
-    clf, oof, C = fit(X, y)
-    data[kind] = {"ix": ix, "X": X, "y": y, "clf": clf, "oof": oof, "C": C}
-    log(f"{kind}: n={len(y)}  5-fold CV top-1 {acc(oof, y):.3f}  (C={C})")
+ix = [i for i in sorted(emb) if man[i]["kind"] == "image"]
+X = norm_blocks(np.stack([emb[i][0] for i in ix]))
+y = np.array([lab2idx[int(man[i]["label"])] for i in ix])
+clf, oof, C = fit(X, y)
+data["image"] = {"ix": ix, "X": X, "y": y, "clf": clf, "oof": oof, "C": C}
+log(f"image: n={len(y)}  5-fold CV top-1 {acc(oof, y):.3f}  (C={C})")
+
+# Songs: three training recipes, compared fairly. One fold assignment over ALL clean recordings
+# (xeno-canto + iNaturalist); each recipe trains on its own rows of the training folds (noisy
+# copies stay with their source recording, so nothing leaks) and is scored on every clean
+# held-out recording. The shipped recipe is chosen by this CV, not by the SSW60 test.
+from joblib import Parallel, delayed  # noqa: E402
+
+aix = [i for i in sorted(emb) if man[i]["kind"] == "audio"]
+src = np.array(["inat" if "/inat_" in man[i]["file"] else "xc" for i in aix])
+ya = np.array([lab2idx[int(man[i]["label"])] for i in aix])
+Xc = norm_blocks(np.stack([emb[i][0] for i in aix]))
+Xn = [norm_blocks(np.stack([emb[i][a] for i in aix])) for a in range(1, 1 + N_AUG)]
+RECIPES = {"xeno-canto": (("xc",), False), "xeno-canto + iNaturalist": (("xc", "inat"), False),
+           "xeno-canto + iNaturalist + noise": (("xc", "inat"), True)}
+AGRID = (100, 300, 1000)
+folds = list(CV.split(Xc, ya))
+
+
+def train_rows(rows, recipe):
+    srcs, noisy = RECIPES[recipe]
+    rows = rows[np.isin(src[rows], srcs)]
+    X = np.vstack([Xc[rows]] + ([N[rows] for N in Xn] if noisy else []))
+    return X, np.concatenate([ya[rows]] * (1 + (N_AUG if noisy else 0)))
+
+
+def fold_fit(recipe, C, tr, te):
+    X, y_ = train_rows(tr, recipe)
+    m = LogisticRegression(C=C, max_iter=4000).fit(X, y_)
+    P = np.zeros((len(te), K)); P[:, m.classes_] = m.predict_proba(Xc[te])  # noqa: E702
+    return recipe, C, te, P
+
+
+jobs = [(r, C, tr, te) for r in RECIPES for C in AGRID for tr, te in folds]
+oofs = {}
+for r, C, te, P in Parallel(n_jobs=-1)(delayed(fold_fit)(*j) for j in jobs):
+    oofs.setdefault((r, C), np.zeros((len(ya), K)))[te] = P
+audio_models = {}
+for r in RECIPES:
+    C = max(AGRID, key=lambda c: acc(oofs[(r, c)], ya))
+    X, y_ = train_rows(np.arange(len(ya)), r)
+    audio_models[r] = {"clf": LogisticRegression(C=C, max_iter=4000).fit(X, y_), "oof": oofs[(r, C)], "C": C,
+                       "cv_all": acc(oofs[(r, C)], ya), "cv_xc": acc(oofs[(r, C)][src == "xc"], ya[src == "xc"]),
+                       "cv_inat": acc(oofs[(r, C)][src == "inat"], ya[src == "inat"]), "n_train": int(len(y_))}
+    log(f"song recipe {r}: CV all {audio_models[r]['cv_all']:.3f}  xc {audio_models[r]['cv_xc']:.3f}  "
+        f"inat {audio_models[r]['cv_inat']:.3f}  (C={C}, {len(y_)} training rows)")
+best_recipe = max(RECIPES, key=lambda r: audio_models[r]["cv_all"])
+log(f"shipping song recipe: {best_recipe}")
+am = audio_models[best_recipe]
+data["audio"] = {"ix": aix, "X": Xc, "y": ya, "clf": am["clf"], "oof": am["oof"], "C": am["C"]}
 
 pr = pairs(data["image"]["y"], data["audio"]["y"])
 gamma = max([0.5, 1, 2, 4, 8], key=lambda g: acc(fuse_conf(data["image"]["oof"][pr[:, 0]],
@@ -237,6 +320,11 @@ try:
     Xa = norm_blocks(np.hstack([A["aud_slow2_trim5"], V["aud_slow2"], V["aud_base"]]).astype(np.float32))
     ate = A["aud_split"] == "test"
     Pa_all = data["audio"]["clf"].predict_proba(Xa)
+    R["song_recipes"] = {r: {k: v for k, v in m.items() if k not in ("clf", "oof")} |
+                         {"ssw60_song_top1": acc(m["clf"].predict_proba(Xa)[ate], yidx(A["aud_y"])[ate]),
+                          "ssw60_song_top5": acc(m["clf"].predict_proba(Xa)[ate], yidx(A["aud_y"])[ate], 5)}
+                         for r, m in audio_models.items()}
+    R["shipped_song_recipe"] = best_recipe
     yi_all, ya_all = yidx(B["img_y"]), yidx(A["aud_y"])
     row_of = {a: i for i, a in enumerate(A["aud_id"].astype(str))}
     b2a = np.array([row_of[a] for a in B["aud_id"].astype(str)])
@@ -267,7 +355,8 @@ np.savez_compressed(
     img_file=np.array([man[i]["file"] for i in img_ix]))
 with open(f"{OUT}/credits.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(man[0]))
-    w.writeheader(); w.writerows([man[i] for i in sorted(emb)])  # noqa: E702
+    w.writeheader(); w.writerows([man[i] for i in sorted(emb) if man[i]["kind"] == "image" or
+                                  RECIPES[best_recipe][0].count("inat" if "/inat_" in man[i]["file"] else "xc")])  # noqa: E702
 # one display photo per species: the most typical one (closest to the species' mean embedding).
 # "Most-faved first" picked e.g. a flight shot for Ruby-throated Hummingbird that looked like a swift.
 os.makedirs(f"{OUT}/thumbs", exist_ok=True)
@@ -283,8 +372,8 @@ json.dump(R, open(f"{OUT}/demo_eval.json", "w"), indent=2)
 
 pct = lambda x: f"{100 * x:.1f}%"  # noqa: E731
 md = ["# Demo model: trained only on openly licensed web data", "",
-      f"Training data: {R['cc_train']['image']['n']} iNaturalist photos, {R['cc_train']['audio']['n']} xeno-canto "
-      f"recordings (60 species). 5-fold CV top-1: photo {pct(R['cc_train']['image']['cv_top1'])}, "
+      f"Training data: {R['cc_train']['image']['n']} iNaturalist photos, {int((src == 'xc').sum())} xeno-canto + "
+      f"{int((src == 'inat').sum())} iNaturalist recordings (60 species); song recipe: {best_recipe}. 5-fold CV top-1: photo {pct(R['cc_train']['image']['cv_top1'])}, "
       f"song {pct(R['cc_train']['audio']['cv_top1'])}, photo + song {pct(cv_fused)} (gamma={gamma}).", ""]
 if "ssw60_test" in R:
     s = R["ssw60_test"]
@@ -296,6 +385,13 @@ if "ssw60_test" in R:
            f"| photo + song (paired) | {s['paired']['n']} | **{pct(s['paired']['fused'])}** | |", "",
            f"Paired set: photo only {pct(s['paired']['photo'])}, gain from adding song "
            f"[{100 * g[0]:+.1f}, {100 * g[1]:+.1f}] pts (95% CI)."]
+if "song_recipes" in R:
+    md += ["", "## Song training recipes (chosen by CV on the web data; SSW60 shown for reference)", "",
+           "| recipe | training rows | CV, all clean recordings | CV, iNaturalist only | SSW60 song top-1 | top-5 |",
+           "|---|---|---|---|---|---|"]
+    for r, m in R["song_recipes"].items():
+        md.append(f"| {'**' + r + '**' if r == best_recipe else r} | {m['n_train']} | {pct(m['cv_all'])} | "
+                  f"{pct(m['cv_inat'])} | {pct(m['ssw60_song_top1'])} | {pct(m['ssw60_song_top5'])} |")
 open(f"{OUT}/demo_eval.md", "w").write("\n".join(md) + "\n")
 print("\n".join(md))
 log("done")
