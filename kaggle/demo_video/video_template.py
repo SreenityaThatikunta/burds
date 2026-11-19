@@ -63,7 +63,7 @@ def candidates(sci, common, kind, n=8):
     q = {"photos": "true", "photo_license": LIC} if kind == "photo" else {"sounds": "true", "sound_license": LIC}
     obs = []
     for name in (sci, common):
-        obs = inat({"taxon_name": name, "quality_grade": "research", "per_page": 100, "order_by": "votes",
+        obs = inat({"taxon_name": name, "iconic_taxa": "Aves", "quality_grade": "research", "per_page": 100, "order_by": "votes",
                     "page": 2 if kind == "photo" else 1, **q})
         if obs:
             break
@@ -137,7 +137,7 @@ def predict(photo=None, song=None):
     eid = S.post(f"{URL}/gradio_api/call/identify", json={"data": data}, timeout=60).json()["event_id"]
     txt = S.get(f"{URL}/gradio_api/call/identify/{eid}", timeout=300).text
     out = json.loads([x for x in txt.splitlines() if x.startswith("data:")][-1][5:])
-    return [o["label"] if isinstance(o, dict) else None for o in out[:3]]  # fused, photo-only, song-only
+    return [o.get("label") if isinstance(o, dict) else None for o in out[:3]]  # fused, photo-only, song-only
 
 
 for sc in SCENES:

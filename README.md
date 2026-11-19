@@ -8,12 +8,12 @@ its nearest species.
 ![burds demo: photo only, song only, photo + song](docs/burds_demo.gif)
 
 The demo app ([`app/`](app/), [MP4](docs/burds_demo.mp4)) on photos and recordings from iNaturalist
-that the model never saw in training. **These examples were picked to work:** the photos were right
-on the first or second try, but the song-only clip took 14 tries (Carolina Wren failed 8 times
-first). Measured accuracy on unseen data is below: photo 88%, song 36%. The video was recorded before
-the song training improved (below). Recorded headlessly on
-Kaggle by [`kaggle/demo_video`](kaggle/demo_video/video_template.py); credits are in
-[`results/demo_video2/media.json`](results/demo_video2/media.json).
+that the model never saw in training. **These examples were picked to work.** The cardinal photo
+was right on the first try and the woodpecker scene took 4 tries, but the song-only scene took 17:
+all 8 Carolina Wren and 8 Black-capped Chickadee recordings failed before a Blue Jay call was
+recognised (98%). Measured accuracy on unseen data is below: photo 88%, song 36%. Recorded
+headlessly on Kaggle by [`kaggle/demo_video`](kaggle/demo_video/video_template.py); credits and
+every try are in [`results/demo_video3/`](results/demo_video3/media.json).
 
 ## Layout
 - `kaggle/ssw60_baseline/`: Kaggle kernel that streams [SSW60](https://github.com/visipedia/ssw60)
