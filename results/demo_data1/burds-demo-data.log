@@ -1,0 +1,84 @@
+[{"stream_name":"stdout","time":2.649969748,"data":"[   1.1s] xeno-canto key ok\n"}
+,{"stream_name":"stdout","time":6.35463926,"data":"[   4.8s] cangoo   Canada Goose                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":11.614501446,"data":"[  10.0s] wooduc   Wood Duck                    photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":15.892507066,"data":"[  14.3s] mallar3  Mallard                      photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":21.129947689,"data":"[  19.6s] hoomer   Hooded Merganser             photos=30 songs=15\n"}
+,{"stream_name":"stdout","time":25.099129215,"data":"[  23.5s] moudov   Mourning Dove                photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":30.787743684,"data":"[  29.2s] rthhum   Ruby-throated Hummingbird    photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":33.856511659,"data":"[  32.3s] killde   Killdeer                     photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":39.548885397,"data":"[  38.0s] grbher3  Great Blue Heron             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":44.692171548,"data":"[  43.1s] grnher   Green Heron                  photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":50.47217149,"data":"[  48.9s] shshaw   Sharp-shinned Hawk           photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":54.168488604,"data":"[  52.6s] coohaw   Cooper's Hawk                photos= 0 songs=20\n"}
+,{"stream_name":"stdout","time":58.764360898,"data":"[  57.2s] rethaw   Red-tailed Hawk              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":63.494364776,"data":"[  61.9s] grhowl   Great Horned Owl             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":70.856183813,"data":"[  69.3s] yebsap   Yellow-bellied Sapsucker     photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":73.528269294,"data":"[  72.0s] rebwoo   Red-bellied Woodpecker       photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":76.448698719,"data":"[  74.9s] dowwoo   Downy Woodpecker             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":83.447635251,"data":"[  81.9s] haiwoo   Hairy Woodpecker             photos= 0 songs= 0\n"}
+,{"stream_name":"stdout","time":86.362902078,"data":"[  84.8s] pilwoo   Pileated Woodpecker          photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":88.774615055,"data":"[  87.2s] norfli   Northern Flicker             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":93.794558367,"data":"[  92.2s] amekes   American Kestrel             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":97.692262852,"data":"[  96.1s] easpho   Eastern Phoebe               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":100.21221687,"data":"[  98.6s] reevir1  Red-eyed Vireo               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":103.550826097,"data":"[ 102.0s] blujay   Blue Jay                     photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":106.456624107,"data":"[ 104.9s] amecro   American Crow                photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":109.540486964,"data":"[ 108.0s] comrav   Common Raven                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":112.398141752,"data":"[ 110.8s] bkcchi   Black-capped Chickadee       photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":114.89520557,"data":"[ 113.3s] tuftit   Tufted Titmouse              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":117.250827503,"data":"[ 115.7s] treswa   Tree Swallow                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":119.977378581,"data":"[ 118.4s] barswa   Barn Swallow                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":122.537956954,"data":"[ 121.0s] whbnut   White-breasted Nuthatch      photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":124.960215172,"data":"[ 123.4s] houwre   House Wren                   photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":127.807912879,"data":"[ 126.2s] eursta   European Starling            photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":130.579528049,"data":"[ 129.0s] grycat   Gray Catbird                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":133.534147739,"data":"[ 132.0s] amerob   American Robin               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":137.507626837,"data":"[ 135.9s] cedwax   Cedar Waxwing                photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":140.021679531,"data":"[ 138.5s] houfin   House Finch                  photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":143.276448358,"data":"[ 141.7s] purfin   Purple Finch                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":147.08946156,"data":"[ 145.5s] comred   Common Redpoll               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":149.57528383,"data":"[ 148.0s] amegfi   American Goldfinch           photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":152.317666371,"data":"[ 150.7s] chispa   Chipping Sparrow             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":155.15225585,"data":"[ 153.6s] foxspa   Fox Sparrow                  photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":158.385318055,"data":"[ 156.8s] daejun   Dark-eyed Junco              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":161.813583112,"data":"[ 160.2s] whcspa   White-crowned Sparrow        photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":164.737193377,"data":"[ 163.2s] whtspa   White-throated Sparrow       photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":167.166172706,"data":"[ 165.6s] sonspa   Song Sparrow                 photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":169.800305866,"data":"[ 168.2s] balori   Baltimore Oriole             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":172.268001892,"data":"[ 170.7s] rewbla   Red-winged Blackbird         photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":176.20261074,"data":"[ 174.6s] rusbla   Rusty Blackbird              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":178.622630433,"data":"[ 177.1s] comgra   Common Grackle               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":181.996376754,"data":"[ 180.4s] ovenbi1  Ovenbird                     photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":184.615143418,"data":"[ 183.0s] amered   American Redstart            photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":188.51099412,"data":"[ 186.9s] camwar   Cape May Warbler             photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":190.989653172,"data":"[ 189.4s] norpar   Northern Parula              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":193.616228962,"data":"[ 192.0s] yelwar   Yellow Warbler               photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":196.056559477,"data":"[ 194.5s] chswar   Chestnut-sided Warbler       photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":198.553808451,"data":"[ 197.0s] btbwar   Black-throated Blue Warbler  photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":201.256048944,"data":"[ 199.7s] yerwar   Yellow-rumped Warbler        photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":203.794049774,"data":"[ 202.2s] scatan   Scarlet Tanager              photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":206.493780671,"data":"[ 204.9s] norcar   Northern Cardinal            photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":209.250695128,"data":"[ 207.7s] robgro   Rose-breasted Grosbeak       photos=30 songs=20\n"}
+,{"stream_name":"stdout","time":210.134706519,"data":"[ 208.6s]   images.tar: 0/1740\n"}
+,{"stream_name":"stdout","time":212.238760045,"data":"[ 210.7s]   images.tar: 200/1740\n"}
+,{"stream_name":"stdout","time":214.160365077,"data":"[ 212.6s]   images.tar: 400/1740\n"}
+,{"stream_name":"stdout","time":216.240643632,"data":"[ 214.7s]   images.tar: 600/1740\n"}
+,{"stream_name":"stdout","time":217.922960445,"data":"[ 216.4s]   images.tar: 800/1740\n"}
+,{"stream_name":"stdout","time":219.798803896,"data":"[ 218.2s]   images.tar: 1000/1740\n"}
+,{"stream_name":"stdout","time":221.608259691,"data":"[ 220.0s]   images.tar: 1200/1740\n"}
+,{"stream_name":"stdout","time":223.383639063,"data":"[ 221.8s]   images.tar: 1400/1740\n"}
+,{"stream_name":"stdout","time":226.404092672,"data":"[ 224.8s]   images.tar: 1600/1740\n"}
+,{"stream_name":"stdout","time":228.99053739,"data":"[ 227.4s]   audio.tar: 0/1175\n"}
+,{"stream_name":"stdout","time":319.921257233,"data":"[ 318.3s]   audio.tar: 200/1175\n"}
+,{"stream_name":"stdout","time":398.132728122,"data":"[ 396.6s]   audio.tar: 400/1175\n"}
+,{"stream_name":"stdout","time":519.214376727,"data":"[ 517.6s]   audio.tar: 600/1175\n"}
+,{"stream_name":"stdout","time":619.506569672,"data":"[ 617.9s]   audio.tar: 800/1175\n"}
+,{"stream_name":"stdout","time":752.228368319,"data":"[ 750.7s]   audio.tar: 1000/1175\n"}
+,{"stream_name":"stdout","time":867.838845152,"data":"[ 866.3s] done: 1740 photos, 1175 songs (min per species 0/15)\n"}
+,{"stream_name":"stderr","time":871.309945854,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":871.310035697,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":871.921281571,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":871.92134732,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":874.793037724,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":876.432545517,"data":"[NbConvertApp] Writing 313418 bytes to __results__.html\n"}
+]

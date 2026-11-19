@@ -1,0 +1,245 @@
+{
+  "images": 1740,
+  "audio": 1175,
+  "min_images": 0,
+  "min_audio": 15,
+  "per_species": {
+    "cangoo": {
+      "image": 30,
+      "audio": 20
+    },
+    "wooduc": {
+      "image": 30,
+      "audio": 20
+    },
+    "mallar3": {
+      "image": 30,
+      "audio": 20
+    },
+    "hoomer": {
+      "image": 30,
+      "audio": 15
+    },
+    "moudov": {
+      "image": 30,
+      "audio": 20
+    },
+    "rthhum": {
+      "image": 30,
+      "audio": 20
+    },
+    "killde": {
+      "image": 30,
+      "audio": 20
+    },
+    "grbher3": {
+      "image": 30,
+      "audio": 20
+    },
+    "grnher": {
+      "image": 30,
+      "audio": 20
+    },
+    "shshaw": {
+      "image": 30,
+      "audio": 20
+    },
+    "coohaw": {
+      "image": 0,
+      "audio": 20
+    },
+    "rethaw": {
+      "image": 30,
+      "audio": 20
+    },
+    "grhowl": {
+      "image": 30,
+      "audio": 20
+    },
+    "yebsap": {
+      "image": 30,
+      "audio": 20
+    },
+    "rebwoo": {
+      "image": 30,
+      "audio": 20
+    },
+    "dowwoo": {
+      "image": 30,
+      "audio": 20
+    },
+    "pilwoo": {
+      "image": 30,
+      "audio": 20
+    },
+    "norfli": {
+      "image": 30,
+      "audio": 20
+    },
+    "amekes": {
+      "image": 30,
+      "audio": 20
+    },
+    "easpho": {
+      "image": 30,
+      "audio": 20
+    },
+    "reevir1": {
+      "image": 30,
+      "audio": 20
+    },
+    "blujay": {
+      "image": 30,
+      "audio": 20
+    },
+    "amecro": {
+      "image": 30,
+      "audio": 20
+    },
+    "comrav": {
+      "image": 30,
+      "audio": 20
+    },
+    "bkcchi": {
+      "image": 30,
+      "audio": 20
+    },
+    "tuftit": {
+      "image": 30,
+      "audio": 20
+    },
+    "treswa": {
+      "image": 30,
+      "audio": 20
+    },
+    "barswa": {
+      "image": 30,
+      "audio": 20
+    },
+    "whbnut": {
+      "image": 30,
+      "audio": 20
+    },
+    "houwre": {
+      "image": 30,
+      "audio": 20
+    },
+    "eursta": {
+      "image": 30,
+      "audio": 20
+    },
+    "grycat": {
+      "image": 30,
+      "audio": 20
+    },
+    "amerob": {
+      "image": 30,
+      "audio": 20
+    },
+    "cedwax": {
+      "image": 30,
+      "audio": 20
+    },
+    "houfin": {
+      "image": 30,
+      "audio": 20
+    },
+    "purfin": {
+      "image": 30,
+      "audio": 20
+    },
+    "comred": {
+      "image": 30,
+      "audio": 20
+    },
+    "amegfi": {
+      "image": 30,
+      "audio": 20
+    },
+    "chispa": {
+      "image": 30,
+      "audio": 20
+    },
+    "foxspa": {
+      "image": 30,
+      "audio": 20
+    },
+    "daejun": {
+      "image": 30,
+      "audio": 20
+    },
+    "whcspa": {
+      "image": 30,
+      "audio": 20
+    },
+    "whtspa": {
+      "image": 30,
+      "audio": 20
+    },
+    "sonspa": {
+      "image": 30,
+      "audio": 20
+    },
+    "balori": {
+      "image": 30,
+      "audio": 20
+    },
+    "rewbla": {
+      "image": 30,
+      "audio": 20
+    },
+    "rusbla": {
+      "image": 30,
+      "audio": 20
+    },
+    "comgra": {
+      "image": 30,
+      "audio": 20
+    },
+    "ovenbi1": {
+      "image": 30,
+      "audio": 20
+    },
+    "amered": {
+      "image": 30,
+      "audio": 20
+    },
+    "camwar": {
+      "image": 30,
+      "audio": 20
+    },
+    "norpar": {
+      "image": 30,
+      "audio": 20
+    },
+    "yelwar": {
+      "image": 30,
+      "audio": 20
+    },
+    "chswar": {
+      "image": 30,
+      "audio": 20
+    },
+    "btbwar": {
+      "image": 30,
+      "audio": 20
+    },
+    "yerwar": {
+      "image": 30,
+      "audio": 20
+    },
+    "scatan": {
+      "image": 30,
+      "audio": 20
+    },
+    "norcar": {
+      "image": 30,
+      "audio": 20
+    },
+    "robgro": {
+      "image": 30,
+      "audio": 20
+    }
+  },
+  "seconds": 866
+}
