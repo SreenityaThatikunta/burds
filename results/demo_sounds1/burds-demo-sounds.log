@@ -1,0 +1,86 @@
+[{"stream_name":"stdout","time":3.278340486,"data":"[   0.9s] excluding 4 demo-video observations\n"}
+,{"stream_name":"stdout","time":44.803914851,"data":"[  42.4s] cangoo   Canada Goose                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":83.463626555,"data":"[  81.1s] wooduc   Wood Duck                    inat sounds=30\n"}
+,{"stream_name":"stdout","time":123.797415907,"data":"[ 121.4s] mallar3  Mallard                      inat sounds=30\n"}
+,{"stream_name":"stdout","time":138.569418473,"data":"[ 136.2s] hoomer   Hooded Merganser             inat sounds=10\n"}
+,{"stream_name":"stderr","time":164.792336408,"data":"[mp3float @ 0x5d4f160f8f40] Header missing\n"}
+,{"stream_name":"stderr","time":164.792415937,"data":"[aist#0:0/mp3 @ 0x5d4f160f8200] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stderr","time":164.872485343,"data":"[mp3float @ 0x5d4f160f8f40] Header missing\n"}
+,{"stream_name":"stderr","time":164.872538426,"data":"[aist#0:0/mp3 @ 0x5d4f160f8200] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stdout","time":173.693888631,"data":"[ 171.3s] moudov   Mourning Dove                inat sounds=30\n"}
+,{"stream_name":"stdout","time":208.752161491,"data":"[ 206.4s] rthhum   Ruby-throated Hummingbird    inat sounds=30\n"}
+,{"stream_name":"stdout","time":241.705712837,"data":"[ 239.3s] killde   Killdeer                     inat sounds=30\n"}
+,{"stream_name":"stdout","time":275.393320257,"data":"[ 273.0s] grbher3  Great Blue Heron             inat sounds=30\n"}
+,{"stream_name":"stdout","time":310.840286812,"data":"[ 308.4s] grnher   Green Heron                  inat sounds=30\n"}
+,{"stream_name":"stdout","time":329.177609954,"data":"[ 326.8s] shshaw   Sharp-shinned Hawk           inat sounds=15\n"}
+,{"stream_name":"stdout","time":365.528085274,"data":"[ 363.1s] coohaw   Cooper's Hawk                inat sounds=30\n"}
+,{"stream_name":"stdout","time":400.460140407,"data":"[ 398.1s] rethaw   Red-tailed Hawk              inat sounds=30\n"}
+,{"stream_name":"stdout","time":434.641758688,"data":"[ 432.2s] grhowl   Great Horned Owl             inat sounds=30\n"}
+,{"stream_name":"stdout","time":471.732056923,"data":"[ 469.3s] yebsap   Yellow-bellied Sapsucker     inat sounds=30\n"}
+,{"stream_name":"stdout","time":504.323939006,"data":"[ 501.9s] rebwoo   Red-bellied Woodpecker       inat sounds=30\n"}
+,{"stream_name":"stdout","time":538.416239469,"data":"[ 536.0s] dowwoo   Downy Woodpecker             inat sounds=30\n"}
+,{"stream_name":"stdout","time":573.10469117,"data":"[ 570.7s] haiwoo   Hairy Woodpecker             inat sounds=30\n"}
+,{"stream_name":"stdout","time":604.512280367,"data":"[ 602.1s] pilwoo   Pileated Woodpecker          inat sounds=30\n"}
+,{"stream_name":"stdout","time":639.022113104,"data":"[ 636.6s] norfli   Northern Flicker             inat sounds=30\n"}
+,{"stream_name":"stdout","time":681.102894923,"data":"[ 678.7s] amekes   American Kestrel             inat sounds=30\n"}
+,{"stream_name":"stdout","time":713.497041617,"data":"[ 711.1s] easpho   Eastern Phoebe               inat sounds=30\n"}
+,{"stream_name":"stdout","time":746.614045562,"data":"[ 744.2s] reevir1  Red-eyed Vireo               inat sounds=30\n"}
+,{"stream_name":"stderr","time":774.805340131,"data":"[mp3float @ 0x556804ab1dc0] Header missing\n"}
+,{"stream_name":"stderr","time":774.805388465,"data":"[aist#0:0/mp3 @ 0x556804acd3c0] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stdout","time":778.375196219,"data":"[ 776.0s] blujay   Blue Jay                     inat sounds=30\n"}
+,{"stream_name":"stdout","time":814.708058101,"data":"[ 812.3s] amecro   American Crow                inat sounds=30\n"}
+,{"stream_name":"stdout","time":849.992625505,"data":"[ 847.6s] comrav   Common Raven                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":884.044844666,"data":"[ 881.6s] bkcchi   Black-capped Chickadee       inat sounds=30\n"}
+,{"stream_name":"stdout","time":919.994159964,"data":"[ 917.6s] tuftit   Tufted Titmouse              inat sounds=30\n"}
+,{"stream_name":"stdout","time":959.391935291,"data":"[ 957.0s] treswa   Tree Swallow                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":996.906747981,"data":"[ 994.5s] barswa   Barn Swallow                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":1034.890972802,"data":"[1032.5s] whbnut   White-breasted Nuthatch      inat sounds=30\n"}
+,{"stream_name":"stdout","time":1070.573468052,"data":"[1068.2s] houwre   House Wren                   inat sounds=30\n"}
+,{"stream_name":"stderr","time":1074.74069888,"data":"[aac @ 0x577ffd745040] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1074.748842439,"data":"[aac @ 0x577ffd76a340] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1074.750130496,"data":"[aist#0:0/aac @ 0x577ffd74c780] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stderr","time":1076.947527449,"data":"[aac @ 0x5a646389e040] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1076.950456493,"data":"[aac @ 0x5a64638c3340] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1076.950497317,"data":"[aist#0:0/aac @ 0x5a64638a5780] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stderr","time":1087.869475784,"data":"[aac @ 0x56b269700040] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1087.872662148,"data":"[aac @ 0x56b269725340] Input buffer exhausted before END element found\n"}
+,{"stream_name":"stderr","time":1087.872715978,"data":"[aist#0:0/aac @ 0x56b269707780] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stdout","time":1116.9526592080001,"data":"[1114.6s] eursta   European Starling            inat sounds=30\n"}
+,{"stream_name":"stdout","time":1156.741545639,"data":"[1154.3s] grycat   Gray Catbird                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":1199.026567027,"data":"[1196.6s] amerob   American Robin               inat sounds=30\n"}
+,{"stream_name":"stdout","time":1241.449588363,"data":"[1239.0s] cedwax   Cedar Waxwing                inat sounds=30\n"}
+,{"stream_name":"stdout","time":1279.537360203,"data":"[1277.1s] houfin   House Finch                  inat sounds=30\n"}
+,{"stream_name":"stdout","time":1319.59482018,"data":"[1317.2s] purfin   Purple Finch                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":1357.232468741,"data":"[1354.8s] comred   Common Redpoll               inat sounds=30\n"}
+,{"stream_name":"stdout","time":1390.45149157,"data":"[1388.1s] amegfi   American Goldfinch           inat sounds=30\n"}
+,{"stream_name":"stdout","time":1426.547563432,"data":"[1424.1s] chispa   Chipping Sparrow             inat sounds=30\n"}
+,{"stream_name":"stdout","time":1463.024750316,"data":"[1460.6s] foxspa   Fox Sparrow                  inat sounds=30\n"}
+,{"stream_name":"stdout","time":1496.213210004,"data":"[1493.8s] daejun   Dark-eyed Junco              inat sounds=30\n"}
+,{"stream_name":"stdout","time":1531.57384956,"data":"[1529.2s] whcspa   White-crowned Sparrow        inat sounds=30\n"}
+,{"stream_name":"stdout","time":1570.390457201,"data":"[1568.0s] whtspa   White-throated Sparrow       inat sounds=30\n"}
+,{"stream_name":"stderr","time":1599.124184814,"data":"[mp3float @ 0x5d1995cc5dc0] Header missing\n"}
+,{"stream_name":"stderr","time":1599.124226808,"data":"[aist#0:0/mp3 @ 0x5d1995ce13c0] Error submitting packet to decoder: Invalid data found when processing input\n"}
+,{"stream_name":"stdout","time":1601.727387869,"data":"[1599.3s] sonspa   Song Sparrow                 inat sounds=30\n"}
+,{"stream_name":"stdout","time":1640.680003361,"data":"[1638.3s] balori   Baltimore Oriole             inat sounds=30\n"}
+,{"stream_name":"stdout","time":1672.478126972,"data":"[1670.1s] rewbla   Red-winged Blackbird         inat sounds=30\n"}
+,{"stream_name":"stdout","time":1711.125953393,"data":"[1708.7s] rusbla   Rusty Blackbird              inat sounds=30\n"}
+,{"stream_name":"stdout","time":1746.837889234,"data":"[1744.4s] comgra   Common Grackle               inat sounds=30\n"}
+,{"stream_name":"stdout","time":1780.786411069,"data":"[1778.4s] ovenbi1  Ovenbird                     inat sounds=30\n"}
+,{"stream_name":"stdout","time":1814.004745961,"data":"[1811.6s] amered   American Redstart            inat sounds=30\n"}
+,{"stream_name":"stdout","time":1855.065292835,"data":"[1852.7s] camwar   Cape May Warbler             inat sounds=30\n"}
+,{"stream_name":"stdout","time":1889.152730875,"data":"[1886.8s] norpar   Northern Parula              inat sounds=30\n"}
+,{"stream_name":"stdout","time":1901.819190294,"data":"[1899.4s] yelwar   Yellow Warbler               inat sounds=11\n"}
+,{"stream_name":"stdout","time":1938.069624517,"data":"[1935.7s] chswar   Chestnut-sided Warbler       inat sounds=30\n"}
+,{"stream_name":"stdout","time":1973.632524766,"data":"[1971.2s] btbwar   Black-throated Blue Warbler  inat sounds=30\n"}
+,{"stream_name":"stdout","time":2012.002733553,"data":"[2009.6s] yerwar   Yellow-rumped Warbler        inat sounds=30\n"}
+,{"stream_name":"stdout","time":2050.692284656,"data":"[2048.3s] scatan   Scarlet Tanager              inat sounds=30\n"}
+,{"stream_name":"stdout","time":2088.768430862,"data":"[2086.4s] norcar   Northern Cardinal            inat sounds=30\n"}
+,{"stream_name":"stdout","time":2125.768935752,"data":"[2123.4s] robgro   Rose-breasted Grosbeak       inat sounds=30\n"}
+,{"stream_name":"stdout","time":2125.785563134,"data":"[2123.4s] done: 1746 iNaturalist sounds\n"}
+,{"stream_name":"stderr","time":2129.348154569,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":2129.348206121,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":2129.849587202,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":2129.849622323,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":2132.661542326,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":2134.520365736,"data":"[NbConvertApp] Writing 296250 bytes to __results__.html\n"}
+]

@@ -1,0 +1,167 @@
+[{"stream_name":"stdout","time":1.475252349,"data":"[    0.0s main] $ pip install -q -U sentence-transformers transformers soundfile\n"}
+,{"stream_name":"stdout","time":27.738839142,"data":"[   26.3s main] augmentation self-test ok\n"}
+,{"stream_name":"stdout","time":28.300535881,"data":"[   26.8s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data/images.tar\n"}
+,{"stream_name":"stderr","time":28.736286879,"data":"/kaggle/src/script.py:184: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":28.736314637,"data":"  tarfile.open(t).extractall(WORK)\n"}
+,{"stream_name":"stdout","time":30.41573835,"data":"[   28.9s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data-topup/images_topup.tar\n"}
+,{"stream_name":"stdout","time":31.13386062,"data":"[   29.7s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data/audio.tar\n"}
+,{"stream_name":"stdout","time":63.228655805,"data":"[   61.8s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data-topup/audio_topup.tar\n"}
+,{"stream_name":"stdout","time":64.422415338,"data":"[   62.9s main] untar /kaggle/input/burds-demo-sounds/audio_inat.tar\n"}
+,{"stream_name":"stdout","time":69.267768752,"data":"[   67.8s main] 4741 files: 1800 photos, 2941 songs\n"}
+,{"stream_name":"stderr","time":95.838658554,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   5%|▌         | 70/1376 [00:00\u003c00:02, 619.95it/s]\rLoading weights:   6%|▌         | 82/1376 [00:00\u003c00:01, 706.38it/s]\rLoading weights:  10%|▉         | 132/1376 [00:00\u003c00:02, 509.38it/s]\rLoading weights:  11%|█         | 153/1376 [00:00\u003c00:01, 612.51it/s]\rLoading weights:  14%|█▎        | 189/1376 [00:00\u003c00:02, 496.87it/s]\rLoading weights:  16%|█▌        | 215/1376 [00:00\u003c00:02, 530.06it/s]\rLoading weights:  18%|█▊        | 251/1376 [00:00\u003c00:02, 498.36it/s]\rLoading weights:  20%|█▉        | 269/1376 [00:00\u003c00:02, 437.44it/s]\rLoading weights:  22%|██▏       | 302/1376 [00:00\u003c00:02, 498.93it/s]\rLoading weights:  24%|██▎       | 325/1376 [00:00\u003c00:02, 459.13it/s]\rLoading weights:  26%|██▌       | 353/1376 [00:00\u003c00:02, 466.42it/s]\rLoading weights:  27%|██▋       | 375/1376 [00:00\u003c00:02, 404.94it/s]\rLoading weights:  29%|██▉       | 400/1376 [00:00\u003c00:02, 429.81it/s]\rLoading weights:  33%|███▎      | 449/1376 [00:00\u003c00:01, 483.37it/s]\rLoading weights:  34%|███▎      | 463/1376 [00:00\u003c00:01, 464.70it/s]\rLoading weights:  36%|███▋      | 501/1376 [00:01\u003c00:01, 452.24it/s]\rLoading weights:  37%|███▋      | 510/1376 [00:01\u003c00:01, 452.73it/s]\rLoading weights:  41%|████      | 561/1376 [00:01\u003c00:01, 489.81it/s]\rLoading weights:  41%|████      | 566/1376 [00:01\u003c00:01, 468.84it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:01\u003c00:01, 457.47it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:01\u003c00:01, 471.36it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:01\u003c00:01, 496.65it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:01\u003c00:01, 505.34it/s]\rLoading weights:  54%|█████▍    | 747/1376 [00:01\u003c00:01, 491.31it/s]\rLoading weights:  54%|█████▍    | 747/1376 [00:01\u003c00:01, 484.93it/s]\rLoading weights:  58%|█████▊    | 797/1376 [00:03\u003c00:05, 97.45it/s] \rLoading weights:  58%|█████▊    | 798/1376 [00:03\u003c00:05, 100.29it/s]\rLoading weights:  91%|█████████ | 1253/1376 [00:03\u003c00:00, 407.47it/s]\rLoading weights:  91%|█████████▏| 1256/1376 [00:03\u003c00:00, 410.61it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:03\u003c00:00, 359.75it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:03\u003c00:00, 357.96it/s]\n"}
+,{"stream_name":"stderr","time":95.838735073,"data":"\n"}
+,{"stream_name":"stdout","time":100.990827658,"data":"[   31.4s gpu0] model loaded on Tesla T4; 2371 items\n"}
+,{"stream_name":"stdout","time":101.164794254,"data":"[   31.6s gpu1] model loaded on Tesla T4; 2370 items\n"}
+,{"stream_name":"stdout","time":118.393758153,"data":"[   48.8s gpu0] image: 32/900\n"}
+,{"stream_name":"stdout","time":118.528292184,"data":"[   49.0s gpu1] image: 32/900\n"}
+,{"stream_name":"stdout","time":255.461750633,"data":"[  185.9s gpu0] image: 352/900\n"}
+,{"stream_name":"stdout","time":257.344896677,"data":"[  187.8s gpu1] image: 352/900\n"}
+,{"stream_name":"stdout","time":398.807572267,"data":"[  329.2s gpu0] image: 672/900\n"}
+,{"stream_name":"stdout","time":400.239736651,"data":"[  330.7s gpu1] image: 672/900\n"}
+,{"stream_name":"stdout","time":546.532758667,"data":"[  477.0s gpu0] audio: 32/1471\n"}
+,{"stream_name":"stdout","time":549.79538498,"data":"[  480.2s gpu1] audio: 32/1470\n"}
+,{"stream_name":"stderr","time":551.570227347,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":551.570281843,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":551.582442627,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":551.582476196,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":561.333919132,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":561.333971953,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":561.33527673,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":561.335290859,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":561.335447113,"data":"/kaggle/src/script.py:50: UserWarning: PySoundFile failed. Trying audioread instead.\n"}
+,{"stream_name":"stderr","time":561.335457786,"data":"  x, sr = librosa.load(path, sr=None, mono=True)\n"}
+,{"stream_name":"stderr","time":561.335636712,"data":"/usr/local/lib/python3.13/dist-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load\n"}
+,{"stream_name":"stderr","time":561.335650424,"data":"\tDeprecated as of librosa version 0.10.0.\n"}
+,{"stream_name":"stderr","time":561.335655462,"data":"\tIt will be removed in librosa version 1.0.\n"}
+,{"stream_name":"stderr","time":561.335659714,"data":"  y, sr_native = __audioread_load(path, offset, duration, dtype)\n"}
+,{"stream_name":"stderr","time":588.146080281,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":588.146164165,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":588.150814463,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":588.15083721,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":592.813147066,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":592.813806834,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":592.821794626,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":592.821815904,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":592.826751907,"data":"/kaggle/src/script.py:50: UserWarning: PySoundFile failed. Trying audioread instead.\n"}
+,{"stream_name":"stderr","time":592.826768423,"data":"  x, sr = librosa.load(path, sr=None, mono=True)\n"}
+,{"stream_name":"stderr","time":592.832542333,"data":"/usr/local/lib/python3.13/dist-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load\n"}
+,{"stream_name":"stderr","time":592.832560027,"data":"\tDeprecated as of librosa version 0.10.0.\n"}
+,{"stream_name":"stderr","time":592.83256455,"data":"\tIt will be removed in librosa version 1.0.\n"}
+,{"stream_name":"stderr","time":592.832568288,"data":"  y, sr_native = __audioread_load(path, offset, duration, dtype)\n"}
+,{"stream_name":"stderr","time":634.510405993,"data":"Note: Illegal Audio-MPEG-Header 0x50455441 at offset 1122555.\n"}
+,{"stream_name":"stderr","time":634.510544859,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":634.514410867,"data":"Note: Hit end of (available) data during resync.\n"}
+,{"stream_name":"stdout","time":670.725298033,"data":"[  601.2s gpu0] audio: 128/1471\n"}
+,{"stream_name":"stdout","time":683.943435844,"data":"[  614.4s gpu1] audio: 128/1470\n"}
+,{"stream_name":"stdout","time":787.760612417,"data":"[  718.2s gpu0] audio: 224/1471\n"}
+,{"stream_name":"stdout","time":801.391093916,"data":"[  731.8s gpu1] audio: 224/1470\n"}
+,{"stream_name":"stdout","time":910.730701293,"data":"[  841.2s gpu0] audio: 320/1471\n"}
+,{"stream_name":"stdout","time":924.075943144,"data":"[  854.5s gpu1] audio: 320/1470\n"}
+,{"stream_name":"stdout","time":1031.191023332,"data":"[  961.6s gpu0] audio: 416/1471\n"}
+,{"stream_name":"stdout","time":1048.288134596,"data":"[  978.7s gpu1] audio: 416/1470\n"}
+,{"stream_name":"stdout","time":1158.046635339,"data":"[ 1088.5s gpu0] audio: 512/1471\n"}
+,{"stream_name":"stderr","time":1159.661486554,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":1173.0822817,"data":"[ 1103.5s gpu1] audio: 512/1470\n"}
+,{"stream_name":"stdout","time":1278.059711671,"data":"[ 1208.5s gpu0] audio: 608/1471\n"}
+,{"stream_name":"stdout","time":1287.916253452,"data":"[ 1218.4s gpu1] audio: 608/1470\n"}
+,{"stream_name":"stderr","time":1367.39770086,"data":"Note: Illegal Audio-MPEG-Header 0x50455441 at offset 1122555.\n"}
+,{"stream_name":"stderr","time":1367.397751287,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":1367.401654245,"data":"Note: Hit end of (available) data during resync.\n"}
+,{"stream_name":"stdout","time":1397.9945345,"data":"[ 1328.4s gpu0] audio: 704/1471\n"}
+,{"stream_name":"stdout","time":1404.2826062,"data":"[ 1334.7s gpu1] audio: 704/1470\n"}
+,{"stream_name":"stdout","time":1514.49034093,"data":"[ 1444.9s gpu1] audio: 800/1470\n"}
+,{"stream_name":"stderr","time":1514.716545123,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":1519.804056551,"data":"[ 1450.2s gpu0] audio: 800/1471\n"}
+,{"stream_name":"stderr","time":1562.626363345,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":1605.601718402,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":1605.607311104,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":1605.609273204,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":1605.612432409,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":1605.865842331,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":1605.866008591,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":1605.868005206,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":1605.86810422,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":1605.872689023,"data":"/kaggle/src/script.py:50: UserWarning: PySoundFile failed. Trying audioread instead.\n"}
+,{"stream_name":"stderr","time":1605.872704382,"data":"  x, sr = librosa.load(path, sr=None, mono=True)\n"}
+,{"stream_name":"stderr","time":1605.87448452,"data":"/usr/local/lib/python3.13/dist-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load\n"}
+,{"stream_name":"stderr","time":1605.874499765,"data":"\tDeprecated as of librosa version 0.10.0.\n"}
+,{"stream_name":"stderr","time":1605.874504457,"data":"\tIt will be removed in librosa version 1.0.\n"}
+,{"stream_name":"stderr","time":1605.87450848,"data":"  y, sr_native = __audioread_load(path, offset, duration, dtype)\n"}
+,{"stream_name":"stdout","time":1650.411275573,"data":"[ 1580.9s gpu1] audio: 896/1470\n"}
+,{"stream_name":"stdout","time":1651.505142858,"data":"[ 1581.9s gpu0] audio: 896/1471\n"}
+,{"stream_name":"stderr","time":1702.266920638,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":1703.015505774,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":1791.616695695,"data":"[ 1722.1s gpu1] audio: 992/1470\n"}
+,{"stream_name":"stdout","time":1793.08304136,"data":"[ 1723.5s gpu0] audio: 992/1471\n"}
+,{"stream_name":"stderr","time":1794.512169587,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":1850.202989721,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":1941.780705123,"data":"[ 1872.2s gpu0] audio: 1088/1471\n"}
+,{"stream_name":"stdout","time":1943.088920515,"data":"[ 1873.5s gpu1] audio: 1088/1470\n"}
+,{"stream_name":"stderr","time":2006.224452586,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":2006.22449686,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":2006.226294547,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":2006.226320265,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":2006.355045972,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":2006.355173589,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":2006.357043328,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":2006.357249464,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":2006.357554582,"data":"/kaggle/src/script.py:50: UserWarning: PySoundFile failed. Trying audioread instead.\n"}
+,{"stream_name":"stderr","time":2006.357566767,"data":"  x, sr = librosa.load(path, sr=None, mono=True)\n"}
+,{"stream_name":"stderr","time":2006.357868949,"data":"/usr/local/lib/python3.13/dist-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load\n"}
+,{"stream_name":"stderr","time":2006.357878979,"data":"\tDeprecated as of librosa version 0.10.0.\n"}
+,{"stream_name":"stderr","time":2006.357882993,"data":"\tIt will be removed in librosa version 1.0.\n"}
+,{"stream_name":"stderr","time":2006.357886584,"data":"  y, sr_native = __audioread_load(path, offset, duration, dtype)\n"}
+,{"stream_name":"stdout","time":2097.63206935,"data":"[ 2028.1s gpu0] audio: 1184/1471\n"}
+,{"stream_name":"stdout","time":2098.847763326,"data":"[ 2029.3s gpu1] audio: 1184/1470\n"}
+,{"stream_name":"stderr","time":2212.027295429,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":2250.74423743,"data":"[ 2181.2s gpu1] audio: 1280/1470\n"}
+,{"stream_name":"stdout","time":2252.578440343,"data":"[ 2183.0s gpu0] audio: 1280/1471\n"}
+,{"stream_name":"stderr","time":2258.482120499,"data":"Note: Illegal Audio-MPEG-Header 0x50455441 at offset 1122555.\n"}
+,{"stream_name":"stderr","time":2258.49132562,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":2258.492337828,"data":"Note: Hit end of (available) data during resync.\n"}
+,{"stream_name":"stderr","time":2306.550260973,"data":"Note: Illegal Audio-MPEG-Header 0x50455441 at offset 1122555.\n"}
+,{"stream_name":"stderr","time":2306.550305322,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":2306.554348266,"data":"Note: Hit end of (available) data during resync.\n"}
+,{"stream_name":"stdout","time":2405.476605348,"data":"[ 2335.9s gpu0] audio: 1376/1471\n"}
+,{"stream_name":"stdout","time":2407.910278043,"data":"[ 2338.4s gpu1] audio: 1376/1470\n"}
+,{"stream_name":"stderr","time":2466.854043538,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":2516.68463702,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stdout","time":2563.756843543,"data":"[ 2494.2s gpu0] audio: 1471/1471\n"}
+,{"stream_name":"stdout","time":2564.220248765,"data":"[ 2494.7s gpu1] audio: 1470/1470\n"}
+,{"stream_name":"stdout","time":2571.262590474,"data":"[ 2569.8s main] embedded 4741/4741\n"}
+,{"stream_name":"stdout","time":2619.604697469,"data":"[ 2618.1s main] image: n=1800  5-fold CV top-1 0.826  (C=300)\n"}
+,{"stream_name":"stdout","time":2975.633947195,"data":"[ 2974.2s main] song recipe xeno-canto: CV all 0.344  xc 0.565  inat 0.193  (C=300, 1195 training rows)\n"}
+,{"stream_name":"stdout","time":3013.571624713,"data":"[ 3012.1s main] song recipe xeno-canto + iNaturalist: CV all 0.414  xc 0.557  inat 0.317  (C=300, 2941 training rows)\n"}
+,{"stream_name":"stdout","time":3092.708501877,"data":"[ 3091.2s main] song recipe xeno-canto + iNaturalist + noise: CV all 0.386  xc 0.536  inat 0.284  (C=100, 8823 training rows)\n"}
+,{"stream_name":"stdout","time":3092.708564926,"data":"[ 3091.2s main] shipping song recipe: xeno-canto + iNaturalist\n"}
+,{"stream_name":"stdout","time":3092.782088973,"data":"[ 3091.3s main] gamma=1  CV fused top-1 0.888\n"}
+,{"stream_name":"stdout","time":3095.529260479,"data":"[ 3094.1s main] SSW60 test: {'photo': {'n': 5171, 'top1': 0.8799071746277316, 'top5': 0.9941984142332237}, 'song': {'n': 1264, 'top1': 0.36075949367088606, 'top5': 0.6495253164556962}, 'paired': {'n': 1500, 'photo': 0.8786666666666667, 'song': 0.36533333333333334, 'fused': 0.908, 'gain_ci95': [0.014, 0.044]}}\n"}
+,{"stream_name":"stdout","time":3096.102786636,"data":"# Demo model: trained only on openly licensed web data\n"}
+,{"stream_name":"stdout","time":3096.102815269,"data":"\n"}
+,{"stream_name":"stdout","time":3096.102821087,"data":"Training data: 1800 iNaturalist photos, 1195 xeno-canto + 1746 iNaturalist recordings (60 species); song recipe: xeno-canto + iNaturalist. 5-fold CV top-1: photo 82.6%, song 41.4%, photo + song 88.8% (gamma=1).\n"}
+,{"stream_name":"stdout","time":3096.102827324,"data":"\n"}
+,{"stream_name":"stdout","time":3096.102832124,"data":"## Tested on SSW60 (different photographers, recordists and sites; never seen)\n"}
+,{"stream_name":"stdout","time":3096.102836402,"data":"\n"}
+,{"stream_name":"stdout","time":3096.102840334,"data":"| input | n | top-1 | top-5 |\n"}
+,{"stream_name":"stdout","time":3096.102844505,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":3096.102850642,"data":"| photo | 5171 | 88.0% | 99.4% |\n"}
+,{"stream_name":"stdout","time":3096.102858775,"data":"| song | 1264 | 36.1% | 65.0% |\n"}
+,{"stream_name":"stdout","time":3096.102861659,"data":"| photo + song (paired) | 1500 | **90.8%** | |\n"}
+,{"stream_name":"stdout","time":3096.102864616,"data":"\n"}
+,{"stream_name":"stdout","time":3096.10286742,"data":"Paired set: photo only 87.9%, gain from adding song [+1.4, +4.4] pts (95% CI).\n"}
+,{"stream_name":"stdout","time":3096.102870432,"data":"\n"}
+,{"stream_name":"stdout","time":3096.102873178,"data":"## Song training recipes (chosen by CV on the web data; SSW60 shown for reference)\n"}
+,{"stream_name":"stdout","time":3096.102876067,"data":"\n"}
+,{"stream_name":"stdout","time":3096.10287889,"data":"| recipe | training rows | CV, all clean recordings | CV, iNaturalist only | SSW60 song top-1 | top-5 |\n"}
+,{"stream_name":"stdout","time":3096.102881862,"data":"|---|---|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":3096.10288469,"data":"| xeno-canto | 1195 | 34.4% | 19.3% | 31.5% | 57.1% |\n"}
+,{"stream_name":"stdout","time":3096.102887595,"data":"| **xeno-canto + iNaturalist** | 2941 | 41.4% | 31.7% | 36.1% | 65.0% |\n"}
+,{"stream_name":"stdout","time":3096.102890549,"data":"| xeno-canto + iNaturalist + noise | 8823 | 38.6% | 28.4% | 34.2% | 61.3% |\n"}
+,{"stream_name":"stdout","time":3096.102893471,"data":"[ 3094.6s main] done\n"}
+,{"stream_name":"stderr","time":3099.111243858,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":3099.111269898,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":3099.387218026,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":3099.387239824,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":3100.207159622,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":3101.36313858,"data":"[NbConvertApp] Writing 403920 bytes to __results__.html\n"}
+]
