@@ -7,23 +7,26 @@ xeno-canto recordings) read those vectors. Photo and song predictions are combin
 """
 import csv
 import os
+import time
 
 import gradio as gr
 import numpy as np
 import torch
+from PIL import Image
 from sentence_transformers import SentenceTransformer
 
-HERE = os.path.dirname(os.path.abspath(__file__))
+HERE = os.environ.get("BURDS_DATA") or os.path.dirname(os.path.abspath(__file__))
 SR = 16000
 IDX = np.load(os.path.join(HERE, "demo_index.npz"))
 COMMON, SCI = IDX["common"].tolist(), IDX["sci"].tolist()
-CODES = [r["species_code"] for r in csv.DictReader(open(os.path.join(HERE, "taxa.csv")))]
+CODES = [r["species_code"] for r in csv.DictReader(open(os.environ.get("BURDS_TAXA") or os.path.join(HERE, "taxa.csv")))]
 W_IMG, B_IMG, W_AUD, B_AUD = IDX["W_img"], IDX["b_img"], IDX["W_aud"], IDX["b_aud"]
 GAMMA, BUDGET = float(IDX["gamma"]), int(IDX["budget"])
 AUDIO_KINDS = IDX["audio_kinds"].tolist()
 
 torch.set_num_threads(os.cpu_count() or 2)
-MODEL = SentenceTransformer(os.environ.get("BURDS_MODEL", "google/embeddinggemma-2"), device="cpu",
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+MODEL = SentenceTransformer(os.environ.get("BURDS_MODEL", "google/embeddinggemma-2"), device=DEVICE,
                             model_kwargs={"torch_dtype": torch.float32})
 
 
@@ -105,7 +108,7 @@ def identify(img, audio):
     best = int(p.argmax())
     thumb = os.path.join(HERE, "thumbs", f"{CODES[best]}.jpg")
     return (top(p), top(pi) if pi is not None else None, top(pa) if pa is not None else None,
-            thumb if os.path.exists(thumb) else None)
+            Image.open(thumb).convert("RGB") if os.path.exists(thumb) else None)
 
 
 EX = os.path.join(HERE, "examples")
@@ -132,9 +135,14 @@ with gr.Blocks(title="burds: bird ID from photo + song") as demo:
                 out_a = gr.Label(num_top_classes=5, label="From the song")
     if examples:
         gr.Examples(examples, [img, aud])
-    gr.Markdown("Works on CPU; a prediction takes a few seconds. Species list and media credits: "
+    gr.Markdown(f"Running on {DEVICE.upper()}; a prediction takes a few seconds on CPU, under one on GPU. Species list and media credits: "
                 "`taxa.csv`, `credits.csv` in this Space.")
     btn.click(identify, [img, aud], [out, out_i, out_a, ref])
 
 if __name__ == "__main__":
-    demo.launch()
+    if os.environ.get("BURDS_SHARE"):  # temporary public link (e.g. from a Kaggle GPU run)
+        demo.launch(share=True, prevent_thread_lock=True)
+        print(f"BURDS_LIVE share link above; staying up for {os.environ.get('BURDS_HOURS', '3')} h", flush=True)
+        time.sleep(float(os.environ.get("BURDS_HOURS", "3")) * 3600)
+    else:
+        demo.launch()

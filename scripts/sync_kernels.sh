@@ -13,3 +13,7 @@ copy() {  # copy <experiment> <dest>
 }
 
 copy audiolen kaggle/ssw60_audiolen/ssw60_audiolen.py
+
+# demo_live = Kaggle wrapper + the exact app that ships to a Space
+cat kaggle/demo_live/header.py app/app.py > kaggle/demo_live/demo_live.py
+echo "synced kaggle/demo_live/demo_live.py"

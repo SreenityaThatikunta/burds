@@ -1,0 +1,22 @@
+{
+  "id": "sreenityathatikunta/burds-demo-live",
+  "title": "burds-demo-live",
+  "code_file": "demo_live.py",
+  "language": "python",
+  "kernel_type": "script",
+  "is_private": true,
+  "enable_gpu": true,
+  "enable_tpu": false,
+  "enable_internet": true,
+  "keywords": [],
+  "dataset_sources": [],
+  "kernel_sources": [
+    "sreenityathatikunta/burds-demo-embed",
+    "sreenityathatikunta/burds-demo-data"
+  ],
+  "competition_sources": [],
+  "model_sources": [
+    "google/embeddinggemma-2/transformers/embeddinggemma-2/1"
+  ],
+  "machine_shape": "NvidiaTeslaT4"
+}

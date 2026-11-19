@@ -85,6 +85,27 @@ The 3 s window came from BirdNET's chunk size, so we swept the loudest 1–10 s 
   **46.9%** [44.2, 49.4] (vs 44.3%), but no extra gain once fused with photos (95.7% vs 96.3%,
   overlapping CIs). Photo + song is saturated by the photo side, so the five-version setup stays.
 
+## Demo: trained only on openly licensed web data
+SSW60 can't be redistributed, so the demo ([`app/`](app/)) learns from **1,800 iNaturalist photos**
+(CC0 / CC BY / CC BY-SA) and **1,195 xeno-canto recordings**, 30 photos and ~20 songs per species,
+every file credited in [`app/credits.csv`](app/credits.csv). The model itself is still untouched;
+only two linear classifiers are trained. Two species had to be looked up under newer scientific
+names (Cooper's Hawk → *Astur cooperii*, Hairy Woodpecker → *Leuconotopicus villosus*).
+
+Tested on the SSW60 test sets, which come from different photographers, recordists and sites
+([`results/demo_embed1/demo_eval.md`](results/demo_embed1/demo_eval.md)):
+
+| input | trained on web data | trained on SSW60 (above) |
+|---|---|---|
+| photo (n=5,171) | **88.0%** (top-5 99.4%) | 94.4% |
+| song (n=1,264) | 31.4% (top-5 56.8%) | 44.3% |
+| photo + song (paired, n=1,500) | 88.5% | 96.3% |
+
+Photos transfer well: about 6 points lost to a new domain. Songs transfer worse. xeno-canto
+recordings are mostly clean, focal recordings, while SSW60's Macaulay clips are noisier field
+audio, and the song gain on top of photos is no longer significant ([-0.9, +2.3] pts). Closing
+that gap (more recordings per species, noise augmentation) is the obvious next step.
+
 ## Speed
 All seven embedding jobs (3 photo budgets on 2,400 photos, 5 audio versions of 3,861 clips) take
 **37 min** on Kaggle's 2× T4, compared with 4.5 h for a single set in run 2. The speedup comes
