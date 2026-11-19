@@ -1,0 +1,84 @@
+"""
+Latency benchmark for the burds app (Kaggle, 2x T4 machine; nothing runs locally).
+
+Runs the exact app code (embedded below by scripts/sync_kernels.sh) on 20 photos and 20 recordings,
+once on a T4 GPU and once on CPU only (4 vCPUs), and times photo, song and photo + song requests
+end to end: decode, preprocess, embed, classify, fuse. First call excluded (warm-up).
+
+Outputs: latency.json, latency.md
+"""
+import base64
+import glob
+import json
+import os
+import subprocess
+import sys
+import tarfile
+import time
+
+OUT, WORK = "/kaggle/working", "/kaggle/temp/bench"
+os.makedirs(WORK, exist_ok=True)
+APP_B64 = "IiIiCmJ1cmRzOiBpZGVudGlmeSBhIE5vcnRoIEFtZXJpY2FuIGJpcmQgZnJvbSBhIHBob3RvLCBhIHNvbmcsIG9yIGJvdGguCgpObyB0cmFpbmluZyBvbiB0aGUgbW9kZWwgaXRzZWxmOiBFbWJlZGRpbmdHZW1tYSAyIHR1cm5zIHRoZSBwaG90byBhbmQgdGhlIHNvbmcgaW50byB2ZWN0b3JzLCBhbmQKdHdvIHNtYWxsIGxpbmVhciBjbGFzc2lmaWVycyAoNjAgc3BlY2llcywgdHJhaW5lZCBvbiBvcGVubHkgbGljZW5zZWQgaU5hdHVyYWxpc3QgcGhvdG9zIGFuZAppTmF0dXJhbGlzdCArIHhlbm8tY2FudG8gcmVjb3JkaW5ncykgcmVhZCB0aG9zZSB2ZWN0b3JzLiBQaG90byBhbmQgc29uZyBwcmVkaWN0aW9ucyBhcmUgY29tYmluZWQgYnkgY29uZmlkZW5jZS4KIiIiCmltcG9ydCBjc3YKaW1wb3J0IG9zCmltcG9ydCB0aW1lCgppbXBvcnQgZ3JhZGlvIGFzIGdyCmltcG9ydCBudW1weSBhcyBucAppbXBvcnQgdG9yY2gKZnJvbSBQSUwgaW1wb3J0IEltYWdlCmZyb20gc2VudGVuY2VfdHJhbnNmb3JtZXJzIGltcG9ydCBTZW50ZW5jZVRyYW5zZm9ybWVyCgojIC0tLS0gYXBwL2J1cmRzX2NvcmUucHkgKGlubGluZWQpIC0tLS0KIiIiClB1cmUgbnVtcHkvc2NpcHkgY29yZSBvZiBidXJkczogYXVkaW8gcHJlcHJvY2Vzc2luZyBhbmQgc2NvcmUgZnVzaW9uLiBObyBtb2RlbCwgbm8gVUksIHNvIGl0IGlzCmZhc3QgdG8gdGVzdCAodGVzdHMvKSBhbmQgc2hhcmVkIGJ5IHRoZSBhcHAgYW5kIHRoZSBLYWdnbGUga2VybmVscy4KClRoZSBhdWRpbyBmdW5jdGlvbnMgbXVzdCBzdGF5IGJ5dGUtaWRlbnRpY2FsIHRvIHRoZSBjb3BpZXMgaW4ga2FnZ2xlL2RlbW9fZW1iZWQvZGVtb19lbWJlZC5weQooS2FnZ2xlIGtlcm5lbHMgYXJlIHNpbmdsZSBmaWxlcyk7IHRlc3RzL3Rlc3RfY29uc2lzdGVuY3kucHkgY2hlY2tzIHRoaXMuCiIiIgppbXBvcnQgbnVtcHkgYXMgbnAKClNSID0gMTYwMDAgICMgRW1iZWRkaW5nR2VtbWEgMiBhdWRpbyByYXRlOiBpdCBoZWFycyAwLTgga0h6CgoKZGVmIHJlc2FtcGxlKHgsIHNyX2luLCBzcl9vdXQpOgogICAgZnJvbSBtYXRoIGltcG9ydCBnY2QKCiAgICBmcm9tIHNjaXB5LnNpZ25hbCBpbXBvcnQgcmVzYW1wbGVfcG9seQogICAgc3JfaW4sIHNyX291dCA9IGludChyb3VuZChzcl9pbikpLCBpbnQocm91bmQoc3Jfb3V0KSkKICAgIGcgPSBnY2Qoc3JfaW4sIHNyX291dCkKICAgIHJldHVybiByZXNhbXBsZV9wb2x5KHgsIHNyX291dCAvLyBnLCBzcl9pbiAvLyBnKS5hc3R5cGUobnAuZmxvYXQzMikKCgpkZWYgbG91ZGVzdCh4LCBzciwgc2Vjcyk6CiAgICBmcm9tIHNjaXB5LnNpZ25hbCBpbXBvcnQgYnV0dGVyLCBzb3NmaWx0CiAgICBuID0gaW50KHNlY3MgKiBzcikKICAgIGlmIGxlbih4KSA8PSBuOgogICAgICAgIHJldHVybiAwCiAgICBocCA9IHNvc2ZpbHQoYnV0dGVyKDQsIDEwMDAsICJoaWdocGFzcyIsIGZzPXNyLCBvdXRwdXQ9InNvcyIpLCB4KQogICAgYyA9IG5wLmNvbmNhdGVuYXRlKFtbMC4wXSwgbnAuY3Vtc3VtKGhwLmFzdHlwZShucC5mbG9hdDY0KSAqKiAyKV0pCiAgICByZXR1cm4gaW50KG5wLmFyZ21heChjW246XSAtIGNbOi1uXSkpCgoKZGVmIHJtcyh4KToKICAgIHJldHVybiBmbG9hdChucC5zcXJ0KG5wLm1lYW4oeC5hc3R5cGUobnAuZmxvYXQ2NCkgKiogMikpICsgMWUtOSkKCgpkZWYgYWRkX2JhY2tncm91bmQoeCwgc3IsIG5vaXNlLCBzcl9uLCBzbnJfZGIpOgogICAgIiIiTWl4IGluIHRoZSBxdWlldGVzdCBzdHJldGNoIG9mIGFub3RoZXIgcmVjb3JkaW5nICh3aW5kLCB0cmFmZmljLCBvdGhlciBiaXJkcywgaGlzcykgYXQgc25yX2RiLiIiIgogICAgaWYgc3JfbiAhPSBzcjoKICAgICAgICBub2lzZSA9IHJlc2FtcGxlKG5vaXNlLCBzcl9uLCBzcikKICAgIG4gPSBtaW4obGVuKHgpLCBsZW4obm9pc2UpKQogICAgYyA9IG5wLmNvbmNhdGVuYXRlKFtbMC4wXSwgbnAuY3Vtc3VtKG5vaXNlLmFzdHlwZShucC5mbG9hdDY0KSAqKiAyKV0pCiAgICBzMCA9IGludChucC5hcmdtaW4oY1tuOl0gLSBjWzotbl0pKSBpZiBsZW4obm9pc2UpID4gbiBlbHNlIDAKICAgIHNlZyA9IG5wLnJlc2l6ZShub2lzZVtzMDpzMCArIG5dLCBsZW4oeCkpICAjIHRpbGUgaWYgdGhlIGJhY2tncm91bmQgaXMgc2hvcnRlciB0aGFuIHRoZSBjbGlwCiAgICByZXR1cm4gKHggKyBzZWcgKiAocm1zKHgpIC8gcm1zKHNlZykpICogMTAgKiogKC1zbnJfZGIgLyAyMCkpLmFzdHlwZShucC5mbG9hdDMyKQoKCmRlZiBhdWRpb192YXJpYW50KHgsIHNyLCBraW5kKToKICAgICIiImtpbmQ6IFtzbG93Ml9ddHJpbTxOPi4gSGFsZiBzcGVlZCByZWFkcyB0aGUgc2FtcGxlcyBhdCBzci8yLCBzbyBmcmVxdWVuY3kgZiBsYW5kcyBhdCBmLzIuIiIiCiAgICByYXRlID0gc3IgLyAyIGlmIGtpbmQuc3RhcnRzd2l0aCgic2xvdzIiKSBlbHNlIHNyCiAgICBuID0gZmxvYXQoa2luZC5zcGxpdCgidHJpbSIpWzFdKQogICAgcyA9IGxvdWRlc3QoeCwgc3IsIG4pCiAgICByZXR1cm4gcmVzYW1wbGUoeFtzOnMgKyBpbnQobiAqIHNyKV0sIHJhdGUsIFNSKQoKCiMgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSBzY29yZXMKZGVmIHNvZnRtYXgoeik6CiAgICB6ID0geiAtIHoubWF4KCkKICAgIGUgPSBucC5leHAoeikKICAgIHJldHVybiBlIC8gZS5zdW0oKQoKCmRlZiBibG9ja3Nfbm9ybSh2LCBkPTc2OCk6CiAgICAiIiJMMi1ub3JtYWxpc2UgZWFjaCA3NjgtZCBibG9jayBvZiBhIGNvbmNhdGVuYXRlZCBlbWJlZGRpbmcgKG9uZSBibG9jayBwZXIgYXVkaW8gdmVyc2lvbikuIiIiCiAgICB2ID0gdi5yZXNoYXBlKC0xLCBkKQogICAgcmV0dXJuICh2IC8gbnAubGluYWxnLm5vcm0odiwgYXhpcz0xLCBrZWVwZGltcz1UcnVlKS5jbGlwKDFlLTEyKSkucmVzaGFwZSgtMSkKCgpkZWYgZnVzZShwaSwgcGEsIGdhbW1hKToKICAgICIiIkNvbmZpZGVuY2UgZnVzaW9uOiBhdmVyYWdlIHBob3RvIGFuZCBzb25nIGxvZy1wcm9icywgZWFjaCB3ZWlnaHRlZCBieSBpdHMgdG9wIHByb2JhYmlsaXR5ICoqIGdhbW1hLiIiIgogICAgYSwgYiA9IHBpLm1heCgpICoqIGdhbW1hLCBwYS5tYXgoKSAqKiBnYW1tYQogICAgcmV0dXJuIHNvZnRtYXgoKGEgKiBucC5sb2cocGkgKyAxZS05KSArIGIgKiBucC5sb2cocGEgKyAxZS05KSkgLyAoYSArIGIpKQoKCmRlZiB0b3BfayhwLCBuYW1lcywgaz01KToKICAgIHJldHVybiB7bmFtZXNbaV06IGZsb2F0KHBbaV0pIGZvciBpIGluIG5wLmFyZ3NvcnQoLXApWzprXX0KCiMgLS0tLSBlbmQgYnVyZHNfY29yZSAtLS0tCgpIRVJFID0gb3MuZW52aXJvbi5nZXQoIkJVUkRTX0RBVEEiKSBvciBvcy5wYXRoLmRpcm5hbWUob3MucGF0aC5hYnNwYXRoKF9fZmlsZV9fKSkKSURYID0gbnAubG9hZChvcy5wYXRoLmpvaW4oSEVSRSwgImRlbW9faW5kZXgubnB6IikpCkNPTU1PTiwgU0NJID0gSURYWyJjb21tb24iXS50b2xpc3QoKSwgSURYWyJzY2kiXS50b2xpc3QoKQpOQU1FUyA9IFtmIntjfSAoe3N9KSIgZm9yIGMsIHMgaW4gemlwKENPTU1PTiwgU0NJLCBzdHJpY3Q9VHJ1ZSldCndpdGggb3Blbihvcy5lbnZpcm9uLmdldCgiQlVSRFNfVEFYQSIpIG9yIG9zLnBhdGguam9pbihIRVJFLCAidGF4YS5jc3YiKSkgYXMgZjoKICAgIENPREVTID0gW3JbInNwZWNpZXNfY29kZSJdIGZvciByIGluIGNzdi5EaWN0UmVhZGVyKGYpXQpXX0lNRywgQl9JTUcsIFdfQVVELCBCX0FVRCA9IElEWFsiV19pbWciXSwgSURYWyJiX2ltZyJdLCBJRFhbIldfYXVkIl0sIElEWFsiYl9hdWQiXQpHQU1NQSwgQlVER0VUID0gZmxvYXQoSURYWyJnYW1tYSJdKSwgaW50KElEWFsiYnVkZ2V0Il0pCkFVRElPX0tJTkRTID0gSURYWyJhdWRpb19raW5kcyJdLnRvbGlzdCgpCgp0b3JjaC5zZXRfbnVtX3RocmVhZHMob3MuY3B1X2NvdW50KCkgb3IgMikKREVWSUNFID0gImN1ZGEiIGlmIHRvcmNoLmN1ZGEuaXNfYXZhaWxhYmxlKCkgZWxzZSAiY3B1IgpNT0RFTCA9IFNlbnRlbmNlVHJhbnNmb3JtZXIob3MuZW52aXJvbi5nZXQoIkJVUkRTX01PREVMIiwgImdvb2dsZS9lbWJlZGRpbmdnZW1tYS0yIiksIGRldmljZT1ERVZJQ0UsCiAgICAgICAgICAgICAgICAgICAgICAgICAgICBtb2RlbF9rd2FyZ3M9eyJ0b3JjaF9kdHlwZSI6IHRvcmNoLmZsb2F0MzJ9KQoKCmRlZiBsb2FkX2F1ZGlvKHBhdGgpOgogICAgaW1wb3J0IGxpYnJvc2EKICAgIHgsIHNyID0gbGlicm9zYS5sb2FkKHBhdGgsIHNyPU5vbmUsIG1vbm89VHJ1ZSwgZHVyYXRpb249MTIwKQogICAgcmV0dXJuIG5wLmFzYXJyYXkoeCwgbnAuZmxvYXQzMiksIHNyCgoKIyAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tIHByZWRpY3Rpb24KZGVmIHBob3RvX3Byb2JzKGltZyk6CiAgICBlID0gTU9ERUwuZW5jb2RlKFt7ImltYWdlIjogaW1nLmNvbnZlcnQoIlJHQiIpfV0sIG5vcm1hbGl6ZV9lbWJlZGRpbmdzPVRydWUsIGNvbnZlcnRfdG9fbnVtcHk9VHJ1ZSwKICAgICAgICAgICAgICAgICAgICAgcHJvY2Vzc2luZ19rd2FyZ3M9eyJpbWFnZSI6IHsibWF4X3NvZnRfdG9rZW5zIjogQlVER0VUfX0pWzBdCiAgICByZXR1cm4gc29mdG1heChXX0lNRyBAIGUgKyBCX0lNRykKCgpkZWYgc29uZ19wcm9icyhwYXRoKToKICAgIHgsIHNyID0gbG9hZF9hdWRpbyhwYXRoKQogICAgaWYgbGVuKHgpIDwgc3I6CiAgICAgICAgcmFpc2UgZ3IuRXJyb3IoIlRoZSByZWNvcmRpbmcgaXMgc2hvcnRlciB0aGFuIDEgc2Vjb25kLiIpCiAgICBlID0gTU9ERUwuZW5jb2RlKFt7ImF1ZGlvIjogYXVkaW9fdmFyaWFudCh4LCBzciwgayl9IGZvciBrIGluIEFVRElPX0tJTkRTXSwKICAgICAgICAgICAgICAgICAgICAgbm9ybWFsaXplX2VtYmVkZGluZ3M9VHJ1ZSwgY29udmVydF90b19udW1weT1UcnVlKQogICAgcmV0dXJuIHNvZnRtYXgoV19BVUQgQCBibG9ja3Nfbm9ybShlLnJlc2hhcGUoLTEpKSArIEJfQVVEKQoKCmRlZiB0b3AocCwgaz01KToKICAgIHJldHVybiB0b3BfayhwLCBOQU1FUywgaykKCgpkZWYgaWRlbnRpZnkoaW1nLCBhdWRpbyk6CiAgICBpZiBpbWcgaXMgTm9uZSBhbmQgYXVkaW8gaXMgTm9uZToKICAgICAgICByYWlzZSBnci5FcnJvcigiQWRkIGEgcGhvdG8sIGEgcmVjb3JkaW5nLCBvciBib3RoLiIpCiAgICBwaSA9IHBob3RvX3Byb2JzKGltZykgaWYgaW1nIGlzIG5vdCBOb25lIGVsc2UgTm9uZQogICAgcGEgPSBzb25nX3Byb2JzKGF1ZGlvKSBpZiBhdWRpbyBpcyBub3QgTm9uZSBlbHNlIE5vbmUKICAgIHAgPSBmdXNlKHBpLCBwYSwgR0FNTUEpIGlmIHBpIGlzIG5vdCBOb25lIGFuZCBwYSBpcyBub3QgTm9uZSBlbHNlIChwaSBpZiBwaSBpcyBub3QgTm9uZSBlbHNlIHBhKQogICAgYmVzdCA9IGludChwLmFyZ21heCgpKQogICAgdGh1bWIgPSBvcy5wYXRoLmpvaW4oSEVSRSwgInRodW1icyIsIGYie0NPREVTW2Jlc3RdfS5qcGciKQogICAgcmV0dXJuICh0b3AocCksIHRvcChwaSkgaWYgcGkgaXMgbm90IE5vbmUgZWxzZSBOb25lLCB0b3AocGEpIGlmIHBhIGlzIG5vdCBOb25lIGVsc2UgTm9uZSwKICAgICAgICAgICAgSW1hZ2Uub3Blbih0aHVtYikuY29udmVydCgiUkdCIikgaWYgb3MucGF0aC5leGlzdHModGh1bWIpIGVsc2UgTm9uZSkKCgp3aXRoIGdyLkJsb2Nrcyh0aXRsZT0iYnVyZHM6IGJpcmQgSUQgZnJvbSBwaG90byArIHNvbmciKSBhcyBkZW1vOgogICAgZ3IuTWFya2Rvd24oCiAgICAgICAgIiMgYnVyZHNcbklkZW50aWZ5IG9uZSBvZiAqKjYwIE5vcnRoIEFtZXJpY2FuIGJpcmRzKiogZnJvbSBhIHBob3RvLCBhIHNvbmcsIG9yIGJvdGguICIKICAgICAgICAiT25lIG1vZGVsIChbRW1iZWRkaW5nR2VtbWEgMl0oaHR0cHM6Ly9odWdnaW5nZmFjZS5jby9nb29nbGUvZW1iZWRkaW5nZ2VtbWEtMikpIGVtYmVkcyBib3RoLCAiCiAgICAgICAgIndpdGggbm8gZmluZS10dW5pbmc6IHNtYWxsIGxpbmVhciBjbGFzc2lmaWVycyB0cmFpbmVkIG9uIG9wZW5seSBsaWNlbnNlZCBpTmF0dXJhbGlzdCBwaG90b3MgYW5kICIKICAgICAgICAiaU5hdHVyYWxpc3QgKyB4ZW5vLWNhbnRvIHJlY29yZGluZ3MgZG8gdGhlIHJlc3QuIFtIb3cgaXQgd29ya3MgYW5kIHJlc3VsdHNdKGh0dHBzOi8vZ2l0aHViLmNvbS9TcmVlbml0eWFUaGF0aWt1bnRhL2J1cmRzKSIpCiAgICB3aXRoIGdyLlJvdygpOgogICAgICAgIHdpdGggZ3IuQ29sdW1uKCk6CiAgICAgICAgICAgIGltZyA9IGdyLkltYWdlKHR5cGU9InBpbCIsIGxhYmVsPSJQaG90byIsIHNvdXJjZXM9WyJ1cGxvYWQiLCAid2ViY2FtIiwgImNsaXBib2FyZCJdLCBlbGVtX2lkPSJwaG90byIsCiAgICAgICAgICAgICAgICAgICAgICAgICAgIGhlaWdodD0zMDApCiAgICAgICAgICAgIGF1ZCA9IGdyLkF1ZGlvKHR5cGU9ImZpbGVwYXRoIiwgbGFiZWw9IlNvbmcgb3IgY2FsbCIsIHNvdXJjZXM9WyJ1cGxvYWQiLCAibWljcm9waG9uZSJdLCBlbGVtX2lkPSJzb25nIikKICAgICAgICAgICAgYnRuID0gZ3IuQnV0dG9uKCJJZGVudGlmeSIsIHZhcmlhbnQ9InByaW1hcnkiLCBlbGVtX2lkPSJpZGVudGlmeSIpCiAgICAgICAgd2l0aCBnci5Db2x1bW4oKToKICAgICAgICAgICAgb3V0ID0gZ3IuTGFiZWwobnVtX3RvcF9jbGFzc2VzPTUsIGxhYmVsPSJCZXN0IGd1ZXNzIiwgZWxlbV9pZD0iYmVzdCIpCiAgICAgICAgICAgIHJlZiA9IGdyLkltYWdlKGxhYmVsPSJSZWZlcmVuY2UgcGhvdG8gKGlOYXR1cmFsaXN0LCBzZWUgY3JlZGl0cykiLCBpbnRlcmFjdGl2ZT1GYWxzZSwgaGVpZ2h0PTIyMCkKICAgICAgICAgICAgd2l0aCBnci5BY2NvcmRpb24oIlBob3RvIG9ubHkgLyBzb25nIG9ubHkiLCBvcGVuPUZhbHNlLCBlbGVtX2lkPSJzcGxpdCIpOgogICAgICAgICAgICAgICAgb3V0X2kgPSBnci5MYWJlbChudW1fdG9wX2NsYXNzZXM9NSwgbGFiZWw9IkZyb20gdGhlIHBob3RvIikKICAgICAgICAgICAgICAgIG91dF9hID0gZ3IuTGFiZWwobnVtX3RvcF9jbGFzc2VzPTUsIGxhYmVsPSJGcm9tIHRoZSBzb25nIikKICAgIGdyLk1hcmtkb3duKGYiUnVubmluZyBvbiB7REVWSUNFLnVwcGVyKCl9LiBTcGVjaWVzIGxpc3QgYW5kIG1lZGlhIGNyZWRpdHM6ICIKICAgICAgICAgICAgICAgICJgdGF4YS5jc3ZgLCBgY3JlZGl0cy5jc3ZgIGluIHRoaXMgU3BhY2UuIikKICAgIGJ0bi5jbGljayhpZGVudGlmeSwgW2ltZywgYXVkXSwgW291dCwgb3V0X2ksIG91dF9hLCByZWZdKQoKaWYgX19uYW1lX18gPT0gIl9fbWFpbl9fIjoKICAgIGlmIG9zLmVudmlyb24uZ2V0KCJCVVJEU19TSEFSRSIpOiAgIyB0ZW1wb3JhcnkgcHVibGljIGxpbmsgKGUuZy4gZnJvbSBhIEthZ2dsZSBHUFUgcnVuKQogICAgICAgIGRlbW8ubGF1bmNoKHNoYXJlPVRydWUsIHByZXZlbnRfdGhyZWFkX2xvY2s9VHJ1ZSkKICAgICAgICBwcmludChmIkJVUkRTX0xJVkUgc2hhcmUgbGluayBhYm92ZTsgc3RheWluZyB1cCBmb3Ige29zLmVudmlyb24uZ2V0KCdCVVJEU19IT1VSUycsICczJyl9IGgiLCBmbHVzaD1UcnVlKQogICAgICAgIHRpbWUuc2xlZXAoZmxvYXQob3MuZW52aXJvbi5nZXQoIkJVUkRTX0hPVVJTIiwgIjMiKSkgKiAzNjAwKQogICAgZWxzZToKICAgICAgICBkZW1vLmxhdW5jaCgpCg=="
+N = 20
+
+if os.environ.get("BURDS_BENCH_CHILD"):
+    import numpy as np  # noqa: E402
+    from PIL import Image  # noqa: E402
+    sys.path.insert(0, WORK)
+    import app  # noqa: E402  (loads the model on import)
+
+    photos = sorted(glob.glob(f"{WORK}/images/**/*.jpg", recursive=True))[:N + 1]
+    songs = sorted(glob.glob(f"{WORK}/audio/**/*.mp3", recursive=True))[:N + 1]
+    res = {"device": app.DEVICE}
+
+    def bench(name, fn, items):
+        fn(items[0])  # warm-up
+        t = []
+        for it in items[1:]:
+            t0 = time.perf_counter()
+            fn(it)
+            t.append(time.perf_counter() - t0)
+        res[name] = {"n": len(t), "median_s": float(np.median(t)), "p90_s": float(np.percentile(t, 90))}
+        print(app.DEVICE, name, res[name], flush=True)
+
+    bench("photo", lambda p: app.identify(Image.open(p), None), photos)
+    bench("song", lambda s: app.identify(None, s), songs)
+    bench("photo + song", lambda ps: app.identify(Image.open(ps[0]), ps[1]), list(zip(photos, songs)))
+    secs = [app.load_audio(s)[0].size / app.load_audio(s)[1] for s in songs[1:]]
+    res["song_seconds_median"] = float(np.median(secs))
+    json.dump(res, open(f"{WORK}/lat_{app.DEVICE}.json", "w"))
+    sys.exit(0)
+
+
+def sh(cmd):
+    print(f"$ {cmd}", flush=True)
+    subprocess.run(["bash", "-c", "set -euo pipefail; " + cmd], check=True)
+
+
+sh("pip install -q -U 'gradio>=5' sentence-transformers transformers librosa")
+open(f"{WORK}/app.py", "wb").write(base64.b64decode(APP_B64))
+for t in glob.glob("/kaggle/input/**/images.tar", recursive=True) + glob.glob("/kaggle/input/**/audio_inat.tar", recursive=True):
+    with tarfile.open(t) as tf:
+        members = [m for m in tf.getmembers() if m.isfile()][: 4 * N]  # a few species' worth is plenty
+        tf.extractall(WORK, members=members)
+
+env = dict(os.environ, BURDS_BENCH_CHILD="1")
+env["BURDS_DATA"] = os.path.dirname(glob.glob("/kaggle/input/**/demo_index.npz", recursive=True)[0])
+env["BURDS_TAXA"] = [p for p in glob.glob("/kaggle/input/**/taxa.csv", recursive=True) if "demo-data" in p][0]
+cfg = glob.glob("/kaggle/input/**/embeddinggemma*/**/config.json", recursive=True)
+if cfg:
+    env["BURDS_MODEL"] = os.path.dirname(sorted(cfg, key=len)[0])
+script = os.path.abspath(__file__)
+for dev in ("0", ""):  # T4, then CPU only
+    subprocess.run([sys.executable, script], env=dict(env, CUDA_VISIBLE_DEVICES=dev), check=True)
+
+R = {d: json.load(open(f"{WORK}/lat_{d}.json")) for d in ("cuda", "cpu")}
+json.dump(R, open(f"{OUT}/latency.json", "w"), indent=2)
+md = ["# burds latency (end to end per request, median / p90, first call excluded)", "",
+      f"Song clips: median {R['cpu']['song_seconds_median']:.0f} s long. CPU = 4 vCPUs (Kaggle).", "",
+      "| request | T4 GPU | CPU only |", "|---|---|---|"]
+for k in ("photo", "song", "photo + song"):
+    md.append(f"| {k} | {R['cuda'][k]['median_s']:.2f} s / {R['cuda'][k]['p90_s']:.2f} s | "
+              f"{R['cpu'][k]['median_s']:.2f} s / {R['cpu'][k]['p90_s']:.2f} s |")
+open(f"{OUT}/latency.md", "w").write("\n".join(md) + "\n")
+print("\n".join(md))

@@ -1,0 +1,27 @@
+[{"stream_name":"stdout","time":1.231328658,"data":"$ pip install -q -U 'gradio\u003e=5' sentence-transformers transformers librosa\n"}
+,{"stream_name":"stderr","time":38.974882303,"data":"/kaggle/src/script.py:63: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":38.974919504,"data":"  tf.extractall(WORK, members=members)\n"}
+,{"stream_name":"stderr","time":100.569589133,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   5%|▌         | 70/1376 [00:00\u003c00:02, 514.19it/s]\rLoading weights:   9%|▉         | 122/1376 [00:00\u003c00:02, 491.87it/s]\rLoading weights:  12%|█▏        | 171/1376 [00:00\u003c00:02, 490.81it/s]\rLoading weights:  16%|█▌        | 220/1376 [00:00\u003c00:02, 467.18it/s]\rLoading weights:  22%|██▏       | 297/1376 [00:00\u003c00:01, 543.87it/s]\rLoading weights:  26%|██▌       | 352/1376 [00:00\u003c00:01, 540.63it/s]\rLoading weights:  30%|██▉       | 406/1376 [00:00\u003c00:02, 456.53it/s]\rLoading weights:  33%|███▎      | 454/1376 [00:00\u003c00:02, 460.82it/s]\rLoading weights:  37%|███▋      | 511/1376 [00:01\u003c00:01, 486.04it/s]\rLoading weights:  43%|████▎     | 592/1376 [00:01\u003c00:01, 516.44it/s]\rLoading weights:  47%|████▋     | 644/1376 [00:01\u003c00:01, 514.43it/s]\rLoading weights:  51%|█████     | 702/1376 [00:01\u003c00:01, 519.74it/s]\rLoading weights:  55%|█████▍    | 755/1376 [00:02\u003c00:04, 145.51it/s]\rLoading weights:  79%|███████▊  | 1082/1376 [00:02\u003c00:00, 442.39it/s]\rLoading weights:  86%|████████▌ | 1186/1376 [00:02\u003c00:00, 428.88it/s]\rLoading weights:  92%|█████████▏| 1271/1376 [00:03\u003c00:00, 387.33it/s]\rLoading weights:  97%|█████████▋| 1339/1376 [00:03\u003c00:00, 351.48it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:03\u003c00:00, 386.70it/s]\n"}
+,{"stream_name":"stdout","time":116.098578952,"data":"cuda photo {'n': 20, 'median_s': 0.4060281330000066, 'p90_s': 0.41286851349998416}\n"}
+,{"stream_name":"stdout","time":133.897638309,"data":"cuda song {'n': 20, 'median_s': 0.6237357149999809, 'p90_s': 0.6678099772999873}\n"}
+,{"stream_name":"stdout","time":155.421444299,"data":"cuda photo + song {'n': 20, 'median_s': 1.0441816569999958, 'p90_s': 1.0904479448000133}\n"}
+,{"stream_name":"stderr","time":174.067783926,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:  13%|█▎        | 181/1376 [00:00\u003c00:00, 1793.63it/s]\rLoading weights:  26%|██▌       | 361/1376 [00:00\u003c00:00, 1777.26it/s]\rLoading weights:  39%|███▉      | 539/1376 [00:00\u003c00:00, 1771.16it/s]\rLoading weights:  52%|█████▏    | 717/1376 [00:00\u003c00:00, 1704.66it/s]\rLoading weights:  65%|██████▍   | 888/1376 [00:00\u003c00:00, 988.47it/s] \rLoading weights:  86%|████████▌ | 1183/1376 [00:00\u003c00:00, 1425.91it/s]\rLoading weights:  99%|█████████▉| 1368/1376 [00:01\u003c00:00, 1278.19it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:01\u003c00:00, 1343.76it/s]\n"}
+,{"stream_name":"stdout","time":328.14391121,"data":"cpu photo {'n': 20, 'median_s': 7.232738549000004, 'p90_s': 7.319690780600007}\n"}
+,{"stream_name":"stdout","time":509.233371008,"data":"cpu song {'n': 20, 'median_s': 8.991201945500052, 'p90_s': 9.165422450499943}\n"}
+,{"stream_name":"stdout","time":848.38599486,"data":"cpu photo + song {'n': 20, 'median_s': 16.285873893999963, 'p90_s': 16.9651363168}\n"}
+,{"stream_name":"stdout","time":851.459928075,"data":"# burds latency (end to end per request, median / p90, first call excluded)\n"}
+,{"stream_name":"stdout","time":851.459967064,"data":"\n"}
+,{"stream_name":"stdout","time":851.459972193,"data":"Song clips: median 18 s long. CPU = 4 vCPUs (Kaggle).\n"}
+,{"stream_name":"stdout","time":851.459975401,"data":"\n"}
+,{"stream_name":"stdout","time":851.459978384,"data":"| request | T4 GPU | CPU only |\n"}
+,{"stream_name":"stdout","time":851.459981439,"data":"|---|---|---|\n"}
+,{"stream_name":"stdout","time":851.459984909,"data":"| photo | 0.41 s / 0.41 s | 7.23 s / 7.32 s |\n"}
+,{"stream_name":"stdout","time":851.459988405,"data":"| song | 0.62 s / 0.67 s | 8.99 s / 9.17 s |\n"}
+,{"stream_name":"stdout","time":851.459991541,"data":"| photo + song | 1.04 s / 1.09 s | 16.29 s / 16.97 s |\n"}
+,{"stream_name":"stderr","time":853.591071691,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":853.591119669,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":853.860817613,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":853.860848953,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":854.699556649,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":855.2128007,"data":"[NbConvertApp] Writing 305881 bytes to __results__.html\n"}
+]
