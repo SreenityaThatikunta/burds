@@ -1,0 +1,5 @@
+# Tests need only the pure-numpy core, not the 740M-parameter model.
+numpy
+scipy
+pytest
+ruff
