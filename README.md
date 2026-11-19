@@ -1,12 +1,101 @@
 # burds
 
-Identify bird species from a **photo, a recording of its song, or both**, using
-[EmbeddingGemma 2](https://huggingface.co/google/embeddinggemma-2), with no model training. Every
-image and sound clip becomes a 768-d vector in one shared space, and a new observation is labeled by
-its nearest species.
+**Identify a bird from a photo, a recording of its song, or both, with one multimodal embedding model and no fine-tuning.**
+
+[![tests](https://github.com/SreenityaThatikunta/burds/actions/workflows/tests.yml/badge.svg)](https://github.com/SreenityaThatikunta/burds/actions/workflows/tests.yml)
+[![License: Apache 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
+![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 
 ![burds demo: photo only, song only, photo + song](docs/burds_demo.gif)
 
+**Demo:** [video (MP4)](docs/burds_demo.mp4) · run it yourself in 3 commands ([Quick start](#quick-start)). There is
+no permanent hosted link: free Hugging Face Gradio Spaces now need a paid plan. The examples in the video were
+picked to work (the song-only scene took 17 tries; [details](#demo-video)).
+
+**Who it's for:** birders and citizen scientists who hear a bird they can't see, or get a blurry photo, and
+anyone curious how far a general-purpose multimodal embedding model gets on a fine-grained task with no
+task-specific training.
+
+**Tech stack:** [EmbeddingGemma 2](https://huggingface.co/google/embeddinggemma-2) (740M, shared image + audio +
+text space) via sentence-transformers · scikit-learn linear probes · NumPy/SciPy audio pipeline · Gradio ·
+Kaggle 2× T4 for every heavy job (the laptop never downloads data or runs the model) · Playwright for the
+recorded demo · pytest + GitHub Actions.
+
+## Results at a glance
+60 North American species from [SSW60](https://github.com/visipedia/ssw60) (Van Horn et al., ECCV 2022); test
+sets are never used for training or model selection.
+
+| | photo | song | photo + song |
+|---|---|---|---|
+| Linear probe trained on SSW60 train | **94.4%** | 44.3% | **96.3%** (+2.8 pts over photo, 95% CI [+1.6, +4.0]) |
+| Demo model, trained only on openly licensed web data, tested on SSW60 | 88.0% (top-5 99.4%) | 36.1% (top-5 65.0%) | 90.8% (+2.9 pts, CI [+1.4, +4.4]) |
+| Nearest species centroid, no learned weights (baseline) | 88.6% | 15.8% | 88.3% |
+
+Latency per request, end to end, median ([`results/demo_bench1`](results/demo_bench1/latency.md)):
+| request | T4 GPU | CPU only (4 vCPUs) |
+|---|---|---|
+| photo | 0.41 s | 7.2 s |
+| song (median clip 18 s) | 0.62 s | 9.0 s |
+| photo + song | 1.04 s | 16.3 s |
+
+The model hears only 0-8 kHz, so songs are played at **half speed** before embedding, which moves 0-16 kHz into
+range: song accuracy 27.9% → 37.4% on its own, and the biggest single gain in the project. No users yet; the
+numbers above are offline benchmarks.
+
+## Quick start
+Needs Python 3.11 and ~3 GB of disk for the model, which downloads from Hugging Face on first run. CPU works
+(about 7-16 s per request, see above); a GPU is used automatically if present.
+
+```bash
+git clone https://github.com/SreenityaThatikunta/burds.git && cd burds
+pip install -r app/requirements.txt
+python app/app.py   # opens http://127.0.0.1:7860
+```
+
+Optional settings are listed in [`.env.example`](.env.example). Tests don't need the model:
+
+```bash
+pip install -r requirements-dev.txt && pytest
+```
+
+## How it works
+
+```mermaid
+flowchart LR
+  P[photo] --> E1["EmbeddingGemma 2<br/>image, 280 tokens"] --> LP1["linear classifier<br/>60 species"]
+  S[song] --> H["half speed<br/>+ loudest 5 s / 10 s"] --> E2["EmbeddingGemma 2<br/>audio, 3 versions"] --> LP2["linear classifier<br/>60 species"]
+  LP1 --> F["confidence fusion<br/>weight = top prob ^ gamma"]
+  LP2 --> F --> O[top-5 species]
+```
+
+Key decisions, each backed by an experiment below:
+- **Frozen model + linear probes, no fine-tuning.** Probes beat nearest-centroid by 6 points on photos and 10 on
+  songs, train on a CPU in seconds, and ship as a 3 MB file ([`app/demo_index.npz`](app/demo_index.npz)).
+- **Half-speed audio.** Fixes the model's 8 kHz ceiling for high-pitched songs; ~5 s of the loudest part is
+  enough ([sweep](#how-many-seconds-of-audio)).
+- **Confidence fusion.** The more confident modality gets more weight, so a sure photo isn't dragged down by an
+  unsure song.
+- **Web-only training data for the demo.** SSW60 is research-only, so the shipped model learns from CC-licensed
+  iNaturalist photos and xeno-canto + iNaturalist recordings, with every author credited in
+  [`app/credits.csv`](app/credits.csv). Real field recordings helped (+4.6 pts on songs); synthetic background
+  noise did not.
+- **All compute on Kaggle.** Each step is a Kaggle kernel that reads the previous kernel's output, so the 33 GB
+  dataset is downloaded once and nothing heavy runs locally.
+
+## Repo layout
+```
+app/              Gradio app: app.py (UI + model), burds_core.py (pure audio + fusion code, tested),
+                  demo_index.npz (trained classifiers), taxa.csv, credits.csv, thumbs/
+tests/            pytest: audio pipeline, fusion maths, app <-> training-kernel consistency
+kaggle/ssw60_*    research pipeline on SSW60: data prep, embeddings, probes, audio variants, length sweep
+kaggle/demo_*     demo pipeline: collect CC media, embed + train + test on SSW60, latency, video, live link
+results/          metrics and logs pulled back from each Kaggle run (small files only)
+scripts/          sync_kernels.sh: Kaggle kernels must be single files, so a few are generated from
+                  app/ and kaggle/ssw60_embed (edit the source, then run this; tests check it was run)
+docs/             demo GIF and MP4
+```
+
+## Demo video
 The demo app ([`app/`](app/), [MP4](docs/burds_demo.mp4)) on photos and recordings from iNaturalist
 that the model never saw in training. **These examples were picked to work.** The cardinal photo
 was right on the first try and the woodpecker scene took 4 tries, but the song-only scene took 17:
@@ -15,15 +104,10 @@ recognised (98%). Measured accuracy on unseen data is below: photo 88%, song 36%
 headlessly on Kaggle by [`kaggle/demo_video`](kaggle/demo_video/video_template.py); credits and
 every try are in [`results/demo_video3/`](results/demo_video3/media.json).
 
-## Layout
-- `kaggle/ssw60_baseline/`: Kaggle kernel that streams [SSW60](https://github.com/visipedia/ssw60)
-  (photos + audio only), embeds everything on a GPU, and reports accuracy for image-only, audio-only,
-  fused, zero-shot, and truncated (768/512/256/128-d) embeddings.
-- `results/`: metrics pulled back from Kaggle (`results.md`, `results.json`).
+## Experiments
+Everything below ran on Kaggle; each table links to its full report.
 
-All data download and compute happens on Kaggle; nothing large runs locally.
-
-## Baseline results (run 2, no training)
+### Baseline results (run 2, no training)
 60 species from SSW60. Each test item is labeled by its nearest species centroid, built from the
 training embeddings. Full tables: [`results/run2/results.md`](results/run2/results.md).
 
@@ -37,7 +121,7 @@ training embeddings. Full tables: [`results/run2/results.md`](results/run2/resul
 Random guessing is 1.7%. The photos work very well out of the box. The audio embeddings are only
 weakly specific to species, so giving them equal weight doesn't help fusion.
 
-## Linear classifiers and smarter fusion (frozen embeddings, CPU only)
+### Linear classifiers and smarter fusion (frozen embeddings, CPU only)
 Logistic regression on top of the frozen embeddings; the model itself is not fine-tuned. Every
 setting is chosen by 5-fold cross-validation on the train split. 95% bootstrap CIs. Full report:
 [`results/analysis1/analysis.md`](results/analysis1/analysis.md).
@@ -58,7 +142,7 @@ still pull a correct photo guess off (Downy Woodpecker drops from 84% to 76%).
 Confusion matrices: [photo](results/analysis1/confusion_image.png) ·
 [song](results/analysis1/confusion_audio.png) · [fused](results/analysis1/confusion_fused.png).
 
-## Making the model hear birds: the half-speed trick
+### Making the model hear birds: the half-speed trick
 EmbeddingGemma 2 takes audio at 16 kHz, so it can't hear anything above 8 kHz, and many songbirds
 sing higher than that. Playing each clip at **half speed** moves 0–11 kHz content into the range
 the model can hear. Linear classifier, full audio test set (n=1,264). Full report:
@@ -74,7 +158,7 @@ the model can hear. Linear classifier, full audio test set (n=1,264). Full repor
 With the improved audio, photo + song reaches **96.3%** on the paired test set, compared with
 93.5% for photo only. The gain is **+2.8 points, 95% CI [+1.6, +4.0]**, so it is clearly above zero.
 
-### How many seconds of audio?
+#### How many seconds of audio?
 The 3 s window came from BirdNET's chunk size, so we swept the loudest 1–10 s (energy above
 1 kHz) at both speeds. Linear classifier, audio test set (n=1,264). Full report:
 [`results/audiolen1/audiolen.md`](results/audiolen1/audiolen.md).
@@ -95,7 +179,7 @@ The 3 s window came from BirdNET's chunk size, so we swept the loudest 1–10 s 
   **46.9%** [44.2, 49.4] (vs 44.3%), but no extra gain once fused with photos (95.7% vs 96.3%,
   overlapping CIs). Photo + song is saturated by the photo side, so the five-version setup stays.
 
-## Demo: trained only on openly licensed web data
+### Demo: trained only on openly licensed web data
 SSW60 can't be redistributed, so the demo ([`app/`](app/)) learns from **1,800 iNaturalist photos**
 (CC0 / CC BY / CC BY-SA), **1,195 xeno-canto recordings** and **1,746 iNaturalist sound
 recordings**, every file credited in [`app/credits.csv`](app/credits.csv). The model itself is
@@ -125,7 +209,7 @@ Adding real field recordings lifts song accuracy by 4.6 points and makes the pho
 significant again. Adding *synthetic* background noise (the quietest stretch of another recording,
 0-12 dB SNR) hurts: real noisy recordings beat simulated ones here.
 
-## Speed
+### Speed
 All seven embedding jobs (3 photo budgets on 2,400 photos, 5 audio versions of 3,861 clips) take
 **37 min** on Kaggle's 2× T4, compared with 4.5 h for a single set in run 2. The speedup comes
 from reusing the prepped data (no 33 GB download), one worker per GPU, and photo decoding that
@@ -138,17 +222,23 @@ classifier, 20 training photos per species):
 | 140 | 87.9% | 5.0 |
 | 280 (default) | 91.0% | 2.1 |
 
-## Run
+## Reproduce on Kaggle
+Needs the Kaggle CLI with your own credentials (see [`.env.example`](.env.example)); change the owner in each
+`kaggle/*/kernel-metadata.json`. Each kernel's sources (`kernel_sources`) say which ones must run first.
+
 ```bash
-kaggle kernels push -p kaggle/ssw60_baseline
-kaggle kernels status sreenityathatikunta/burds-ssw60-baseline
-kaggle kernels output sreenityathatikunta/burds-ssw60-baseline -p results --file-pattern 'results\..*|taxa\.csv'
+bash scripts/sync_kernels.sh                     # regenerate single-file kernels
+kaggle kernels push -p kaggle/ssw60_data         # 33 GB SSW60 download, CPU, once
+kaggle kernels push -p kaggle/demo_embed         # demo model: embed, train, test on SSW60 (GPU)
+kaggle kernels output <owner>/burds-demo-embed -p results/demo_embed
 ```
 
 ## Data and licensing
-SSW60 media is for **research use only and must not be redistributed**. This repo never stores SSW60
-images or audio, and the kernel is private. The public demo will use openly licensed
-iNaturalist photos and xeno-canto recordings, with credit to each author.
+Code: [Apache 2.0](LICENSE). SSW60 media is for **research use only and must not be redistributed**: this repo
+never stores SSW60 images or audio, only metrics. The demo uses openly licensed iNaturalist photos (CC0 / CC BY /
+CC BY-SA) and iNaturalist + xeno-canto recordings (Creative Commons); only embeddings, classifier weights and one
+thumbnail per species are committed, and every author is credited in [`app/credits.csv`](app/credits.csv).
+EmbeddingGemma 2 is used under its own terms.
 
 ## Citation
 Van Horn et al., *Exploring Fine-grained Audiovisual Categorization with the SSW60 Dataset*, ECCV 2022.
