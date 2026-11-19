@@ -3,3 +3,15 @@
 data/
 __pycache__/
 .DS_Store
+!app/demo_index.npz
+.env
+.venv/
+.pytest_cache/
+.ruff_cache/
+# local duplicates of files committed under app/ and docs/, and the failed first run
+results/*/thumbs/
+results/*/credits.csv
+results/*/*.gif
+results/*/*.mp4
+results/run1/
+results/demo_video1/

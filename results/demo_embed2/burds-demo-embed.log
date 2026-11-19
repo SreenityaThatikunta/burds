@@ -1,0 +1,68 @@
+[{"stream_name":"stdout","time":1.454230851,"data":"[    0.0s main] $ pip install -q -U sentence-transformers transformers soundfile\n"}
+,{"stream_name":"stdout","time":27.213633627,"data":"[   25.8s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data-topup/images_topup.tar\n"}
+,{"stream_name":"stderr","time":27.680253917,"data":"/kaggle/src/script.py:149: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.\n"}
+,{"stream_name":"stderr","time":27.680284709,"data":"  tarfile.open(t).extractall(WORK)\n"}
+,{"stream_name":"stdout","time":27.918178861,"data":"[   26.5s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data/images.tar\n"}
+,{"stream_name":"stdout","time":29.858710306,"data":"[   28.4s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data-topup/audio_topup.tar\n"}
+,{"stream_name":"stdout","time":30.787474956,"data":"[   29.3s main] untar /kaggle/input/notebooks/sreenityathatikunta/burds-demo-data/audio.tar\n"}
+,{"stream_name":"stdout","time":57.961144572,"data":"[   56.5s main] 2995 files: 1800 photos, 1195 songs\n"}
+,{"stream_name":"stderr","time":84.891432747,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   5%|▍         | 65/1376 [00:00\u003c00:06, 212.77it/s]\rLoading weights:   5%|▍         | 65/1376 [00:00\u003c00:06, 211.26it/s]\rLoading weights:   7%|▋         | 96/1376 [00:00\u003c00:05, 214.77it/s]\rLoading weights:   7%|▋         | 96/1376 [00:00\u003c00:05, 213.83it/s]\rLoading weights:   9%|▉         | 127/1376 [00:00\u003c00:08, 144.58it/s]\rLoading weights:   9%|▉         | 127/1376 [00:00\u003c00:08, 144.70it/s]\rLoading weights:  11%|█▏        | 158/1376 [00:00\u003c00:06, 174.17it/s]\rLoading weights:  11%|█▏        | 158/1376 [00:00\u003c00:06, 174.41it/s]\rLoading weights:  13%|█▎        | 184/1376 [00:01\u003c00:06, 184.05it/s]\rLoading weights:  13%|█▎        | 184/1376 [00:01\u003c00:06, 183.71it/s]\rLoading weights:  15%|█▍        | 206/1376 [00:01\u003c00:08, 141.33it/s]\rLoading weights:  15%|█▍        | 206/1376 [00:01\u003c00:08, 141.22it/s]\rLoading weights:  18%|█▊        | 251/1376 [00:01\u003c00:06, 184.99it/s]\rLoading weights:  18%|█▊        | 251/1376 [00:01\u003c00:06, 184.73it/s]\rLoading weights:  23%|██▎       | 313/1376 [00:01\u003c00:04, 250.64it/s]\rLoading weights:  23%|██▎       | 313/1376 [00:01\u003c00:04, 250.32it/s]\rLoading weights:  27%|██▋       | 375/1376 [00:01\u003c00:03, 283.64it/s]\rLoading weights:  27%|██▋       | 375/1376 [00:01\u003c00:03, 283.05it/s]\rLoading weights:  32%|███▏      | 442/1376 [00:01\u003c00:02, 360.19it/s]\rLoading weights:  32%|███▏      | 442/1376 [00:01\u003c00:02, 360.84it/s]\rLoading weights:  36%|███▋      | 499/1376 [00:01\u003c00:02, 391.81it/s]\rLoading weights:  36%|███▋      | 499/1376 [00:01\u003c00:02, 391.95it/s]\rLoading weights:  41%|████      | 561/1376 [00:02\u003c00:01, 431.60it/s]\rLoading weights:  41%|████      | 561/1376 [00:02\u003c00:01, 431.76it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:02\u003c00:01, 452.93it/s]\rLoading weights:  45%|████▌     | 623/1376 [00:02\u003c00:01, 453.05it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:02\u003c00:01, 468.30it/s]\rLoading weights:  50%|████▉     | 685/1376 [00:02\u003c00:01, 467.78it/s]\rLoading weights:  54%|█████▍    | 740/1376 [00:02\u003c00:01, 487.26it/s]\rLoading weights:  55%|█████▍    | 754/1376 [00:04\u003c00:06, 95.56it/s] \rLoading weights:  57%|█████▋    | 791/1376 [00:04\u003c00:06, 90.60it/s] \rLoading weights:  93%|█████████▎| 1273/1376 [00:04\u003c00:00, 408.48it/s]\rLoading weights:  93%|█████████▎| 1281/1376 [00:04\u003c00:00, 402.72it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:04\u003c00:00, 285.66it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:04\u003c00:00, 285.54it/s]\n"}
+,{"stream_name":"stderr","time":84.891512366,"data":"\n"}
+,{"stream_name":"stdout","time":93.912836233,"data":"[   35.7s gpu1] model loaded on Tesla T4; 1497 items\n"}
+,{"stream_name":"stdout","time":93.920434298,"data":"[   35.7s gpu0] model loaded on Tesla T4; 1498 items\n"}
+,{"stream_name":"stdout","time":108.848182191,"data":"[   50.7s gpu0] image: 32/900\n"}
+,{"stream_name":"stdout","time":109.056295929,"data":"[   50.9s gpu1] image: 32/900\n"}
+,{"stream_name":"stdout","time":247.687877075,"data":"[  189.5s gpu0] image: 352/900\n"}
+,{"stream_name":"stdout","time":254.124301086,"data":"[  195.9s gpu1] image: 352/900\n"}
+,{"stream_name":"stdout","time":387.546167178,"data":"[  329.4s gpu0] image: 672/900\n"}
+,{"stream_name":"stdout","time":400.10681339,"data":"[  341.9s gpu1] image: 672/900\n"}
+,{"stream_name":"stdout","time":505.132640316,"data":"[  446.9s gpu0] audio: 32/598\n"}
+,{"stream_name":"stdout","time":522.418628265,"data":"[  464.2s gpu1] audio: 32/597\n"}
+,{"stream_name":"stderr","time":537.176112073,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":538.145689651,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":565.17842458,"data":"Warning: Xing stream size off by more than 1%, fuzzy seeking may be even more fuzzy than by design!\n"}
+,{"stream_name":"stderr","time":612.76672033,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":612.766761249,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":612.768609619,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":612.76862878,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":621.314381217,"data":"Note: Illegal Audio-MPEG-Header 0x352c3130 at offset 1240793.\n"}
+,{"stream_name":"stderr","time":621.314416735,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":621.316629299,"data":"Note: Skipped 1024 bytes in input.\n"}
+,{"stream_name":"stderr","time":621.321634038,"data":"[src/libmpg123/parse.c:wetwork():1349] error: Giving up resync after 1024 bytes - your stream is not nice... (maybe increasing resync limit could help).\n"}
+,{"stream_name":"stderr","time":621.321651179,"data":"/kaggle/src/script.py:48: UserWarning: PySoundFile failed. Trying audioread instead.\n"}
+,{"stream_name":"stderr","time":621.321658318,"data":"  x, sr = librosa.load(path, sr=None, mono=True)\n"}
+,{"stream_name":"stderr","time":621.321663232,"data":"/usr/local/lib/python3.13/dist-packages/librosa/core/audio.py:184: FutureWarning: librosa.core.audio.__audioread_load\n"}
+,{"stream_name":"stderr","time":621.321668605,"data":"\tDeprecated as of librosa version 0.10.0.\n"}
+,{"stream_name":"stderr","time":621.321673713,"data":"\tIt will be removed in librosa version 1.0.\n"}
+,{"stream_name":"stderr","time":621.321678867,"data":"  y, sr_native = __audioread_load(path, offset, duration, dtype)\n"}
+,{"stream_name":"stdout","time":673.947542989,"data":"[  615.8s gpu0] audio: 352/598\n"}
+,{"stream_name":"stdout","time":681.339463626,"data":"[  623.1s gpu1] audio: 352/597\n"}
+,{"stream_name":"stderr","time":714.435213175,"data":"Note: Illegal Audio-MPEG-Header 0x50455441 at offset 1122555.\n"}
+,{"stream_name":"stderr","time":714.43849257,"data":"Note: Trying to resync...\n"}
+,{"stream_name":"stderr","time":714.442756607,"data":"Note: Hit end of (available) data during resync.\n"}
+,{"stream_name":"stdout","time":809.098098115,"data":"[  807.6s main] embedded 2995/2995\n"}
+,{"stream_name":"stdout","time":859.01474381,"data":"[  857.6s main] image: n=1800  5-fold CV top-1 0.826  (C=300)\n"}
+,{"stream_name":"stdout","time":949.627959549,"data":"[  948.2s main] audio: n=1195  5-fold CV top-1 0.571  (C=300)\n"}
+,{"stream_name":"stdout","time":949.672429773,"data":"[  948.2s main] gamma=0.5  CV fused top-1 0.921\n"}
+,{"stream_name":"stdout","time":953.115414075,"data":"[  951.7s main] SSW60 test: {'photo': {'n': 5171, 'top1': 0.8799071746277316, 'top5': 0.9941984142332237}, 'song': {'n': 1264, 'top1': 0.31408227848101267, 'top5': 0.5680379746835443}, 'paired': {'n': 1500, 'photo': 0.8786666666666667, 'song': 0.31533333333333335, 'fused': 0.8853333333333333, 'gain_ci95': [-0.009333333333333334, 0.02268333333333332]}}\n"}
+,{"stream_name":"stdout","time":953.692060988,"data":"# Demo model: trained only on openly licensed web data\n"}
+,{"stream_name":"stdout","time":953.692092625,"data":"\n"}
+,{"stream_name":"stdout","time":953.692098236,"data":"Training data: 1800 iNaturalist photos, 1195 xeno-canto recordings (60 species). 5-fold CV top-1: photo 82.6%, song 57.1%, photo + song 92.1% (gamma=0.5).\n"}
+,{"stream_name":"stdout","time":953.692103043,"data":"\n"}
+,{"stream_name":"stdout","time":953.69210715,"data":"## Tested on SSW60 (different photographers, recordists and sites; never seen)\n"}
+,{"stream_name":"stdout","time":953.69211709,"data":"\n"}
+,{"stream_name":"stdout","time":953.692120103,"data":"| input | n | top-1 | top-5 |\n"}
+,{"stream_name":"stdout","time":953.692122925,"data":"|---|---|---|---|\n"}
+,{"stream_name":"stdout","time":953.692125749,"data":"| photo | 5171 | 88.0% | 99.4% |\n"}
+,{"stream_name":"stdout","time":953.692128496,"data":"| song | 1264 | 31.4% | 56.8% |\n"}
+,{"stream_name":"stdout","time":953.692131223,"data":"| photo + song (paired) | 1500 | **88.5%** | |\n"}
+,{"stream_name":"stdout","time":953.692134014,"data":"\n"}
+,{"stream_name":"stdout","time":953.692136714,"data":"Paired set: photo only 87.9%, gain from adding song [-0.9, +2.3] pts (95% CI).\n"}
+,{"stream_name":"stdout","time":953.692139608,"data":"[  952.2s main] done\n"}
+,{"stream_name":"stderr","time":956.685034797,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":956.685068099,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":956.934672492,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":956.934700085,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":957.724174103,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":958.737686056,"data":"[NbConvertApp] Writing 366201 bytes to __results__.html\n"}
+]
