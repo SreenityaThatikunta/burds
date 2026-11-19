@@ -1,0 +1,97 @@
+[
+  {
+    "title": "1 \u00b7 Photo only",
+    "kinds": [
+      "photo"
+    ],
+    "species": [
+      [
+        "Cardinalis cardinalis",
+        "Northern Cardinal"
+      ],
+      [
+        "Cyanocitta cristata",
+        "Blue Jay"
+      ]
+    ],
+    "tries": 1,
+    "species_name": "Northern Cardinal",
+    "photo_media": {
+      "file": "photo_244805027.jpg",
+      "author": "(c) MarvalPhotography19, some rights reserved (CC BY)",
+      "license": "cc-by",
+      "url": "https://www.inaturalist.org/observations/142757924"
+    },
+    "prediction": "Best guess\nNorthern Cardinal (Cardinalis cardinalis)\nNorthern Cardinal (Cardinalis cardinalis)\n100%\nRed-bellied Woodpecker (Melanerpes carolinus)\n0%\nPileated Woodpecker (Dryocopus pileatus)\n0%\nHouse Finch (Haemorhous mexicanus)\n0%\nCommon Raven (Corvus corax)\n0%"
+  },
+  {
+    "title": "2 \u00b7 Song only",
+    "kinds": [
+      "song"
+    ],
+    "species": [
+      [
+        "Thryothorus ludovicianus",
+        "Carolina Wren"
+      ],
+      [
+        "Poecile atricapillus",
+        "Black-capped Chickadee"
+      ],
+      [
+        "Cyanocitta cristata",
+        "Blue Jay"
+      ],
+      [
+        "Turdus migratorius",
+        "American Robin"
+      ]
+    ],
+    "tries": 14,
+    "species_name": "Black-capped Chickadee",
+    "song_media": {
+      "file": "song_54622.mp3",
+      "author": "(c) feralbeetle, some rights reserved (CC BY)",
+      "license": "cc-by",
+      "url": "https://www.inaturalist.org/observations/37486786"
+    },
+    "prediction": "Best guess\nBlack-capped Chickadee (Poecile atricapillus)\nBlack-capped Chickadee (Poecile atricapillus)\n13%\nRuby-throated Hummingbird (Archilochus colubris)\n9%\nCedar Waxwing (Bombycilla cedrorum)\n8%\nGreat Horned Owl (Bubo virginianus)\n7%\nMourning Dove (Zenaida macroura)\n7%"
+  },
+  {
+    "title": "3 \u00b7 Photo + song",
+    "kinds": [
+      "photo",
+      "song"
+    ],
+    "split": true,
+    "species": [
+      [
+        "Dryobates pubescens",
+        "Downy Woodpecker"
+      ],
+      [
+        "Melanerpes carolinus",
+        "Red-bellied Woodpecker"
+      ],
+      [
+        "Cyanocitta cristata",
+        "Blue Jay"
+      ]
+    ],
+    "tries": 5,
+    "species_name": "Downy Woodpecker",
+    "photo_media": {
+      "file": "photo_28483527.jpg",
+      "author": "(c) CK2AZ, some rights reserved (CC BY)",
+      "license": "cc-by",
+      "url": "https://www.inaturalist.org/observations/18610713"
+    },
+    "song_media": {
+      "file": "song_1556357.mp3",
+      "author": "(c) Sam Eh, some rights reserved (CC BY)",
+      "license": "cc-by",
+      "url": "https://www.inaturalist.org/observations/295500829"
+    },
+    "prediction": "Best guess\nDowny Woodpecker (Dryobates pubescens)\nDowny Woodpecker (Dryobates pubescens)\n91%\nHairy Woodpecker (Dryobates villosus)\n7%\nNorthern Flicker (Colaptes auratus)\n1%\nRed-bellied Woodpecker (Melanerpes carolinus)\n0%\nPileated Woodpecker (Dryocopus pileatus)\n0%"
+  }
+]

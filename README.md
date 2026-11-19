@@ -5,6 +5,15 @@ Identify bird species from a **photo, a recording of its song, or both**, using
 image and sound clip becomes a 768-d vector in one shared space, and a new observation is labeled by
 its nearest species.
 
+![burds demo: photo only, song only, photo + song](docs/burds_demo.gif)
+
+The demo app ([`app/`](app/), [MP4](docs/burds_demo.mp4)) on photos and recordings from iNaturalist
+that the model never saw in training. **These examples were picked to work:** the photos were right
+on the first or second try, but the song-only clip took 14 tries (Carolina Wren failed 8 times
+first). Measured accuracy on unseen data is below: photo 88%, song 31%. Recorded headlessly on
+Kaggle by [`kaggle/demo_video`](kaggle/demo_video/video_template.py); credits are in
+[`results/demo_video2/media.json`](results/demo_video2/media.json).
+
 ## Layout
 - `kaggle/ssw60_baseline/`: Kaggle kernel that streams [SSW60](https://github.com/visipedia/ssw60)
   (photos + audio only), embeds everything on a GPU, and reports accuracy for image-only, audio-only,

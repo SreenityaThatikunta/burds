@@ -1,0 +1,52 @@
+[{"stream_name":"stdout","time":1.536696392,"data":"[   0.0s] $ pip install -q -U 'gradio\u003e=5' sentence-transformers transformers librosa playwright\n"}
+,{"stream_name":"stdout","time":27.716629082,"data":"[  26.2s] $ python -m playwright install --with-deps chromium \u003e /dev/null\n"}
+,{"stream_name":"stderr","time":32.785986755,"data":"W: Skipping acquire of configured file 'main/source/Sources' as repository 'https://r2u.stat.illinois.edu/ubuntu noble InRelease' does not seem to provide it (sources.list entry misspelt?)\n"}
+,{"stream_name":"stdout","time":76.794539937,"data":"[  75.3s] 2995 training sources excluded\n"}
+,{"stream_name":"stderr","time":114.452190509,"data":"\rLoading weights:   0%|          | 0/1376 [00:00\u003c?, ?it/s]\rLoading weights:   1%|▏         | 20/1376 [00:00\u003c00:08, 164.42it/s]\rLoading weights:   4%|▍         | 57/1376 [00:00\u003c00:06, 209.80it/s]\rLoading weights:   6%|▌         | 78/1376 [00:00\u003c00:08, 150.82it/s]\rLoading weights:   8%|▊         | 111/1376 [00:00\u003c00:06, 198.41it/s]\rLoading weights:  10%|▉         | 134/1376 [00:00\u003c00:10, 116.01it/s]\rLoading weights:  12%|█▏        | 167/1376 [00:01\u003c00:07, 154.50it/s]\rLoading weights:  14%|█▎        | 189/1376 [00:01\u003c00:09, 125.01it/s]\rLoading weights:  19%|█▊        | 256/1376 [00:01\u003c00:05, 218.46it/s]\rLoading weights:  23%|██▎       | 313/1376 [00:01\u003c00:03, 286.52it/s]\rLoading weights:  27%|██▋       | 375/1376 [00:01\u003c00:02, 349.67it/s]\rLoading weights:  32%|███▏      | 442/1376 [00:01\u003c00:02, 416.24it/s]\rLoading weights:  36%|███▋      | 499/1376 [00:01\u003c00:02, 431.36it/s]\rLoading weights:  42%|████▏     | 578/1376 [00:02\u003c00:01, 488.78it/s]\rLoading weights:  49%|████▊     | 669/1376 [00:02\u003c00:01, 591.66it/s]\rLoading weights:  53%|█████▎    | 733/1376 [00:02\u003c00:01, 600.12it/s]\rLoading weights:  58%|█████▊    | 797/1376 [00:03\u003c00:03, 184.21it/s]\rLoading weights:  79%|███████▊  | 1083/1376 [00:03\u003c00:00, 464.04it/s]\rLoading weights:  87%|████████▋ | 1200/1376 [00:03\u003c00:00, 428.99it/s]\rLoading weights:  94%|█████████▍| 1293/1376 [00:03\u003c00:00, 391.87it/s]\rLoading weights:  99%|█████████▉| 1367/1376 [00:04\u003c00:00, 374.30it/s]\rLoading weights: 100%|██████████| 1376/1376 [00:04\u003c00:00, 325.56it/s]\n"}
+,{"stream_name":"stdout","time":120.022089108,"data":"[ 118.5s] app is up\n"}
+,{"stream_name":"stdout","time":124.887179122,"data":"[ 123.4s]   1 · Photo only Northern Cardinal photo https://www.inaturalist.org/observations/142757924: Northern Cardinal (Cardinalis cardinalis)\n"}
+,{"stream_name":"stdout","time":125.399081859,"data":"[ 123.9s] 1 · Photo only: Northern Cardinal after 1 tries\n"}
+,{"stream_name":"stdout","time":133.700497124,"data":"[ 132.2s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/123810061: Ruby-throated Hummingbird (Archilochus colubris)\n"}
+,{"stream_name":"stdout","time":135.297332082,"data":"[ 133.8s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/239677398: House Wren (Troglodytes aedon)\n"}
+,{"stream_name":"stdout","time":135.888290117,"data":"[ 134.4s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/53051041: Sharp-shinned Hawk (Accipiter striatus)\n"}
+,{"stream_name":"stdout","time":137.126023864,"data":"[ 135.6s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/83864479: Eastern Phoebe (Sayornis phoebe)\n"}
+,{"stream_name":"stdout","time":138.466797722,"data":"[ 136.9s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/34890732: House Wren (Troglodytes aedon)\n"}
+,{"stream_name":"stdout","time":139.397108501,"data":"[ 137.9s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/111247363: House Wren (Troglodytes aedon)\n"}
+,{"stream_name":"stdout","time":140.718734835,"data":"[ 139.2s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/119160220: House Wren (Troglodytes aedon)\n"}
+,{"stream_name":"stdout","time":142.263947293,"data":"[ 140.7s]   2 · Song only Carolina Wren song https://www.inaturalist.org/observations/202471037: Rusty Blackbird (Euphagus carolinus)\n"}
+,{"stream_name":"stdout","time":146.157816069,"data":"[ 144.6s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/70660125: Northern Cardinal (Cardinalis cardinalis)\n"}
+,{"stream_name":"stdout","time":146.793946424,"data":"[ 145.3s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/124872043: Pileated Woodpecker (Dryocopus pileatus)\n"}
+,{"stream_name":"stdout","time":148.058820754,"data":"[ 146.5s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/140066435: Cape May Warbler (Setophaga tigrina)\n"}
+,{"stream_name":"stdout","time":149.021535471,"data":"[ 147.5s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/37171740: Green Heron (Butorides virescens)\n"}
+,{"stream_name":"stdout","time":150.256019329,"data":"[ 148.7s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/68989464: White-breasted Nuthatch (Sitta carolinensis)\n"}
+,{"stream_name":"stdout","time":151.63088373,"data":"[ 150.1s]   2 · Song only Black-capped Chickadee song https://www.inaturalist.org/observations/37486786: Black-capped Chickadee (Poecile atricapillus)\n"}
+,{"stream_name":"stdout","time":152.336596071,"data":"[ 150.8s] 2 · Song only: Black-capped Chickadee after 14 tries\n"}
+,{"stream_name":"stdout","time":155.707904062,"data":"[ 154.2s]   3 · Photo + song Downy Woodpecker photo https://www.inaturalist.org/observations/102555686: Hairy Woodpecker (Dryobates villosus)\n"}
+,{"stream_name":"stdout","time":156.315375515,"data":"[ 154.8s]   3 · Photo + song Downy Woodpecker photo https://www.inaturalist.org/observations/18610713: Downy Woodpecker (Dryobates pubescens)\n"}
+,{"stream_name":"stdout","time":159.56678545,"data":"[ 158.0s]   3 · Photo + song Downy Woodpecker song https://www.inaturalist.org/observations/66797377: Hairy Woodpecker (Dryobates villosus)\n"}
+,{"stream_name":"stdout","time":160.766532892,"data":"[ 159.2s]   3 · Photo + song Downy Woodpecker song https://www.inaturalist.org/observations/291590176: Ruby-throated Hummingbird (Archilochus colubris)\n"}
+,{"stream_name":"stdout","time":162.4537001,"data":"[ 160.9s]   3 · Photo + song Downy Woodpecker song https://www.inaturalist.org/observations/295500829: Downy Woodpecker (Dryobates pubescens)\n"}
+,{"stream_name":"stdout","time":163.599751729,"data":"[ 162.1s] 3 · Photo + song: Downy Woodpecker after 5 tries\n"}
+,{"stream_name":"stdout","time":181.789557315,"data":"[ 180.3s] 1 · Photo only -\u003e ['Best guess', 'Northern Cardinal (Cardinalis cardinalis)', 'Northern Cardinal (Cardinalis cardinalis)']\n"}
+,{"stream_name":"stdout","time":189.951683023,"data":"[ 188.4s] 2 · Song only -\u003e ['Best guess', 'Black-capped Chickadee (Poecile atricapillus)', 'Black-capped Chickadee (Poecile atricapillus)']\n"}
+,{"stream_name":"stdout","time":203.996854685,"data":"[ 202.5s] 3 · Photo + song -\u003e ['Best guess', 'Downy Woodpecker (Dryobates pubescens)', 'Downy Woodpecker (Dryobates pubescens)']\n"}
+,{"stream_name":"stdout","time":204.597317467,"data":"[ 203.1s] $ ffmpeg -y -loglevel error -i /kaggle/temp/video/page@25825d68de8a5b28ba2ca42d77701767.webm -c:v libx264 -pix_fmt yuv420p -crf 23 -movflags +faststart /kaggle/working/burds_demo.mp4\n"}
+,{"stream_name":"stdout","time":211.634419995,"data":"[ 210.1s] $ ffmpeg -y -loglevel error -i /kaggle/temp/video/page@25825d68de8a5b28ba2ca42d77701767.webm -vf 'fps=8,scale=900:-1:flags=lanczos,split[a][b];[a]palettegen=max_colors=128[p];[b][p]paletteuse=dither=bayer' /kaggle/working/burds_demo.gif\n"}
+,{"stream_name":"stdout","time":218.892996038,"data":"[ 217.4s] $ ls -la /kaggle/working\n"}
+,{"stream_name":"stdout","time":218.899046393,"data":"total 5180\n"}
+,{"stream_name":"stdout","time":218.899067086,"data":"drwxr-xr-x 2 root root    4096 Nov 19 02:43 .\n"}
+,{"stream_name":"stdout","time":218.899072702,"data":"drwxr-xr-x 9 root root    4096 Nov 19 02:39 ..\n"}
+,{"stream_name":"stdout","time":218.899078106,"data":"-rw-r--r-- 1 root root 3932515 Nov 19 02:43 burds_demo.gif\n"}
+,{"stream_name":"stdout","time":218.899083301,"data":"-rw-r--r-- 1 root root  725052 Nov 19 02:43 burds_demo.mp4\n"}
+,{"stream_name":"stdout","time":218.899088126,"data":"-rw-r--r-- 1 root root    2956 Nov 19 02:43 media.json\n"}
+,{"stream_name":"stdout","time":218.899092466,"data":"-rw-r--r-- 1 root root  327214 Nov 19 02:42 scene1.png\n"}
+,{"stream_name":"stdout","time":218.899101063,"data":"-rw-r--r-- 1 root root  154479 Nov 19 02:42 scene2.png\n"}
+,{"stream_name":"stdout","time":218.899124618,"data":"-rw-r--r-- 1 root root  142710 Nov 19 02:43 scene3.png\n"}
+,{"stream_name":"stdout","time":218.899237897,"data":"[ 217.4s] done\n"}
+,{"stream_name":"stderr","time":220.917716141,"data":"/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\\|'\n"}
+,{"stream_name":"stderr","time":220.917751418,"data":"  cells[i][c] = re.sub('\\\\\\\\\\|', '|', cell)\n"}
+,{"stream_name":"stderr","time":221.1555509,"data":"/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\\_'\n"}
+,{"stream_name":"stderr","time":221.155574394,"data":"  text = re.sub(r'_', '\\_', text) # Escape underscores in display text\n"}
+,{"stream_name":"stderr","time":221.940586097,"data":"[NbConvertApp] Converting notebook __script__.ipynb to html\n"}
+,{"stream_name":"stderr","time":222.466008989,"data":"[NbConvertApp] Writing 337266 bytes to __results__.html\n"}
+]
