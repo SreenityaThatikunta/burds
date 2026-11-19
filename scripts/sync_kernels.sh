@@ -17,3 +17,13 @@ copy audiolen kaggle/ssw60_audiolen/ssw60_audiolen.py
 # demo_live = Kaggle wrapper + the exact app that ships to a Space
 cat kaggle/demo_live/header.py app/app.py > kaggle/demo_live/demo_live.py
 echo "synced kaggle/demo_live/demo_live.py"
+
+# demo_video = recording script with the exact app embedded (base64, so no quoting issues)
+python3 - <<'PY'
+import base64
+t = open("kaggle/demo_video/video_template.py").read()
+b = base64.b64encode(open("app/app.py", "rb").read()).decode()
+assert "@@APP_B64@@" in t
+open("kaggle/demo_video/demo_video.py", "w").write(t.replace("@@APP_B64@@", b))
+PY
+echo "synced kaggle/demo_video/demo_video.py"

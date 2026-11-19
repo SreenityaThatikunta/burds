@@ -124,13 +124,13 @@ with gr.Blocks(title="burds: bird ID from photo + song") as demo:
         "xeno-canto recordings do the rest. [How it works and results](https://github.com/SreenityaThatikunta/burds)")
     with gr.Row():
         with gr.Column():
-            img = gr.Image(type="pil", label="Photo", sources=["upload", "webcam", "clipboard"])
-            aud = gr.Audio(type="filepath", label="Song or call", sources=["upload", "microphone"])
-            btn = gr.Button("Identify", variant="primary")
+            img = gr.Image(type="pil", label="Photo", sources=["upload", "webcam", "clipboard"], elem_id="photo", height=300)
+            aud = gr.Audio(type="filepath", label="Song or call", sources=["upload", "microphone"], elem_id="song")
+            btn = gr.Button("Identify", variant="primary", elem_id="identify")
         with gr.Column():
-            out = gr.Label(num_top_classes=5, label="Best guess")
+            out = gr.Label(num_top_classes=5, label="Best guess", elem_id="best")
             ref = gr.Image(label="Reference photo (iNaturalist, see credits)", interactive=False, height=220)
-            with gr.Accordion("Photo only / song only", open=False):
+            with gr.Accordion("Photo only / song only", open=False, elem_id="split"):
                 out_i = gr.Label(num_top_classes=5, label="From the photo")
                 out_a = gr.Label(num_top_classes=5, label="From the song")
     if examples:

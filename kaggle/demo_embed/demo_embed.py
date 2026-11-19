@@ -268,11 +268,15 @@ np.savez_compressed(
 with open(f"{OUT}/credits.csv", "w", newline="") as f:
     w = csv.DictWriter(f, fieldnames=list(man[0]))
     w.writeheader(); w.writerows([man[i] for i in sorted(emb)])  # noqa: E702
-# one display photo per species (the first, i.e. most-faved, observation) for the app
+# one display photo per species: the most typical one (closest to the species' mean embedding).
+# "Most-faved first" picked e.g. a flight shot for Ruby-throated Hummingbird that looked like a swift.
 os.makedirs(f"{OUT}/thumbs", exist_ok=True)
 from PIL import Image  # noqa: E402
+Xi, yi_ = data["image"]["X"], data["image"]["y"]
 for c in range(K):
-    i = next(i for i in img_ix if lab2idx[int(man[i]["label"])] == c)
+    rows_c = np.where(yi_ == c)[0]
+    mu = Xi[rows_c].mean(0)
+    i = img_ix[rows_c[int(np.argmax(Xi[rows_c] @ mu))]]
     im = Image.open(f"{WORK}/{man[i]['file']}").convert("RGB"); im.thumbnail((320, 320))  # noqa: E702
     im.save(f"{OUT}/thumbs/{taxa[c]['species_code']}.jpg", quality=85)
 json.dump(R, open(f"{OUT}/demo_eval.json", "w"), indent=2)
