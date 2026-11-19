@@ -142,8 +142,8 @@ sh("pip install -q -U sentence-transformers transformers soundfile")
 import torch  # noqa: E402
 
 os.makedirs(WORK, exist_ok=True)
-for t in glob.glob("/kaggle/input/**/images*.tar", recursive=True) + glob.glob("/kaggle/input/**/audio.tar", recursive=True):
-    if "ssw60" in t:
+for t in glob.glob("/kaggle/input/**/images*.tar", recursive=True) + glob.glob("/kaggle/input/**/audio*.tar", recursive=True):
+    if "ssw60" in t or "audio_ml" in t:
         continue
     log(f"untar {t}")
     tarfile.open(t).extractall(WORK)
