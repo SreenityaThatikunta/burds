@@ -55,6 +55,7 @@ def load_audio(path):
 
 def resample(x, sr_in, sr_out):
     from math import gcd
+
     from scipy.signal import resample_poly
     sr_in, sr_out = int(round(sr_in)), int(round(sr_out))
     g = gcd(sr_in, sr_out)

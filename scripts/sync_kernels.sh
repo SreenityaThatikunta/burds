@@ -14,16 +14,24 @@ copy() {  # copy <experiment> <dest>
 
 copy audiolen kaggle/ssw60_audiolen/ssw60_audiolen.py
 
-# demo_live = Kaggle wrapper + the exact app that ships to a Space
-cat kaggle/demo_live/header.py app/app.py > kaggle/demo_live/demo_live.py
-echo "synced kaggle/demo_live/demo_live.py"
-
-# demo_video = recording script with the exact app embedded (base64, so no quoting issues)
+# Single-file app for Kaggle: app/burds_core.py inlined in place of its import.
 python3 - <<'PY'
-import base64
-t = open("kaggle/demo_video/video_template.py").read()
-b = base64.b64encode(open("app/app.py", "rb").read()).decode()
-assert "@@APP_B64@@" in t
-open("kaggle/demo_video/demo_video.py", "w").write(t.replace("@@APP_B64@@", b))
+import base64, re
+core = open("app/burds_core.py").read()
+app = open("app/app.py").read()
+line = re.search(r"^from burds_core import .*$", app, re.M)
+assert line, "app.py no longer imports burds_core"
+single = app.replace(line.group(0), "# ---- app/burds_core.py (inlined) ----\n" + core + "\n# ---- end burds_core ----")
+
+# demo_live = Kaggle wrapper + the exact app that ships to a Space
+open("kaggle/demo_live/demo_live.py", "w").write(open("kaggle/demo_live/header.py").read() + single)
+
+# demo_video / demo_bench = scripts with the exact app embedded (base64, so no quoting issues)
+b = base64.b64encode(single.encode()).decode()
+for t_path, out in (("kaggle/demo_video/video_template.py", "kaggle/demo_video/demo_video.py"),
+                    ("kaggle/demo_bench/bench_template.py", "kaggle/demo_bench/demo_bench.py")):
+    t = open(t_path).read()
+    assert "@@APP_B64@@" in t, t_path
+    open(out, "w").write(t.replace("@@APP_B64@@", b))
 PY
-echo "synced kaggle/demo_video/demo_video.py"
+echo "synced kaggle/demo_live, kaggle/demo_video, kaggle/demo_bench"
